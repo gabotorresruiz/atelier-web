@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { getTheme } from '@utils/utils';
 
-export const StyledMiniCart = styled.div`
+const StyledMiniCart = styled.div`
   display: flex;
   height: 100vh;
   flex-direction: column;
@@ -46,3 +46,5 @@ export const StyledMiniCart = styled.div`
     }
   }
 `;
+
+export default StyledMiniCart;

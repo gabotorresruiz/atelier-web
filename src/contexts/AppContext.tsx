@@ -58,14 +58,18 @@ const AppContext = createContext<ContextProps>({
 });
 
 const reducer = (state: InitialState, action: ActionType) => {
+  let cartList;
+  let cartItem;
+  let exist;
+
   switch (action.type) {
     case 'TOGGLE_HEADER':
       return { ...state, isHeaderFixed: action.payload };
 
     case 'CHANGE_CART_AMOUNT':
-      let cartList = state.cart;
-      let cartItem = action.payload;
-      let exist = cartList.find((item) => item.id === cartItem.id);
+      cartList = state.cart;
+      cartItem = action.payload;
+      exist = cartList.find((item) => item.id === cartItem.id);
 
       if (cartItem.qty < 1) {
         const filteredCart = cartList.filter((item) => item.id !== cartItem.id);

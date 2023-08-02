@@ -5,16 +5,16 @@ import { color, compose, space, variant } from 'styled-system';
 import { IconProps } from './Icon';
 
 const StyledIcon = styled(ReactSVG)<IconProps>(
-  ({ color, size, transform, defaultcolor }) =>
+  ({ color: iconColor, size, transform, defaultcolor }) =>
     systemCss({
       svg: {
         transform,
         width: '100%',
         height: '100%',
 
-        path: { fill: color ? `${color}.main` : defaultcolor },
-        polyline: { color: color ? `${color}.main` : defaultcolor },
-        polygon: { color: color ? `${color}.main` : defaultcolor }
+        path: { fill: iconColor ? `${iconColor}.main` : defaultcolor },
+        polyline: { color: iconColor ? `${iconColor}.main` : defaultcolor },
+        polygon: { color: iconColor ? `${iconColor}.main` : defaultcolor }
       },
 
       div: { display: 'flex', width: size, height: size }

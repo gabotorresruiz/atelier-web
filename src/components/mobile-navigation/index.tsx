@@ -42,6 +42,12 @@ const Wrapper = styled.div`
     width: 100vw;
   }
 `;
+const list = [
+  { title: 'Home', icon: 'home', href: '/' },
+  { title: 'Category', icon: 'category', href: '/mobile-category-nav' },
+  { title: 'Cart', icon: 'bag', href: '/cart' },
+  { title: 'Account', icon: 'user-2', href: '/profile' }
+];
 
 const MobileNavigationBar: FC = () => {
   const width = useWindowSize();
@@ -77,12 +83,5 @@ const MobileNavigationBar: FC = () => {
     )
   );
 };
-
-const list = [
-  { title: 'Home', icon: 'home', href: '/' },
-  { title: 'Category', icon: 'category', href: '/mobile-category-nav' },
-  { title: 'Cart', icon: 'bag', href: '/cart' },
-  { title: 'Account', icon: 'user-2', href: '/profile' }
-];
 
 export default MobileNavigationBar;

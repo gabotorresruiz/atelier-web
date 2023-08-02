@@ -12,6 +12,13 @@ import { Button, IconButton } from '@component/buttons';
 import { H3, H5, H6, SemiSpan, Small, Span } from '@component/Typography';
 import { StyledSessionCard } from './styles';
 
+const initialValues = { email: '', password: '' };
+
+const formSchema = yup.object().shape({
+  email: yup.string().email('invalid email').required('email is required'),
+  password: yup.string().required('password is required')
+});
+
 const Login: FC = () => {
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   const router = useRouter();
@@ -70,7 +77,7 @@ const Login: FC = () => {
           endAdornment={
             <IconButton
               p="0.25rem"
-              size="small"
+              // size="small"
               mr="0.25rem"
               type="button"
               onClick={togglePasswordVisibility}
@@ -153,12 +160,5 @@ const Login: FC = () => {
     </StyledSessionCard>
   );
 };
-
-const initialValues = { email: '', password: '' };
-
-const formSchema = yup.object().shape({
-  email: yup.string().email('invalid email').required('${path} is required'),
-  password: yup.string().required('${path} is required')
-});
 
 export default Login;

@@ -14,7 +14,7 @@ import UserLoginDialog from './LoginDialog';
 import StyledHeader from './styles';
 
 // ========================================================================
-type HeaderProps = { isFixed?: boolean; className?: string };
+type HeaderProps = { className?: string };
 // ========================================================================
 
 const HeaderTwo: FC<HeaderProps> = ({ className }) => {

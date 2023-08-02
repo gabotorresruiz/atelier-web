@@ -12,6 +12,41 @@ import { Button } from '@component/buttons';
 import TextField from '@component/text-field';
 import Typography from '@component/Typography';
 
+const initialValues = {
+  shipping_name: '',
+  shipping_email: '',
+  shipping_contact: '',
+  shipping_company: '',
+  shipping_zip: '',
+  shipping_country: '',
+  shipping_address1: '',
+  shipping_address2: '',
+
+  billing_name: '',
+  billing_email: '',
+  billing_contact: '',
+  billing_company: '',
+  billing_zip: '',
+  billing_country: '',
+  billing_address1: '',
+  billing_address2: ''
+};
+
+const checkoutSchema = yup.object().shape({
+  // shipping_name: yup.string().required("required"),
+  // shipping_email: yup.string().email("invalid email").required("required"),
+  // shipping_contact: yup.string().required("required"),
+  // shipping_zip: yup.string().required("required"),
+  // shipping_country: yup.object().required("required"),
+  // shipping_address1: yup.string().required("required"),
+  // billing_name: yup.string().required("required"),
+  // billing_email: yup.string().required("required"),
+  // billing_contact: yup.string().required("required"),
+  // billing_zip: yup.string().required("required"),
+  // billing_country: yup.string().required("required"),
+  // billing_address1: yup.string().required("required"),
+});
+
 const CheckoutForm: FC = () => {
   const router = useRouter();
   const [sameAsShipping, setSameAsShipping] = useState(false);
@@ -260,40 +295,5 @@ const CheckoutForm: FC = () => {
     </Formik>
   );
 };
-
-const initialValues = {
-  shipping_name: '',
-  shipping_email: '',
-  shipping_contact: '',
-  shipping_company: '',
-  shipping_zip: '',
-  shipping_country: '',
-  shipping_address1: '',
-  shipping_address2: '',
-
-  billing_name: '',
-  billing_email: '',
-  billing_contact: '',
-  billing_company: '',
-  billing_zip: '',
-  billing_country: '',
-  billing_address1: '',
-  billing_address2: ''
-};
-
-const checkoutSchema = yup.object().shape({
-  // shipping_name: yup.string().required("required"),
-  // shipping_email: yup.string().email("invalid email").required("required"),
-  // shipping_contact: yup.string().required("required"),
-  // shipping_zip: yup.string().required("required"),
-  // shipping_country: yup.object().required("required"),
-  // shipping_address1: yup.string().required("required"),
-  // billing_name: yup.string().required("required"),
-  // billing_email: yup.string().required("required"),
-  // billing_contact: yup.string().required("required"),
-  // billing_zip: yup.string().required("required"),
-  // billing_country: yup.string().required("required"),
-  // billing_address1: yup.string().required("required"),
-});
 
 export default CheckoutForm;

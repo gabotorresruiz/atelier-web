@@ -38,6 +38,46 @@ export interface CarouselProps {
 }
 // ====================================================
 
+const renderDots = ({ step, currentSlide, visibleSlides, totalSlides, carouselStore }) => {
+  const dots = [];
+  const total = totalSlides - visibleSlides + 1;
+
+  for (let i = 0; i < total; i += step) {
+    dots.push(
+      <div
+        key={i}
+        className={clsx({ dot: true, 'dot-active': currentSlide === i })}
+        onClick={() => carouselStore.setStoreState({ currentSlide: i, autoPlay: false })}
+        role="button"
+        tabIndex={0}
+        aria-label={`Go to slide ${i + 1}`}
+      />
+    );
+
+    if (total - i - 1 < step && total - i - 1 !== 0) {
+      dots.push(
+        <div
+          role="button"
+          key={i + total}
+          tabIndex={0} // Hacer que el elemento sea enfocable
+          aria-label="Go to last slide"
+          className={clsx({
+            dot: true,
+            'dot-active': currentSlide === totalSlides - visibleSlides
+          })}
+          onClick={() =>
+            carouselStore.setStoreState({
+              currentSlide: totalSlides - visibleSlides,
+              autoPlay: false
+            })
+          }
+        />
+      );
+    }
+  }
+  return dots;
+};
+
 const Carousel: FC<CarouselProps> = ({
   children,
   naturalSlideWidth,
@@ -85,9 +125,7 @@ const Carousel: FC<CarouselProps> = ({
   >
     <Slider className="custom-slider">
       {Children.map(children, (child: ReactNode, ind) => (
-        <Slide index={ind} key={ind}>
-          {child}
-        </Slide>
+        <Slide index={ind}>{child}</Slide>
       ))}
     </Slider>
 
@@ -103,7 +141,7 @@ const Carousel: FC<CarouselProps> = ({
         <IconButton
           as={ButtonBack}
           variant="contained"
-          color={arrowButtonColor}
+          color="primary"
           style={leftButtonStyle || {}}
           className={`arrow-button left-arrow-class ${arrowButtonClass} ${leftButtonClass}`}
         >
@@ -115,7 +153,7 @@ const Carousel: FC<CarouselProps> = ({
         <IconButton
           as={ButtonNext}
           variant="contained"
-          color={arrowButtonColor}
+          color="primary"
           style={rightButtonStyle || {}}
           className={`arrow-button right-arrow-class ${arrowButtonClass} ${rightButtonClass}`}
         >
@@ -127,40 +165,6 @@ const Carousel: FC<CarouselProps> = ({
     )}
   </StyledCarousel>
 );
-
-const renderDots = ({ step, currentSlide, visibleSlides, totalSlides, carouselStore }) => {
-  const dots = [];
-  const total = totalSlides - visibleSlides + 1;
-
-  for (let i = 0; i < total; i += step) {
-    dots.push(
-      <div
-        key={i}
-        className={clsx({ dot: true, 'dot-active': currentSlide === i })}
-        onClick={() => carouselStore.setStoreState({ currentSlide: i, autoPlay: false })}
-      />
-    );
-
-    if (total - i - 1 < step && total - i - 1 !== 0) {
-      dots.push(
-        <div
-          key={i + total}
-          className={clsx({
-            dot: true,
-            'dot-active': currentSlide === totalSlides - visibleSlides
-          })}
-          onClick={() =>
-            carouselStore.setStoreState({
-              currentSlide: totalSlides - visibleSlides,
-              autoPlay: false
-            })
-          }
-        />
-      );
-    }
-  }
-  return dots;
-};
 
 Carousel.defaultProps = {
   step: 1,

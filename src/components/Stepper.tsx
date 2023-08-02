@@ -8,7 +8,7 @@ type Step = { title: string; disabled: boolean };
 type StepperProps = {
   stepperList: Step[];
   selectedStep?: number;
-  onChange?: (Step: Step, index: number) => void;
+  onChange?: (step: Step, index: number) => void;
 };
 
 const Stepper: FC<StepperProps> = ({ selectedStep, stepperList, onChange }) => {

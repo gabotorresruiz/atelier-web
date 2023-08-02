@@ -62,7 +62,7 @@ const ProductIntro: FC<ProductIntroProps> = ({ images, title, price, id }) => {
             <FlexBox overflow="auto">
               {images.map((url, ind) => (
                 <Box
-                  key={ind}
+                  key={url}
                   size={70}
                   bg="white"
                   minWidth={70}
@@ -125,7 +125,7 @@ const ProductIntro: FC<ProductIntroProps> = ({ images, title, price, id }) => {
                 size="small"
                 color="primary"
                 variant="outlined"
-                onClick={handleCartAmountChange(cartItem?.qty - 1)}
+                onClick={() => handleCartAmountChange(cartItem?.qty ? cartItem.qty - 1 : 1)}
               >
                 <Icon variant="small">minus</Icon>
               </Button>
@@ -139,7 +139,7 @@ const ProductIntro: FC<ProductIntroProps> = ({ images, title, price, id }) => {
                 size="small"
                 color="primary"
                 variant="outlined"
-                onClick={handleCartAmountChange(cartItem?.qty + 1)}
+                onClick={() => handleCartAmountChange(cartItem?.qty ? cartItem.qty + 1 : 1)}
               >
                 <Icon variant="small">plus</Icon>
               </Button>

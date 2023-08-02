@@ -9,6 +9,33 @@ import { Button } from '@component/buttons';
 import { H2, H5 } from '@component/Typography';
 import ProductComment from './ProductComment';
 
+const commentList = [
+  {
+    name: 'Jannie Schumm',
+    imgUrl: '/assets/images/faces/7.png',
+    rating: 4.7,
+    date: '2021-02-14',
+    comment:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Varius massa id ut mattis. Facilisis vitae gravida egestas ac account.'
+  },
+  {
+    name: 'Joe Kenan',
+    imgUrl: '/assets/images/faces/6.png',
+    rating: 4.7,
+    date: '2019-08-10',
+    comment:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Varius massa id ut mattis. Facilisis vitae gravida egestas ac account.'
+  },
+  {
+    name: 'Jenifer Tulio',
+    imgUrl: '/assets/images/faces/8.png',
+    rating: 4.7,
+    date: '2021-02-05',
+    comment:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Varius massa id ut mattis. Facilisis vitae gravida egestas ac account.'
+  }
+];
+
 const ProductReview: FC = () => {
   const initialValues = {
     rating: '',
@@ -45,7 +72,7 @@ const ProductReview: FC = () => {
   return (
     <Box>
       {commentList.map((item, ind) => (
-        <ProductComment {...item} key={ind} />
+        <ProductComment {...item} key={item.name} />
       ))}
 
       <H2 fontWeight="600" mt="55px" mb="20">
@@ -104,32 +131,5 @@ const ProductReview: FC = () => {
     </Box>
   );
 };
-
-const commentList = [
-  {
-    name: 'Jannie Schumm',
-    imgUrl: '/assets/images/faces/7.png',
-    rating: 4.7,
-    date: '2021-02-14',
-    comment:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Varius massa id ut mattis. Facilisis vitae gravida egestas ac account.'
-  },
-  {
-    name: 'Joe Kenan',
-    imgUrl: '/assets/images/faces/6.png',
-    rating: 4.7,
-    date: '2019-08-10',
-    comment:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Varius massa id ut mattis. Facilisis vitae gravida egestas ac account.'
-  },
-  {
-    name: 'Jenifer Tulio',
-    imgUrl: '/assets/images/faces/8.png',
-    rating: 4.7,
-    date: '2021-02-05',
-    comment:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Varius massa id ut mattis. Facilisis vitae gravida egestas ac account.'
-  }
-];
 
 export default ProductReview;

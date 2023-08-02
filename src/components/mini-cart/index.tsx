@@ -9,7 +9,7 @@ import { Button } from '@component/buttons';
 import Typography, { H5, Paragraph, Tiny } from '@component/Typography';
 import { useAppContext } from '@context/AppContext';
 import { currency } from '@utils/utils';
-import { StyledMiniCart } from './styles';
+import StyledMiniCart from './styles';
 
 type MiniCartProps = { toggleSidenav?: () => void };
 
@@ -152,7 +152,5 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav }) => {
     </StyledMiniCart>
   );
 };
-
-MiniCart.defaultProps = { toggleSidenav: () => {} };
 
 export default MiniCart;

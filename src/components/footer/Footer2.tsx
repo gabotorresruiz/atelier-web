@@ -47,6 +47,14 @@ const Wrapper = styled(Box)`
     margin-bottom: 3.75rem;
   }
 `;
+const customerCareLinks = [
+  'Help Center',
+  'Track Your Order',
+  'Corporate & Bulk Purchasing',
+  'Returns & Refunds'
+];
+
+const iconList = ['facebook', 'twitter', 'youtube', 'google', 'instagram'];
 
 const Footer2: FC = () => (
   <footer>
@@ -71,16 +79,16 @@ const Footer2: FC = () => (
         <Grid item md={6} sm={6} xs={12}>
           <StyledBox maxWidth="230px" mt="-0.35rem">
             <div>
-              {customerCareLinks.map((item, ind) => (
-                <Link href="/" key={ind}>
+              {customerCareLinks.map((item) => (
+                <Link href="/" key={item}>
                   <StyledLink>{item}</StyledLink>
                 </Link>
               ))}
             </div>
 
             <FlexBox mx="-5px" mt="1rem">
-              {iconList.map((item, ind) => (
-                <Link href="/" key={ind}>
+              {iconList.map((item) => (
+                <Link href="/" key={item}>
                   <Box
                     m="5px"
                     size="small"
@@ -102,14 +110,5 @@ const Footer2: FC = () => (
     </Wrapper>
   </footer>
 );
-
-const customerCareLinks = [
-  'Help Center',
-  'Track Your Order',
-  'Corporate & Bulk Purchasing',
-  'Returns & Refunds'
-];
-
-const iconList = ['facebook', 'twitter', 'youtube', 'google', 'instagram'];
 
 export default Footer2;

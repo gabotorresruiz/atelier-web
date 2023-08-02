@@ -15,6 +15,48 @@ import { Button } from '@component/buttons';
 import TextField from '@component/text-field';
 import Typography, { H6, Paragraph } from '@component/Typography';
 
+const addressList = [
+  { addressType: 'Home', address: '435 Bristol Avenue, Abington MA 2351' },
+  { addressType: 'Office', address: '777 Brockton Avenue, Abington MA 2351' },
+  { addressType: 'Office 2', address: '777 Kazi Avenue, Abington MA 2351' }
+];
+
+const contactList = [
+  { contactType: 'Primary', contact: '+1-202-555-0119' },
+  { contactType: 'Secondary', contact: '+1-202-555-0222' }
+];
+
+const paymentMethodList = [
+  { cardType: 'Amex', last4Digits: '4765', name: 'Jaslynn Land' },
+  { cardType: 'Mastercard', last4Digits: '5432', name: 'Jaslynn Land' },
+  { cardType: 'Visa', last4Digits: '4543', name: 'Jaslynn Land' }
+];
+
+const timeList = [
+  { label: '9AM - 11AM', value: '9AM - 11AM' },
+  { label: '11AM - 1PM', value: '11AM - 1PM' },
+  { label: '3PM - 5PM', value: '3PM - 5PM' },
+  { label: '5PM - 7PM', value: '5PM - 7PM' }
+];
+
+const initialValues = {
+  address: '',
+  contact: '',
+  card: '',
+  date: '',
+  time: '',
+  voucher: ''
+};
+
+const checkoutSchema = yup.object().shape({
+  address: yup.string().required('required'),
+  contact: yup.string().required('required'),
+  card: yup.string().required('required'),
+  date: yup.object().required('required'),
+  time: yup.object().required('required'),
+  voucher: yup.string()
+});
+
 const CheckoutForm2: FC = () => {
   const router = useRouter();
   const [dateList, setDateList] = useState([]);
@@ -38,7 +80,7 @@ const CheckoutForm2: FC = () => {
 
     list.push({ label: format(today, 'dd MMMM'), value: today });
 
-    for (let i = 1; i < 10; i++) {
+    for (let i = 1; i < 10; i += 1) {
       today.setDate(dateCount + i);
       list.push({ label: format(today, 'dd MMMM'), value: today });
     }
@@ -210,47 +252,5 @@ const CheckoutForm2: FC = () => {
     </Formik>
   );
 };
-
-const addressList = [
-  { addressType: 'Home', address: '435 Bristol Avenue, Abington MA 2351' },
-  { addressType: 'Office', address: '777 Brockton Avenue, Abington MA 2351' },
-  { addressType: 'Office 2', address: '777 Kazi Avenue, Abington MA 2351' }
-];
-
-const contactList = [
-  { contactType: 'Primary', contact: '+1-202-555-0119' },
-  { contactType: 'Secondary', contact: '+1-202-555-0222' }
-];
-
-const paymentMethodList = [
-  { cardType: 'Amex', last4Digits: '4765', name: 'Jaslynn Land' },
-  { cardType: 'Mastercard', last4Digits: '5432', name: 'Jaslynn Land' },
-  { cardType: 'Visa', last4Digits: '4543', name: 'Jaslynn Land' }
-];
-
-const timeList = [
-  { label: '9AM - 11AM', value: '9AM - 11AM' },
-  { label: '11AM - 1PM', value: '11AM - 1PM' },
-  { label: '3PM - 5PM', value: '3PM - 5PM' },
-  { label: '5PM - 7PM', value: '5PM - 7PM' }
-];
-
-const initialValues = {
-  address: '',
-  contact: '',
-  card: '',
-  date: '',
-  time: '',
-  voucher: ''
-};
-
-const checkoutSchema = yup.object().shape({
-  address: yup.string().required('required'),
-  contact: yup.string().required('required'),
-  card: yup.string().required('required'),
-  date: yup.object().required('required'),
-  time: yup.object().required('required'),
-  voucher: yup.string()
-});
 
 export default CheckoutForm2;
