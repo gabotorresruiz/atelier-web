@@ -59,7 +59,7 @@ const renderDots = ({ step, currentSlide, visibleSlides, totalSlides, carouselSt
         <div
           role="button"
           key={i + total}
-          tabIndex={0} // Hacer que el elemento sea enfocable
+          tabIndex={0}
           aria-label="Go to last slide"
           className={clsx({
             dot: true,

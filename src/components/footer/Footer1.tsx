@@ -72,8 +72,8 @@ const Footer1: FC = () => (
               </Typography>
 
               <div>
-                {aboutLinks.map((item) => (
-                  <Link href="/" key={item}>
+                {aboutLinks.map((item, ind) => (
+                  <Link href="/" key={ind}>
                     <StyledLink>{item}</StyledLink>
                   </Link>
                 ))}
@@ -86,8 +86,8 @@ const Footer1: FC = () => (
               </Typography>
 
               <div>
-                {customerCareLinks.map((item) => (
-                  <Link href="/" key={item}>
+                {customerCareLinks.map((item, ind) => (
+                  <Link href="/" key={ind}>
                     <StyledLink>{item}</StyledLink>
                   </Link>
                 ))}

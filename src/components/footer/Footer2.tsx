@@ -79,16 +79,16 @@ const Footer2: FC = () => (
         <Grid item md={6} sm={6} xs={12}>
           <StyledBox maxWidth="230px" mt="-0.35rem">
             <div>
-              {customerCareLinks.map((item) => (
-                <Link href="/" key={item}>
+              {customerCareLinks.map((item, ind) => (
+                <Link href="/" key={ind}>
                   <StyledLink>{item}</StyledLink>
                 </Link>
               ))}
             </div>
 
             <FlexBox mx="-5px" mt="1rem">
-              {iconList.map((item) => (
-                <Link href="/" key={item}>
+              {iconList.map((item, ind) => (
+                <Link href="/" key={ind}>
                   <Box
                     m="5px"
                     size="small"
