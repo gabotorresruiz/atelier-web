@@ -65,7 +65,6 @@ type ProductCard17Props = {
   title: string;
   price: number;
   imgUrl: string;
-  rating?: number;
   reviews: number;
   category: string;
   images: string[];

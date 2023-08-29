@@ -24,6 +24,26 @@ const StyledLink = styled.a`
   }
 `;
 
+const aboutLinks = ['Careers', 'Our Stores', 'Our Cares', 'Terms & Conditions', 'Privacy Policy'];
+const iconList = [
+  { iconName: 'facebook', url: 'https://www.facebook.com/UILibOfficial' },
+  { iconName: 'twitter', url: '/' },
+  {
+    iconName: 'youtube',
+    url: 'https://www.youtube.com/channel/UCsIyD-TSO1wQFz-n2Y4i3Rg'
+  },
+  { iconName: 'google', url: '/' },
+  { iconName: 'instagram', url: '/' }
+];
+
+const customerCareLinks = [
+  'Help Center',
+  'How to Buy',
+  'Track Your Order',
+  'Corporate & Bulk Purchasing',
+  'Returns & Refunds'
+];
+
 const Footer1: FC = () => (
   <footer>
     <Box bg="#0F3460">
@@ -93,7 +113,7 @@ const Footer1: FC = () => (
 
               <FlexBox className="flex" mx="-5px">
                 {iconList.map((item) => (
-                  <a href={item.url} target="_blank" key={item.iconName} rel="noreferrer noopenner">
+                  <a href={item.url} target="_blank" key={item.iconName} rel="noreferrer noopener">
                     <Box m="5px" p="10px" size="small" borderRadius="50%" bg="rgba(0,0,0,0.2)">
                       <Icon size="12px" defaultcolor="auto">
                         {item.iconName}
@@ -109,26 +129,5 @@ const Footer1: FC = () => (
     </Box>
   </footer>
 );
-
-const aboutLinks = ['Careers', 'Our Stores', 'Our Cares', 'Terms & Conditions', 'Privacy Policy'];
-
-const customerCareLinks = [
-  'Help Center',
-  'How to Buy',
-  'Track Your Order',
-  'Corporate & Bulk Purchasing',
-  'Returns & Refunds'
-];
-
-const iconList = [
-  { iconName: 'facebook', url: 'https://www.facebook.com/UILibOfficial' },
-  { iconName: 'twitter', url: '/' },
-  {
-    iconName: 'youtube',
-    url: 'https://www.youtube.com/channel/UCsIyD-TSO1wQFz-n2Y4i3Rg'
-  },
-  { iconName: 'google', url: '/' },
-  { iconName: 'instagram', url: '/' }
-];
 
 export default Footer1;

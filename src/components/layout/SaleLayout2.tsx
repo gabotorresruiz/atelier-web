@@ -12,6 +12,20 @@ import StyledAppLayout from './AppLayoutStyle';
 // ======================================================================
 type Props = { title?: string; children: ReactNode };
 // ======================================================================
+const saleCategoryList = [
+  { icon: 't-shirt', title: 'Men' },
+  { icon: 'women-dress', title: 'Women' },
+  { icon: 'beauty-products', title: 'Cosmetics' },
+  { icon: 'watch', title: 'Accessories' },
+  { icon: 'camera', title: 'Eelctronics' },
+  { icon: 'sofa', title: 'Furniture' },
+  { icon: 'basket-ball', title: 'Sport' },
+  { icon: 'wheel', title: 'Automobile' },
+  { icon: 'drill-machine', title: 'Hardware' },
+  { icon: 'baby-feeder', title: 'Baby products' },
+  { icon: 'picture', title: 'Photos' },
+  { icon: 't-shirt', title: 'Clothes' }
+];
 
 const SaleLayout2: FC<Props> = ({ children, title = 'Multivendor Ecommerce | Sale' }) => (
   <StyledAppLayout>
@@ -35,20 +49,5 @@ const SaleLayout2: FC<Props> = ({ children, title = 'Multivendor Ecommerce | Sal
     <Footer1 />
   </StyledAppLayout>
 );
-
-const saleCategoryList = [
-  { icon: 't-shirt', title: 'Men' },
-  { icon: 'women-dress', title: 'Women' },
-  { icon: 'beauty-products', title: 'Cosmetics' },
-  { icon: 'watch', title: 'Accessories' },
-  { icon: 'camera', title: 'Eelctronics' },
-  { icon: 'sofa', title: 'Furniture' },
-  { icon: 'basket-ball', title: 'Sport' },
-  { icon: 'wheel', title: 'Automobile' },
-  { icon: 'drill-machine', title: 'Hardware' },
-  { icon: 'baby-feeder', title: 'Baby products' },
-  { icon: 'picture', title: 'Photos' },
-  { icon: 't-shirt', title: 'Clothes' }
-];
 
 export default SaleLayout2;

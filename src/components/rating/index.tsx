@@ -18,7 +18,7 @@ export interface RatingProps {
 const Rating: FC<RatingProps> = ({ value, color, outof, readonly, onChange, ...props }) => {
   const [state, setState] = useState(value);
 
-  let fullStar = parseInt(state.toString());
+  let fullStar = parseInt(state.toString(), 10);
   let halfStar = Math.ceil(state - fullStar);
   let emptyStar = outof - Math.ceil(state);
   let starList = [];
@@ -32,7 +32,7 @@ const Rating: FC<RatingProps> = ({ value, color, outof, readonly, onChange, ...p
 
   useEffect(() => setState(value), [value]);
 
-  for (let i = 0; i < fullStar; i++) {
+  for (let i = 0; i < fullStar; i += 1) {
     let inputValue = i + 1;
 
     starList.push(
@@ -40,7 +40,7 @@ const Rating: FC<RatingProps> = ({ value, color, outof, readonly, onChange, ...p
     );
   }
 
-  for (let i = 0; i < halfStar; i++) {
+  for (let i = 0; i < halfStar; i += 1) {
     let inputValue = i + fullStar + 1;
 
     starList.push(
@@ -54,7 +54,7 @@ const Rating: FC<RatingProps> = ({ value, color, outof, readonly, onChange, ...p
     );
   }
 
-  for (let i = 0; i < emptyStar; i++) {
+  for (let i = 0; i < emptyStar; i += 1) {
     let inputValue = i + halfStar + fullStar + 1;
 
     starList.push(

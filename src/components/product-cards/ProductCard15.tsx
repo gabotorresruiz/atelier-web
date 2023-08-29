@@ -98,12 +98,14 @@ type Props = {
 const ProductCard15: FC<Props> = (props) => {
   const { off, id, title, price, imgUrl, rating, slug, images } = props;
 
-  const [open, setOpen] = useState(false);
+  const [openDialog, setOpenDialog] = useState(false);
   const { state, dispatch } = useAppContext();
 
   const cartItem = state.cart.find((item) => item.slug === slug);
 
-  const toggleDialog = useCallback(() => setOpen((open) => !open), []);
+  const toggleDialog = useCallback(() => {
+    setOpenDialog((open) => !open);
+  }, []);
 
   // handle add to cart
   const handleAddToCart = () => {
@@ -152,7 +154,7 @@ const ProductCard15: FC<Props> = (props) => {
       </ImgBox>
 
       <ProductQuickView
-        open={open}
+        open={openDialog}
         onClose={toggleDialog}
         product={{ id, slug, images, price, title }}
       />

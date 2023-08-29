@@ -118,11 +118,13 @@ const ProductCard9: FC<ProductCard9Props> = ({
   categories,
   ...props
 }) => {
-  const [open, setOpen] = useState(false);
+  const [openDialog, setOpenDialog] = useState(false);
   const { state, dispatch } = useAppContext();
   const cartItem = state.cart.find((item) => item.id === id);
 
-  const toggleDialog = useCallback(() => setOpen((open) => !open), []);
+  const toggleDialog = useCallback(() => {
+    setOpenDialog((open) => !open);
+  }, []);
 
   const handleCartAmountChange = (qty: number) => () => {
     dispatch({
@@ -294,7 +296,7 @@ const ProductCard9: FC<ProductCard9Props> = ({
       </Grid>
 
       <ProductQuickView
-        open={open}
+        open={openDialog}
         onClose={toggleDialog}
         product={{ id, images, price, title, slug }}
       />

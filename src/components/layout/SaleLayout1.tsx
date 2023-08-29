@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react';
+import React, { FC, ReactNode, Suspense } from 'react';
 import Head from 'next/head';
 import Topbar from '@component/topbar';
 import { Header } from '@component/header';
@@ -21,7 +21,10 @@ const SaleLayout1: FC<Props> = ({ children, title = 'Multivendor Ecommerce | Sal
 
     <Topbar />
     <Header />
-    <Navbar />
+
+    <Suspense fallback={<div>Loading...</div>}>
+      <Navbar />
+    </Suspense>
 
     {children}
 

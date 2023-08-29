@@ -47,6 +47,14 @@ const Wrapper = styled(Box)`
     margin-bottom: 3.75rem;
   }
 `;
+const customerCareLinks = [
+  'Help Center',
+  'Track Your Order',
+  'Corporate & Bulk Purchasing',
+  'Returns & Refunds'
+];
+
+const iconList = ['facebook', 'twitter', 'youtube', 'google', 'instagram'];
 
 const Footer2: FC = () => (
   <footer>
@@ -102,14 +110,5 @@ const Footer2: FC = () => (
     </Wrapper>
   </footer>
 );
-
-const customerCareLinks = [
-  'Help Center',
-  'Track Your Order',
-  'Corporate & Bulk Purchasing',
-  'Returns & Refunds'
-];
-
-const iconList = ['facebook', 'twitter', 'youtube', 'google', 'instagram'];
 
 export default Footer2;

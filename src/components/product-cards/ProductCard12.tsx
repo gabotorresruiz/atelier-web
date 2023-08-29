@@ -112,12 +112,14 @@ type ProductCard12Props = {
 const ProductCard12: FC<ProductCard12Props> = (props) => {
   const { off, title, price, imgUrl, rating, slug, id, images } = props;
 
-  const [open, setOpen] = useState(false);
+  const [openDialog, setOpenDialog] = useState(false);
   const { state, dispatch } = useAppContext();
 
   const cartItem = state.cart.find((item) => item.id === id);
 
-  const toggleDialog = useCallback(() => setOpen((open) => !open), []);
+  const toggleDialog = useCallback(() => {
+    setOpenDialog((open) => !open);
+  }, []);
 
   const handleCartAmountChange = (qty: number) => () => {
     dispatch({
@@ -181,7 +183,9 @@ const ProductCard12: FC<ProductCard12Props> = (props) => {
               variant="outlined"
               borderColor="primary.light"
               className="addCartButton"
-              onClick={handleCartAmountChange(cartItem?.qty ? cartItem?.qty - 1 : 1)}
+              onClick={() =>
+                handleCartAmountChange(cartItem?.qty !== undefined ? cartItem.qty - 1 : 1)
+              }
             >
               {cartItem?.qty ? (
                 <>
@@ -240,7 +244,7 @@ const ProductCard12: FC<ProductCard12Props> = (props) => {
       </ContentWrapper>
 
       <ProductQuickView
-        open={open}
+        open={openDialog}
         onClose={toggleDialog}
         product={{ id, images, slug, price, title }}
       />

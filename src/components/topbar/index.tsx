@@ -9,6 +9,19 @@ import Container from '../Container';
 import { Small } from '../Typography';
 import StyledTopbar from './styles';
 
+const languageList = [
+  { title: 'EN', imgUrl: '/assets/images/flags/usa.png' },
+  { title: 'BN', imgUrl: '/assets/images/flags/bd.png' },
+  { title: 'HN', imgUrl: '/assets/images/flags/in.png' }
+];
+
+const currencyList = [
+  { title: 'USD', imgUrl: '/assets/images/flags/usa.png' },
+  { title: 'EUR', imgUrl: '/assets/images/flags/uk.png' },
+  { title: 'BDT', imgUrl: '/assets/images/flags/bd.png' },
+  { title: 'INR', imgUrl: '/assets/images/flags/in.png' }
+];
+
 const Topbar: FC = () => {
   const [currency, setCurrency] = useState(currencyList[0]);
   const [language, setLanguage] = useState(languageList[0]);
@@ -90,18 +103,5 @@ const Topbar: FC = () => {
     </StyledTopbar>
   );
 };
-
-const languageList = [
-  { title: 'EN', imgUrl: '/assets/images/flags/usa.png' },
-  { title: 'BN', imgUrl: '/assets/images/flags/bd.png' },
-  { title: 'HN', imgUrl: '/assets/images/flags/in.png' }
-];
-
-const currencyList = [
-  { title: 'USD', imgUrl: '/assets/images/flags/usa.png' },
-  { title: 'EUR', imgUrl: '/assets/images/flags/uk.png' },
-  { title: 'BDT', imgUrl: '/assets/images/flags/bd.png' },
-  { title: 'INR', imgUrl: '/assets/images/flags/in.png' }
-];
 
 export default Topbar;

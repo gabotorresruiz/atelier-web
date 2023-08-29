@@ -10,6 +10,12 @@ import Navbar from '../navbar/Navbar';
 // ======================================================
 type Props = { children: ReactNode };
 // ======================================================
+const stepperList = [
+  { title: 'Cart', disabled: false },
+  { title: 'Details', disabled: false },
+  { title: 'Payment', disabled: false },
+  { title: 'Review', disabled: true }
+];
 
 const CheckoutNavLayout: FC<Props> = ({ children }) => {
   const [selectedStep, setSelectedStep] = useState(0);
@@ -71,12 +77,5 @@ const CheckoutNavLayout: FC<Props> = ({ children }) => {
     </AppLayout>
   );
 };
-
-const stepperList = [
-  { title: 'Cart', disabled: false },
-  { title: 'Details', disabled: false },
-  { title: 'Payment', disabled: false },
-  { title: 'Review', disabled: true }
-];
 
 export default CheckoutNavLayout;

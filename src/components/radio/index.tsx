@@ -102,14 +102,17 @@ const Radio: FC<InputHTMLAttributes<HTMLInputElement> & SpaceProps & RadioProps>
   const [radioId, setRadioId] = useState(id);
 
   // extract spacing props
-  let spacingProps = {};
-  for (const key in props) {
-    if (key.startsWith('m') || key.startsWith('p')) spacingProps[key] = props[key];
-  }
+  const propKeys = Object.keys(props);
+  const spacingProps = propKeys.reduce((acc, key) => {
+    if (key.startsWith('m') || key.startsWith('p')) {
+      acc[key] = props[key];
+    }
+    return acc;
+  }, {});
 
   useEffect(() => {
     setRadioId(id || Math.random());
-  }, []);
+  }, [id]);
 
   return (
     <Wrapper labelPlacement={labelPlacement} color={`${labelColor}.main`} {...spacingProps}>

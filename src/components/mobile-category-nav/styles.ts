@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { getTheme } from '@utils/utils';
 import { layoutConstant } from '@utils/constants';
 
-export const MobileCategoryNavStyle = styled.div`
+const MobileCategoryNavStyle = styled.div`
   position: relative;
 
   .header {
@@ -54,3 +54,5 @@ export const MobileCategoryNavStyle = styled.div`
     text-overflow: ellipsis;
   }
 `;
+
+export default MobileCategoryNavStyle;

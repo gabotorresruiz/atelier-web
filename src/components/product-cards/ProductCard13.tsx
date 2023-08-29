@@ -199,8 +199,8 @@ const ProductCard13: FC<Props> = (props) => {
             )}
 
             <ColorBox>
-              {productColors.map((color, ind) => (
-                <Span key={ind} style={{ background: color }} />
+              {productColors.map((color) => (
+                <Span key={color} style={{ background: color }} />
               ))}
             </ColorBox>
 

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { space } from 'styled-system';
 import { getTheme } from '@utils/utils';
 
-export const StyledPagination = styled.div`
+const StyledPagination = styled.div`
   .pagination {
     margin: 0px;
     display: flex;
@@ -65,3 +65,5 @@ export const StyledPagination = styled.div`
 
   ${space}
 `;
+
+export default StyledPagination;

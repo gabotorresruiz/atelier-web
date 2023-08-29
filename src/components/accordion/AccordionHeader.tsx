@@ -19,6 +19,8 @@ type AccordionHeaderProps = {
   showIcon?: boolean;
   children: ReactNode;
   [key: string]: unknown;
+  py?: string;
+  px?: string;
 };
 
 type Props = AccordionHeaderProps & SpaceProps & FlexboxProps;

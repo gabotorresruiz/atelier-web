@@ -12,7 +12,7 @@ import { MegaMenu1Props } from './type';
 
 const MegaMenu1: FC<MegaMenu1Props> = ({
   data: { categories, rightImage, bottomImage },
-  minWidth
+  minWidth = '760px'
 }) =>
   categories ? (
     <StyledMegaMenu1 className="mega-menu">
@@ -29,8 +29,8 @@ const MegaMenu1: FC<MegaMenu1Props> = ({
                   ) : (
                     <SemiSpan className="title-link">{item.title}</SemiSpan>
                   )}
-                  {item.subCategories?.map((sub, ind) => (
-                    <NavLink key={ind} className="child-link" href={sub.href}>
+                  {item.subCategories?.map((sub, subInd) => (
+                    <NavLink key={subInd} className="child-link" href={sub.href}>
                       {sub.title}
                     </NavLink>
                   ))}
@@ -62,7 +62,5 @@ const MegaMenu1: FC<MegaMenu1Props> = ({
       </Card>
     </StyledMegaMenu1>
   ) : null;
-
-MegaMenu1.defaultProps = { minWidth: '760px' };
 
 export default MegaMenu1;
