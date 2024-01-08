@@ -18,7 +18,7 @@ import {
 
 interface ButtonProps {
   fullwidth?: boolean;
-  color?: colorOptions;
+  btnColor?: colorOptions;
   variant?: 'text' | 'outlined' | 'contained';
   size?: 'small' | 'medium' | 'large' | 'none';
 }
@@ -26,7 +26,7 @@ interface ButtonProps {
 const Button = styled.button<
   ColorProps & BackgroundProps & BorderProps & SpaceProps & ButtonProps & LayoutProps
 >(
-  ({ color, fullwidth }) =>
+  ({ btnColor, fullwidth }) =>
     systemCss({
       display: 'flex',
       width: fullwidth ? '100%' : 'unset',
@@ -39,7 +39,7 @@ const Button = styled.button<
       fontSize: '1rem',
       fontWeight: 600,
       fontFamily: 'inherit',
-      color: color ? `${color}.main` : 'body.text',
+      color: btnColor ? `${btnColor}.main` : 'body.text',
       background: 'transparent',
       transition: 'all 150ms ease-in-out',
       lineHeight: 1,
@@ -59,43 +59,43 @@ const Button = styled.button<
         }
       }
     }),
-  ({ theme, color }) =>
+  ({ theme, btnColor }) =>
     variant({
       prop: 'variant',
       variants: {
         text: {
           border: 'none',
-          color: `${color}.main`,
+          color: `${btnColor}.main`,
           '&:hover': {
-            bg: color ? `${color}.light` : 'gray.100'
+            bg: btnColor ? `${btnColor}.light` : 'gray.100'
           }
         },
         outlined: {
           padding: '10px 16px',
-          color: `${color}.main`,
+          color: `${btnColor}.main`,
           border: '1px solid',
-          borderColor: color ? `${color}.main` : 'text.disabled',
+          borderColor: btnColor ? `${btnColor}.main` : 'text.disabled',
 
           '&:enabled svg path': {
-            fill: color ? `${theme.colors[color]?.main} !important` : 'text.primary'
+            fill: btnColor ? `${theme.colors[btnColor]?.main} !important` : 'text.primary'
           },
           '&:enabled svg polyline, svg polygon': {
-            color: color ? `${theme.colors[color]?.main} !important` : 'text.primary'
+            color: btnColor ? `${theme.colors[btnColor]?.main} !important` : 'text.primary'
           },
           '&:focus': {
-            boxShadow: `0px 1px 4px 0px ${theme.colors[color]?.light}`
+            boxShadow: `0px 1px 4px 0px ${theme.colors[btnColor]?.light}`
           },
           '&:hover:enabled': {
             bg: color && `${color}.main`,
             borderColor: color && `${color}.main`,
             color: color && `${color}.text`,
             'svg path': {
-              fill: color ? `${theme.colors[color]?.text} !important` : 'text.primary'
+              fill: color ? `${theme.colors[btnColor]?.text} !important` : 'text.primary'
             },
             'svg polyline, svg polygon': {
-              color: color ? `${theme.colors[color]?.text} !important` : 'text.primary'
+              color: color ? `${theme.colors[btnColor]?.text} !important` : 'text.primary'
             },
-            ...(color === 'dark' && { color: 'white' })
+            ...(btnColor === 'dark' && { color: 'white' })
           }
         },
         contained: {
@@ -103,13 +103,13 @@ const Button = styled.button<
           color: `${color}.text`,
           bg: `${color}.main`,
           '&:focus': {
-            boxShadow: `0px 1px 4px 0px ${theme.colors[color]?.light}`
+            boxShadow: `0px 1px 4px 0px ${theme.colors[btnColor]?.light}`
           },
           '&:enabled svg path': {
-            fill: color ? `${theme.colors[color]?.text} !important` : 'text.primary'
+            fill: btnColor ? `${theme.colors[btnColor]?.text} !important` : 'text.primary'
           },
           '&:enabled svg polyline, svg polygon': {
-            color: color ? `${theme.colors[color]?.text} !important` : 'text.primary'
+            color: btnColor ? `${theme.colors[btnColor]?.text} !important` : 'text.primary'
           }
         }
       }

@@ -1,4 +1,4 @@
-export const addressList = [
+const addressList = [
   {
     id: 'd27d0e28-c35e-4085-af1e-f9f1b1bd9c34',
     user: {
@@ -110,3 +110,5 @@ export const addressList = [
     title: 'Italian Restaurant'
   }
 ];
+
+export default addressList;

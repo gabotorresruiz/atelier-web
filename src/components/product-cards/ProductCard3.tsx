@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import styled, { CSSProperties } from 'styled-components';
+import Image from '@component/Image';
 import { getTheme } from '@utils/utils';
 import Rating from '../rating';
 import Icon from '../icon/Icon';
@@ -103,7 +104,7 @@ const ProductCard3: FC<ProductCard3Props> = ({ ...props }) => (
   <Wrapper {...props}>
     <div className="image-holder">
       <div className="sale-chip">50% off</div>
-      <img src="/assets/images/products/macbook.png" alt="golden-watch" />
+      <Image alt="golden-watch" src="/assets/images/products/macbook.png" />
     </div>
 
     <div className="details">

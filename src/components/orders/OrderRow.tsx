@@ -2,7 +2,7 @@ import { FC } from 'react';
 import Link from 'next/link';
 import { format } from 'date-fns';
 import Box from '@component/Box';
-import { Chip } from '@component/Chip';
+import Chip from '@component/Chip';
 import Hidden from '@component/hidden';
 import Icon from '@component/icon/Icon';
 import TableRow from '@component/TableRow';

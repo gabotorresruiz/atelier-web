@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
+import Image from '@component/Image';
 import Box from '@component/Box';
 import Card from '@component/Card';
 import FlexBox from '@component/FlexBox';
@@ -58,8 +59,7 @@ const Section6: FC<Props> = ({ cardList }) => (
                     </a>
                   </Link>
                 </Box>
-
-                <img src={item.imgUrl} alt="" />
+                <Image src={item.imgUrl} alt="" />
               </FlexBox>
             </Card>
           </Box>

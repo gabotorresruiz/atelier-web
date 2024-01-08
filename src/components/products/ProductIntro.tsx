@@ -62,7 +62,7 @@ const ProductIntro: FC<ProductIntroProps> = ({ images, title, price, id }) => {
             <FlexBox overflow="auto">
               {images.map((url, ind) => (
                 <Box
-                  key={url}
+                  key={ind}
                   size={70}
                   bg="white"
                   minWidth={70}
@@ -112,8 +112,8 @@ const ProductIntro: FC<ProductIntroProps> = ({ images, title, price, id }) => {
             <Button
               mb="36px"
               size="small"
-              color="primary"
-              variant="contained"
+              btnColor="primary"
+              variant="outlined"
               onClick={handleCartAmountChange(1)}
             >
               Add to Cart

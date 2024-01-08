@@ -21,16 +21,16 @@ const Sticky: FC<StickyProps> = (props) => {
   const scrollListener = useCallback(() => {
     if (!window) return;
 
-    let distance = window.pageYOffset - positionRef.current;
+    let distance = window.scrollY - positionRef.current;
 
-    if (containerRef?.current) {
+    if (containerRef?.current && containerRef.current?.offsetHeight) {
       let containerDistance =
-        containerRef.current.offsetTop + containerRef.current?.offsetHeight - window.pageYOffset;
+        containerRef.current.offsetTop + containerRef.current.offsetHeight - window.scrollY;
 
-      if (notifyPosition && notifyOnScroll) {
+      if (notifyPosition && notifyOnScroll)
         notifyOnScroll(distance <= notifyPosition && containerDistance > notifyPosition);
-      }
-      return setFixed(distance <= fixedOn && containerDistance > fixedOn);
+
+      setFixed(distance <= fixedOn && containerDistance > fixedOn);
     }
 
     if (notifyPosition && notifyOnScroll) {
@@ -39,29 +39,32 @@ const Sticky: FC<StickyProps> = (props) => {
 
     let isFixed = distance >= fixedOn;
     setFixed(isFixed);
-  }, []);
+  }, [containerRef, fixedOn, notifyOnScroll, notifyPosition]);
 
   useEffect(() => {
     if (!window) return;
 
     window.addEventListener('scroll', scrollListener);
     window.addEventListener('resize', scrollListener);
+
+    // eslint-disable-next-line consistent-return
     return () => {
       window.removeEventListener('scroll', scrollListener);
       window.removeEventListener('resize', scrollListener);
     };
-  }, []);
+  }, [scrollListener]);
 
   useEffect(() => {
     if (!positionRef.current) {
       positionRef.current = elementRef.current?.offsetTop;
     }
     setParentHeight(elementRef.current?.offsetHeight || 0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [elementRef.current, children]);
 
   useEffect(() => {
     if (onSticky) onSticky(fixed);
-  }, [fixed]);
+  }, [fixed, onSticky]);
 
   return (
     <StyledSticky

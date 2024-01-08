@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { cloneElement, FC, ReactElement, ReactNode, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { StyledSidenav } from './SidenavStyle';
+import StyledSidenav from './SidenavStyle';
 
 export interface SidenavProps {
   open?: boolean;

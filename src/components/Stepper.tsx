@@ -1,6 +1,6 @@
 import { FC, Fragment, useEffect, useState } from 'react';
 import Box from './Box';
-import { Chip } from './Chip';
+import Chip from './Chip';
 import FlexBox from './FlexBox';
 
 type Step = { title: string; disabled: boolean };

@@ -25,13 +25,14 @@ const TextField: FC<InputHTMLAttributes<HTMLInputElement> & TextFieldProps & Spa
 
   // extract spacing props
   let spacingProps = {};
-  for (const key in props) {
+
+  Object.keys(props).forEach((key) => {
     if (key.startsWith('m') || key.startsWith('p')) spacingProps[key] = props[key];
-  }
+  });
 
   useEffect(() => {
     if (!id) setTextId(Math.random());
-  }, []);
+  }, [id]);
 
   return (
     <TextFieldWrapper
@@ -52,6 +53,7 @@ const TextField: FC<InputHTMLAttributes<HTMLInputElement> & TextFieldProps & Spa
   );
 };
 
+// eslint-disable-next-line react/default-props-match-prop-types
 TextField.defaultProps = { color: 'default' };
 
 export default TextField;

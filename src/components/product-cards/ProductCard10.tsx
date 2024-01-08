@@ -8,7 +8,7 @@ import { useAppContext } from '@context/AppContext';
 import { calculateDiscount, currency, getTheme } from '@utils/utils';
 import Box from '../Box';
 import Card from '../Card';
-import { Chip } from '../Chip';
+import Chip from '../Chip';
 import Icon from '../icon/Icon';
 import FlexBox from '../FlexBox';
 import { Button } from '../buttons';

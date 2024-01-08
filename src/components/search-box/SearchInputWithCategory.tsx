@@ -11,6 +11,19 @@ import { Span } from '../Typography';
 import TextField from '../text-field';
 import StyledSearchBox from './styled';
 
+const categories = [
+  'All Categories',
+  'Car',
+  'Clothes',
+  'Electronics',
+  'Laptop',
+  'Desktop',
+  'Camera',
+  'Toys'
+];
+
+const dummySearchResult = ['Macbook Air 13', 'Ksus K555LA', 'Acer Aspire X453', 'iPad Mini 3'];
+
 const SearchInputWithCategory: FC = () => {
   const [resultList, setResultList] = useState([]);
   const [category, setCategory] = useState('All Categories');
@@ -24,10 +37,13 @@ const SearchInputWithCategory: FC = () => {
     else setResultList(dummySearchResult);
   }, 200);
 
-  const hanldeSearch = useCallback((event) => {
-    event.persist();
-    search(event);
-  }, []);
+  const hanldeSearch = useCallback(
+    (event) => {
+      event.persist();
+      search(event);
+    },
+    [search]
+  );
 
   const handleDocumentClick = () => setResultList([]);
 
@@ -82,18 +98,5 @@ const SearchInputWithCategory: FC = () => {
     </Box>
   );
 };
-
-const categories = [
-  'All Categories',
-  'Car',
-  'Clothes',
-  'Electronics',
-  'Laptop',
-  'Desktop',
-  'Camera',
-  'Toys'
-];
-
-const dummySearchResult = ['Macbook Air 13', 'Ksus K555LA', 'Acer Aspire X453', 'iPad Mini 3'];
 
 export default SearchInputWithCategory;

@@ -8,67 +8,6 @@ import Container from '@component/Container';
 import { H2, H4, Paragraph } from '@component/Typography';
 import PageCard from './PageCard';
 
-const SectionWrapper = styled(Box)`
-  background: url(/assets/images/landing/landing-bg-2.svg) center/contain no-repeat;
-`;
-
-const Section3: FC = () => {
-  const [selectedTab, setSelectedTab] = useState(0);
-
-  const page = [demoPageList, shopPageList, customerPageList, vendorPageList];
-  const list = page[selectedTab];
-
-  const handleTabChange = (ind: number) => () => setSelectedTab(ind);
-
-  return (
-    <SectionWrapper mb="7rem" id="demos">
-      <Container id="section-3" position="relative">
-        <Box maxWidth="830px" mx="auto" mb="100px" textAlign="center">
-          <H4 color="primary.main" fontSize="58px" fontWeight="900">
-            35+
-          </H4>
-
-          <Paragraph color="primary.main" fontSize="18px">
-            Server side rendered
-          </Paragraph>
-
-          <H2 color="secondary.main" fontSize="40px" fontWeight="900" mb="2rem">
-            Demos & Pages
-          </H2>
-
-          <FlexBox justifyContent="center" flexWrap="wrap" m="-0.5rem">
-            {['Demos', 'Shop Pages', 'User Account', 'Vendor Account'].map((item, ind) => (
-              <Button
-                key={item}
-                m="0.5rem"
-                color="primary"
-                onClick={handleTabChange(ind)}
-                variant={selectedTab === ind ? 'contained' : 'outlined'}
-              >
-                {item}
-              </Button>
-            ))}
-          </FlexBox>
-        </Box>
-
-        <Grid container spacing={8}>
-          {list.map((item) => (
-            <Grid item lg={4} md={6} xs={12} key={item.previewUrl}>
-              <PageCard badge={item.new} {...item} />
-            </Grid>
-          ))}
-        </Grid>
-
-        <a href="https://1.envato.market/oeNbNe">
-          <Button variant="contained" color="primary" minWidth="125px" mx="auto" mt="2.25rem">
-            Purchase Now
-          </Button>
-        </a>
-      </Container>
-    </SectionWrapper>
-  );
-};
-
 const demoPageList = [
   {
     imgUrl: '/assets/images/landing/page-1.png',
@@ -290,5 +229,66 @@ const customerPageList = [
     new: false
   }
 ];
+
+const SectionWrapper = styled(Box)`
+  background: url(/assets/images/landing/landing-bg-2.svg) center/contain no-repeat;
+`;
+
+const Section3: FC = () => {
+  const [selectedTab, setSelectedTab] = useState(0);
+
+  const page = [demoPageList, shopPageList, customerPageList, vendorPageList];
+  const list = page[selectedTab];
+
+  const handleTabChange = (ind: number) => () => setSelectedTab(ind);
+
+  return (
+    <SectionWrapper mb="7rem" id="demos">
+      <Container id="section-3" position="relative">
+        <Box maxWidth="830px" mx="auto" mb="100px" textAlign="center">
+          <H4 color="primary.main" fontSize="58px" fontWeight="900">
+            35+
+          </H4>
+
+          <Paragraph color="primary.main" fontSize="18px">
+            Server side rendered
+          </Paragraph>
+
+          <H2 color="secondary.main" fontSize="40px" fontWeight="900" mb="2rem">
+            Demos & Pages
+          </H2>
+
+          <FlexBox justifyContent="center" flexWrap="wrap" m="-0.5rem">
+            {['Demos', 'Shop Pages', 'User Account', 'Vendor Account'].map((item, ind) => (
+              <Button
+                key={item}
+                m="0.5rem"
+                color="primary"
+                onClick={handleTabChange(ind)}
+                variant={selectedTab === ind ? 'contained' : 'outlined'}
+              >
+                {item}
+              </Button>
+            ))}
+          </FlexBox>
+        </Box>
+
+        <Grid container spacing={8}>
+          {list.map((item) => (
+            <Grid item lg={4} md={6} xs={12} key={item.previewUrl}>
+              <PageCard badge={item.new} {...item} />
+            </Grid>
+          ))}
+        </Grid>
+
+        <a href="https://1.envato.market/oeNbNe">
+          <Button variant="contained" color="primary" minWidth="125px" mx="auto" mt="2.25rem">
+            Purchase Now
+          </Button>
+        </a>
+      </Container>
+    </SectionWrapper>
+  );
+};
 
 export default Section3;

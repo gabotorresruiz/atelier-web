@@ -87,6 +87,7 @@ const Navbar2: FC<NavbarProps> = () => {
             </Box>
           );
       }
+      return null;
     });
 
   return (

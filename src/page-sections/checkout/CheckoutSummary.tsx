@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Card1 } from '@component/Card1';
+import Card1 from '@component/Card1';
 import Divider from '@component/Divider';
 import FlexBox from '@component/FlexBox';
 import { Button } from '@component/buttons';

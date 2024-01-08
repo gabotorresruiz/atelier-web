@@ -1,4 +1,4 @@
-export const users = [
+const users = [
   {
     id: 'e42e28ea-528f-4bc8-81fb-97f658d67d75',
     email: 'Jayden.Gislason78@gmail.com',
@@ -30,3 +30,5 @@ export const users = [
     name: { firstName: 'Jamaal', lastName: 'McClure' }
   }
 ];
+
+export default users;

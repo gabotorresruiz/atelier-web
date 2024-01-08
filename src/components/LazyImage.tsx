@@ -4,9 +4,7 @@ import { border, BorderProps, color, ColorProps, space, SpaceProps } from 'style
 
 type LazyImageProps = ImageProps & BorderProps & SpaceProps & ColorProps;
 
-const LazyImage = styled(({ borderRadius, ...props }: LazyImageProps) => (
-  <NextImage {...props} />
-))<ImageProps>`
+const LazyImage = styled(({ ...props }: LazyImageProps) => <NextImage {...props} />)<ImageProps>`
   display: block;
   ${color}
   ${space}

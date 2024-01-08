@@ -5,7 +5,7 @@ import * as yup from 'yup';
 import { Formik } from 'formik';
 import Select from '@component/Select';
 import Grid from '@component/grid/Grid';
-import { Card1 } from '@component/Card1';
+import Card1 from '@component/Card1';
 import CheckBox from '@component/CheckBox';
 import countryList from '@data/countryList';
 import { Button } from '@component/buttons';

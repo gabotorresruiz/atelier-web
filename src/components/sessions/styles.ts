@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Card from '../Card';
 
-export const StyledSessionCard = styled(Card)`
+const StyledSessionCard = styled(Card)`
   width: 500px;
   overflow: hidden;
   .content {
@@ -14,3 +14,5 @@ export const StyledSessionCard = styled(Card)`
     }
   }
 `;
+
+export default StyledSessionCard;

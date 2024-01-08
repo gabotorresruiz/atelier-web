@@ -10,7 +10,7 @@ import FlexBox from '@component/FlexBox';
 import TextField from '@component/text-field';
 import { Button, IconButton } from '@component/buttons';
 import { H3, H5, H6, SemiSpan, Small, Span } from '@component/Typography';
-import { StyledSessionCard } from './styles';
+import StyledSessionCard from './styles';
 
 const initialValues = { email: '', password: '' };
 

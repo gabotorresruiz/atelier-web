@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import axios from 'axios';
 import Box from '@component/Box';
 import Sticky from '@component/sticky';
-import { Chip } from '@component/Chip';
+import Chip from '@component/Chip';
 import Grid from '@component/grid/Grid';
 import Icon from '@component/icon/Icon';
 import FlexBox from '@component/FlexBox';

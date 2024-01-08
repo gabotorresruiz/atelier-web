@@ -96,8 +96,8 @@ const SideNavbar: FC<SideNavbarProps> = (props) => {
   return (
     <Scrollbar autoHide={false} sx={{ maxHeight: sidebarHeight }}>
       <NavbarRoot isfixed={isFixed} sidebarstyle={sidebarStyle}>
-        {navList.map((item, ind) => (
-          <Box key={ind}>
+        {navList.map((item, i) => (
+          <Box key={i}>
             <Box padding="16px 20px 5px 20px">
               <H5>{item.category}</H5>
               <BorderBox linestyle={lineStyle}>
@@ -106,31 +106,31 @@ const SideNavbar: FC<SideNavbarProps> = (props) => {
               </BorderBox>
             </Box>
 
-            {item.categoryItem.map((item, ind) => (
+            {item.categoryItem.map((itemx, ind) => (
               <Box mb="2px" color="grey.700" key={ind}>
-                {item.child ? (
+                {itemx.child ? (
                   <Accordion>
-                    <AccordionHeader px={0} py={0.75} className="linkList">
+                    <AccordionHeader px="0" py="0.75" className="linkList">
                       <FlexBox alignItems="center">
                         <Icon mr="10px" size="20px" defaultcolor="currentColor">
-                          {item.icon}
+                          {itemx.icon}
                         </Icon>
                         <Span fontWeight="600" fontSize={14}>
-                          {item.title}
+                          {itemx.title}
                         </Span>
                       </FlexBox>
                     </AccordionHeader>
 
-                    {item.child ? renderChild(item.child) : null}
+                    {itemx.child ? renderChild(itemx.child) : null}
                   </Accordion>
                 ) : (
-                  <NavLink key={item.title} href={item.href} color="grey.700">
+                  <NavLink key={itemx.title} href={itemx.href} color="grey.700">
                     <FlexBox className="linkList" py={0.75}>
                       <Icon mr="10px" size="20px" defaultcolor="currentColor">
-                        {item.icon}
+                        {itemx.icon}
                       </Icon>
                       <Span fontWeight="600" fontSize={14}>
-                        {item.title}
+                        {itemx.title}
                       </Span>
                     </FlexBox>
                   </NavLink>

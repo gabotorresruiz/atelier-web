@@ -17,7 +17,7 @@ import {
 interface IconButtonProps {
   size: 'small' | 'medium' | 'large' | 'none';
   variant: 'text' | 'outlined' | 'contained';
-  color: 'primary' | 'secondary' | 'error' | 'default';
+  $color: 'primary' | 'secondary' | 'error' | 'default';
 }
 
 const IconButton = styled.button<

@@ -3,7 +3,7 @@
 // IF YOU NEED HELP ABOUT SERVER SIDE IMPLEMENTATION
 // CONTACT US AT support@ui-lib.com
 import Mock from '../../mock';
-import { addressList } from './data';
+import addressList from './data';
 
 // get all users
 Mock.onGet('/api/address/user').reply(async () => {

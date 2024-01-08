@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { FC, useCallback, useState } from 'react';
 import styled from 'styled-components';
 import Box from '@component/Box';
-import { Chip } from '@component/Chip';
+import Chip from '@component/Chip';
 import Rating from '@component/rating';
 import Icon from '@component/icon/Icon';
 import FlexBox from '@component/FlexBox';

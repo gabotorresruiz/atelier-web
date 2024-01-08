@@ -1,4 +1,4 @@
-import { cloneElement, FC, ReactElement, useEffect, useRef, useState } from 'react';
+import { cloneElement, FC, ReactElement, useCallback, useEffect, useRef, useState } from 'react';
 import CategoryDropdown from './CategoryDropdown';
 import { StyledCategory } from './styles';
 
@@ -16,14 +16,14 @@ const Categories: FC<CategoriesProps> = ({ open: isOpen, children }) => {
     if (!isOpen) setOpen(!open);
   };
 
-  const handleDocumentClick = () => {
+  const handleDocumentClick = useCallback(() => {
     if (popoverRef.current && !isOpen) setOpen(false);
-  };
+  }, [isOpen]);
 
   useEffect(() => {
     window.addEventListener('click', handleDocumentClick);
     return () => window.removeEventListener('click', handleDocumentClick);
-  }, []);
+  }, [handleDocumentClick]);
 
   return (
     <StyledCategory open={open}>

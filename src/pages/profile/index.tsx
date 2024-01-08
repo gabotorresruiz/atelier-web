@@ -12,7 +12,7 @@ import Typography, { H3, H5, Small } from '@component/Typography';
 import DashboardLayout from '@component/layout/customer-dashboard';
 import DashboardPageHeader from '@component/layout/DashboardPageHeader';
 import User from '@models/user.model';
-import api from '@utils/__api__/users';
+import { getUser } from '@utils/__api__/users';
 
 // ============================================================
 type ProfileProps = { user: User };
@@ -142,7 +142,7 @@ const Profile = ({ user }: ProfileProps) => {
 Profile.layout = DashboardLayout;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const user = await api.getUser();
+  const user = await getUser();
   return { props: { user } };
 };
 

@@ -15,7 +15,7 @@ interface ChipProps extends SpaceProps, ColorProps, TypographyProps, PositionPro
   boxShadow?: string;
 }
 
-export const Chip = styled.div<ChipProps>`
+const Chip = styled.div<ChipProps>`
   display: inline-flex;
   border-radius: 300px;
   transition: all 150ms ease-in-out;
@@ -26,3 +26,5 @@ export const Chip = styled.div<ChipProps>`
   ${position}
   ${typography}
 `;
+
+export default Chip;

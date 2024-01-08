@@ -19,7 +19,7 @@ type ProductCard8Props = {
 };
 // ==============================================================
 
-const ProductCard8: FC<ProductCard8Props> = ({ id, price, title, off, slug, imgUrl, ...props }) => (
+const ProductCard8: FC<ProductCard8Props> = ({ price, title, off, slug, imgUrl, ...props }) => (
   <Card p="1rem" {...props}>
     <Link href={`/product/${slug}`}>
       <a>

@@ -10,7 +10,7 @@ import Avatar from '@component/avatar';
 import Select from '@component/Select';
 import Grid from '@component/grid/Grid';
 import FlexBox from '@component/FlexBox';
-import { Card1 } from '@component/Card1';
+import Card1 from '@component/Card1';
 import { Button } from '@component/buttons';
 import TextField from '@component/text-field';
 import Typography, { H6, Paragraph } from '@component/Typography';

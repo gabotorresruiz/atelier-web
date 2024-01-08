@@ -10,7 +10,33 @@ import CheckBox from '../CheckBox';
 import TextField from '../text-field';
 import { Button, IconButton } from '../buttons';
 import { H3, H5, H6, SemiSpan, Small, Span } from '../Typography';
-import { StyledSessionCard } from './styles';
+import StyledSessionCard from './styles';
+
+const initialValues = {
+  name: '',
+  email: '',
+  password: '',
+  re_password: '',
+  agreement: false
+};
+
+const formSchema = yup.object().shape({
+  name: yup.string().required('path is required'),
+  email: yup.string().email('invalid email').required('path is required'),
+  password: yup.string().required('path is required'),
+  re_password: yup
+    .string()
+    .oneOf([yup.ref('password'), null], 'Passwords must match')
+    .required('Please re-type password'),
+  agreement: yup
+    .bool()
+    .test(
+      'agreement',
+      'You have to agree with our Terms and Conditions!',
+      (value) => value === true
+    )
+    .required('You have to agree with our Terms and Conditions!')
+});
 
 const Signup: FC = () => {
   const [passwordVisibility, setPasswordVisibility] = useState(false);
@@ -195,31 +221,5 @@ const Signup: FC = () => {
     </StyledSessionCard>
   );
 };
-
-const initialValues = {
-  name: '',
-  email: '',
-  password: '',
-  re_password: '',
-  agreement: false
-};
-
-const formSchema = yup.object().shape({
-  name: yup.string().required('${path} is required'),
-  email: yup.string().email('invalid email').required('${path} is required'),
-  password: yup.string().required('${path} is required'),
-  re_password: yup
-    .string()
-    .oneOf([yup.ref('password'), null], 'Passwords must match')
-    .required('Please re-type password'),
-  agreement: yup
-    .bool()
-    .test(
-      'agreement',
-      'You have to agree with our Terms and Conditions!',
-      (value) => value === true
-    )
-    .required('You have to agree with our Terms and Conditions!')
-});
 
 export default Signup;
