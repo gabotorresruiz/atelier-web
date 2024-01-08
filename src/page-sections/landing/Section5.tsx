@@ -2,7 +2,7 @@ import { FC } from 'react';
 import styled from 'styled-components';
 import Box from '@component/Box';
 import Card from '@component/Card';
-import { Chip } from '@component/Chip';
+import Chip from '@component/Chip';
 import FlexBox from '@component/FlexBox';
 import { Button } from '@component/buttons';
 import Container from '@component/Container';

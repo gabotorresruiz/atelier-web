@@ -8,9 +8,7 @@ const INITIAL_VALUE = {
   initialSlide: 3
 };
 
-const useVisibleSlide = (props = INITIAL_VALUE) => {
-  const { initialSlide, xs, sm, md } = props;
-
+const useVisibleSlide = ({ initialSlide, xs, sm, md } = INITIAL_VALUE) => {
   const width = useWindowSize();
   const [visibleSlides, setVisibleSlides] = useState(initialSlide);
 
@@ -19,7 +17,7 @@ const useVisibleSlide = (props = INITIAL_VALUE) => {
     else if (width < 650) setVisibleSlides(sm);
     else if (width < 950) setVisibleSlides(md);
     else setVisibleSlides(initialSlide);
-  }, [width]);
+  }, [initialSlide, md, sm, width, xs]);
 
   return { visibleSlides };
 };

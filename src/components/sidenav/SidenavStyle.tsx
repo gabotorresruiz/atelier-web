@@ -8,7 +8,7 @@ interface StyledSidenavProps {
   position?: 'left' | 'right';
 }
 
-export const StyledSidenav = styled.div<StyledSidenavProps>`
+const StyledSidenav = styled.div<StyledSidenavProps>`
   top: 0;
   left: 0;
   right: 0;
@@ -40,3 +40,5 @@ export const StyledSidenav = styled.div<StyledSidenavProps>`
     cursor: pointer;
   }
 `;
+
+export default StyledSidenav;

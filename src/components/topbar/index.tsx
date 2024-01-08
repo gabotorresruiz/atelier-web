@@ -40,7 +40,7 @@ const Topbar: FC = () => {
       <Container display="flex" justifyContent="space-between" alignItems="center" height="100%">
         <FlexBox className="topbar-left">
           <div className="logo">
-            <img src="/assets/images/logo.svg" alt="logo" />
+            <Image src="/assets/images/logo.svg" alt="logo" />
           </div>
 
           <FlexBox alignItems="center">

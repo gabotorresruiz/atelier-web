@@ -3,7 +3,7 @@ import { FC, useCallback, useState } from 'react';
 import styled from 'styled-components';
 import Box from '@component/Box';
 import Rating from '@component/rating';
-import { Chip } from '@component/Chip';
+import Chip from '@component/Chip';
 import Icon from '@component/icon/Icon';
 import FlexBox from '@component/FlexBox';
 import LazyImage from '@component/LazyImage';

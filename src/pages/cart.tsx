@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Box from '@component/Box';
 import Select from '@component/Select';
 import Grid from '@component/grid/Grid';
-import { Card1 } from '@component/Card1';
+import Card1 from '@component/Card1';
 import Divider from '@component/Divider';
 import FlexBox from '@component/FlexBox';
 import TextArea from '@component/textarea';
@@ -14,6 +14,11 @@ import CheckoutNavLayout from '@component/layout/CheckoutNavLayout';
 import { useAppContext } from '@context/AppContext';
 import countryList from '@data/countryList';
 import { currency } from '@utils/utils';
+
+const stateList = [
+  { value: 'New York', label: 'New York' },
+  { value: 'Chicago', label: 'Chicago' }
+];
 
 const Cart = () => {
   const { state } = useAppContext();
@@ -111,11 +116,6 @@ const Cart = () => {
     </Grid>
   );
 };
-
-const stateList = [
-  { value: 'New York', label: 'New York' },
-  { value: 'Chicago', label: 'Chicago' }
-];
 
 Cart.layout = CheckoutNavLayout;
 

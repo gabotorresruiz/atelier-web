@@ -7,15 +7,6 @@ import { colors } from '@utils/themeColors';
 
 type SelectOption = { label: any; value: any };
 
-// interface SelectProps extends InputHTMLAttributes<HTMLInputElement>, SpaceProps {
-//   value?: any;
-//   label?: string;
-//   errorText?: any;
-//   isMulti?: boolean;
-//   defaultValue?: any;
-//   options: SelectOption[];
-// }
-
 interface SelectProps extends Props, SpaceProps {
   value?: any;
   label?: string;
@@ -25,12 +16,23 @@ interface SelectProps extends Props, SpaceProps {
   options: SelectOption[];
 }
 
-const Select: FC<SelectProps> = ({ options, isMulti = false, id, label, errorText, ...props }) => {
+const customStyles = {
+  input: (styles) => ({ ...styles, height: 30 }),
+  option: (provided, state) => ({
+    ...provided,
+    color: 'inherit',
+    cursor: 'pointer',
+    backgroundColor: state.isFocused ? 'rgba(0,0,0, 0.015)' : 'inherit'
+  })
+};
+
+const Select: FC<SelectProps> = ({ options, isMulti = false, label, errorText, ...props }) => {
   // extract spacing props
   let spacingProps = {};
-  for (const key in props) {
+
+  Object.keys(props).forEach((key) => {
     if (key.startsWith('m') || key.startsWith('p')) spacingProps[key] = props[key];
-  }
+  });
 
   return (
     <Box {...spacingProps}>
@@ -63,16 +65,6 @@ const Select: FC<SelectProps> = ({ options, isMulti = false, id, label, errorTex
       )}
     </Box>
   );
-};
-
-const customStyles = {
-  input: (styles) => ({ ...styles, height: 30 }),
-  option: (provided, state) => ({
-    ...provided,
-    color: 'inherit',
-    cursor: 'pointer',
-    backgroundColor: state.isFocused ? 'rgba(0,0,0, 0.015)' : 'inherit'
-  })
 };
 
 export default Select;

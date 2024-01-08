@@ -2,7 +2,7 @@ import { FC } from 'react';
 import styled from 'styled-components';
 import Box from '@component/Box';
 import Card from '@component/Card';
-import { theme } from '@utils/theme';
+import { theme as baseTheme } from '@utils/theme';
 import Icon from '@component/icon/Icon';
 import FlexBox from '@component/FlexBox';
 import NavLink from '@component/nav-link';
@@ -73,7 +73,7 @@ const SideNavbar2: FC<Props> = ({ navList }) => {
           padding="10px 18px"
           style={{
             borderRadius: '5px 5px 0px 0px',
-            backgroundColor: theme.colors.gray[300]
+            backgroundColor: baseTheme.colors.gray[300]
           }}
         >
           <H4>Categories</H4>
@@ -83,7 +83,7 @@ const SideNavbar2: FC<Props> = ({ navList }) => {
           <Box mb="2px" color="gray.700" key={ind}>
             {item.child ? (
               <Accordion>
-                <AccordionHeader px={0} py={0.75} className="linkList">
+                <AccordionHeader px="0" py="0.75" className="linkList">
                   <FlexBox py={0.3} alignItems="center">
                     <Icon mr="10px" size="20px" defaultcolor="currentColor">
                       {item.icon}

@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Card1 } from '../../components/Card1';
+import Card1 from '../../components/Card1';
 import Divider from '../../components/Divider';
 import FlexBox from '../../components/FlexBox';
 import Typography from '../../components/Typography';

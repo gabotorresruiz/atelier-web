@@ -4,6 +4,12 @@ import Divider from '@component/Divider';
 import FlexBox from '@component/FlexBox';
 import Typography, { Span } from '@component/Typography';
 
+const cartList = [
+  { name: 'iPhone 12', quantity: 1, price: 999 },
+  { name: 'iPhone 12 pro', quantity: 1, price: 1199 },
+  { name: 'iPhone 12 pro max', quantity: 1, price: 1299 }
+];
+
 const CheckoutSummary2: FC = () => (
   <Box>
     <Typography color="secondary.900" fontWeight="700" mb="1.5rem">
@@ -52,11 +58,5 @@ const CheckoutSummary2: FC = () => (
     </FlexBox>
   </Box>
 );
-
-const cartList = [
-  { name: 'iPhone 12', quantity: 1, price: 999 },
-  { name: 'iPhone 12 pro', quantity: 1, price: 1199 },
-  { name: 'iPhone 12 pro max', quantity: 1, price: 1299 }
-];
 
 export default CheckoutSummary2;

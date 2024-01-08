@@ -14,6 +14,7 @@ interface NavLinkProps extends SpaceProps, ColorProps {
 }
 
 const NavLink: FC<NavLinkProps & AnchorHTMLAttributes<HTMLAnchorElement>> = ({
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   as,
   href,
   style,

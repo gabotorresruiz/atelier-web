@@ -1,4 +1,4 @@
-export const products = [
+const products = [
   {
     id: 'eecbf3ce-7a23-4a09-a515-2cf2c50f4fdc',
     slug: 'samsung-galaxy-m1',
@@ -398,3 +398,5 @@ export const products = [
     published: false
   }
 ];
+
+export default products;

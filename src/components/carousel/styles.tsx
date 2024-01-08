@@ -8,10 +8,10 @@ import { deviceSize } from '@utils/constants';
 
 type StyledCarouselProps = {
   spacing?: string;
-  dotColor?: string;
-  showDots?: boolean;
-  showArrowOnHover?: boolean;
-  dotGroupMarginTop?: string;
+  $dotColor?: string;
+  $showDots?: boolean;
+  $showArrowOnHover?: boolean;
+  $dotGroupMarginTop?: string;
 };
 
 export const StyledCarousel = styled(
@@ -32,7 +32,7 @@ export const StyledCarousel = styled(
 
   .arrow-button {
     position: absolute;
-    top: calc(50% - ${(props) => (props.showDots ? props.dotGroupMarginTop : '0px')});
+    $top: calc(50% - ${(props) => (props.$showDots ? props.$dotGroupMarginTop : '0px')});
     transform: translateY(-50%);
     box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
   }
@@ -46,7 +46,7 @@ export const StyledCarousel = styled(
   }
 
   ${(props) =>
-    props.showArrowOnHover
+    props.$showArrowOnHover
       ? `
   [class*="arrow-class"] {
     display: none;
@@ -78,7 +78,7 @@ export const StyledCarousel = styled(
   .custom-dot {
     display: flex;
     justify-content: center;
-    margin-top: ${(props) => props.dotGroupMarginTop || '0px'};
+    margin-top: ${(props) => props.$dotGroupMarginTop || '0px'};
   }
 
   .dot {
@@ -88,7 +88,7 @@ export const StyledCarousel = styled(
     border-radius: 300px;
     margin: 0.25rem;
     cursor: pointer;
-    border: 1px solid ${({ dotColor }) => dotColor || getTheme('colors.secondary.main')};
+    border: 1px solid ${({ $dotColor }) => $dotColor || getTheme('colors.secondary.main')};
   }
   .dot:after {
     position: absolute;
@@ -99,7 +99,7 @@ export const StyledCarousel = styled(
     left: 50%;
     border-radius: 300px;
     transform: translate(-50%, -50%) scaleX(0);
-    background: ${({ dotColor }) => dotColor || getTheme('colors.secondary.main')};
+    background: ${({ $dotColor }) => $dotColor || getTheme('colors.secondary.main')};
   }
   .dot-active:after {
     transform: translate(-50%, -50%) scaleX(1);

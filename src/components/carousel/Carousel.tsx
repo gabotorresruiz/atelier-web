@@ -108,19 +108,19 @@ const Carousel: FC<CarouselProps> = ({
   <StyledCarousel
     step={step}
     spacing={spacing}
-    showDots={showDots}
+    $showDots={showDots}
     infinite={infinite}
     interval={interval}
-    dotColor={dotColor}
+    $dotColor={dotColor}
     isPlaying={autoPlay}
     totalSlides={totalSlides}
     currentSlide={currentSlide}
     visibleSlides={visibleSlides}
     hasMasterSpinner={hasMasterSpinner}
-    showArrowOnHover={showArrowOnHover}
+    $showArrowOnHover={showArrowOnHover}
     naturalSlideWidth={naturalSlideWidth}
     isIntrinsicHeight={isIntrinsicHeight}
-    dotGroupMarginTop={dotGroupMarginTop}
+    $dotGroupMarginTop={dotGroupMarginTop}
     naturalSlideHeight={naturalSlideHeight}
   >
     <Slider className="custom-slider">
@@ -141,7 +141,7 @@ const Carousel: FC<CarouselProps> = ({
         <IconButton
           as={ButtonBack}
           variant="contained"
-          color="primary"
+          color={arrowButtonColor}
           style={leftButtonStyle || {}}
           className={`arrow-button left-arrow-class ${arrowButtonClass} ${leftButtonClass}`}
         >
@@ -153,7 +153,7 @@ const Carousel: FC<CarouselProps> = ({
         <IconButton
           as={ButtonNext}
           variant="contained"
-          color="primary"
+          color={arrowButtonColor}
           style={rightButtonStyle || {}}
           className={`arrow-button right-arrow-class ${arrowButtonClass} ${rightButtonClass}`}
         >

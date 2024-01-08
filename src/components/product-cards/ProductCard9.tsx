@@ -7,7 +7,7 @@ import { useAppContext } from '@context/AppContext';
 import Box from '../Box';
 import Card from '../Card';
 import Image from '../Image';
-import { Chip } from '../Chip';
+import Chip from '../Chip';
 import Hidden from '../hidden';
 import Rating from '../rating';
 import Grid from '../grid/Grid';

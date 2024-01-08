@@ -3,7 +3,7 @@
 // IF YOU NEED HELP ABOUT SERVER SIDE IMPLEMENTATION
 // CONTACT US AT support@ui-lib.com
 import Mock from '../../mock';
-import { orders } from './data';
+import orders from './data';
 
 Mock.onGet('/api/users/orders').reply(async () => {
   try {

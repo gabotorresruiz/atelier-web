@@ -6,7 +6,7 @@ import * as yup from 'yup';
 import Box from '@component/Box';
 import Radio from '@component/radio';
 import Grid from '@component/grid/Grid';
-import { Card1 } from '@component/Card1';
+import Card1 from '@component/Card1';
 import FlexBox from '@component/FlexBox';
 import Divider from '@component/Divider';
 import { Button } from '@component/buttons';

@@ -1,6 +1,6 @@
 import Mock from '../../mock';
-import { orders } from './orders';
-import { products } from './products';
+import orders from './orders';
+import products from './products';
 import { cardList, salesData, topCountryList } from './data';
 
 // dashboard

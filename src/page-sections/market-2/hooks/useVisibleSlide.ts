@@ -11,9 +11,7 @@ const INITIAL_VALUE = {
 
 type Props = Partial<typeof INITIAL_VALUE>;
 
-const useVisibleSlide = (props: Props = INITIAL_VALUE) => {
-  const { initialSlide, xs, sm, md, lg } = props;
-
+const useVisibleSlide = ({ initialSlide, xs, sm, md, lg }: Props = INITIAL_VALUE) => {
   const width = useWindowSize();
   const [visibleSlides, setVisibleSlides] = useState(initialSlide);
 
@@ -23,7 +21,7 @@ const useVisibleSlide = (props: Props = INITIAL_VALUE) => {
     else if (md && width < 1024) setVisibleSlides(md);
     else if (lg && width < 1200) setVisibleSlides(lg);
     else setVisibleSlides(initialSlide);
-  }, [width]);
+  }, [initialSlide, lg, md, sm, width, xs]);
 
   return { visibleSlides };
 };

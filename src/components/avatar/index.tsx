@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import Image from '@component/Image';
 import { BorderProps, ColorProps } from 'styled-system';
 import StyledAvatar from './styles';
 
@@ -11,7 +12,7 @@ export interface AvatarProps extends BorderProps, ColorProps {
 
 const Avatar: FC<AvatarProps> = ({ src, size, children, ...props }) => (
   <StyledAvatar size={size} {...props}>
-    {src && <img src={src} alt="avatar" />}
+    {src && <Image alt="avatar" src={src} />}
     {!src && children && <span>{children}</span>}
   </StyledAvatar>
 );

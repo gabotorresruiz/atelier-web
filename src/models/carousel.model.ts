@@ -18,7 +18,7 @@ export interface GiftCarouselItem {
 }
 
 export interface HealthCarouselItem {
-  id: number;
+  idx: number;
   title: string;
   imgUrl: string;
   buttonText: string;

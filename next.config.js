@@ -1,10 +1,6 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
-  eslint: {
-    // Remover esto una vez se arreglen los errores de ESLint
-    ignoreDuringBuilds: true
-  },
   reactStrictMode: true,
   compiler: {
     styledComponents: true

@@ -7,7 +7,7 @@ import Select from '@component/Select';
 import Avatar from '@component/avatar';
 import Grid from '@component/grid/Grid';
 import Icon from '@component/icon/Icon';
-import { Card1 } from '@component/Card1';
+import Card1 from '@component/Card1';
 import { Button } from '@component/buttons';
 import TextField from '@component/text-field';
 import VendorDashboardLayout from '@component/layout/vendor-dashboard';

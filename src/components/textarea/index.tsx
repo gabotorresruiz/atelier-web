@@ -25,10 +25,10 @@ const TextArea: FC<TextAreaProps> = ({
   let spacingProps = {};
   let otherProps = {};
 
-  for (const key in props) {
+  Object.keys(props).forEach((key) => {
     if (key.startsWith('m') || key.startsWith('p')) spacingProps[key] = props[key];
     else otherProps[key] = props[key];
-  }
+  });
 
   return (
     <TextAreaWrapper
@@ -43,6 +43,7 @@ const TextArea: FC<TextAreaProps> = ({
   );
 };
 
+// eslint-disable-next-line react/default-props-match-prop-types
 TextArea.defaultProps = { id: 'textArea', color: 'default' };
 
 export default TextArea;

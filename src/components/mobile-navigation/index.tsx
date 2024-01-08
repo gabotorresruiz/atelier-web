@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import styled from 'styled-components';
-import { Chip } from '@component/Chip';
+import Chip from '@component/Chip';
 import Icon from '@component/icon/Icon';
 import NavLink from '@component/nav-link';
 import { useAppContext } from '@context/AppContext';

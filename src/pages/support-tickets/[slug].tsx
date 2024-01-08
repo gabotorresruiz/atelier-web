@@ -10,7 +10,7 @@ import { Button } from '@component/buttons';
 import { H5, SemiSpan } from '@component/Typography';
 import DashboardLayout from '@component/layout/customer-dashboard';
 import DashboardPageHeader from '@component/layout/DashboardPageHeader';
-import api from '@utils/__api__/ticket';
+import { getSlugs, getTicket } from '@utils/__api__/ticket';
 import Ticket from '@models/Ticket.model';
 
 // ==========================================================
@@ -69,7 +69,7 @@ const TicketDetails = ({ ticket }: Props) => {
 TicketDetails.layout = DashboardLayout;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = await api.getSlugs();
+  const paths = await getSlugs();
 
   return {
     paths, // indicates that no page needs be created at build time
@@ -78,7 +78,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const ticket = await api.getTicket(String(params.slug));
+  const ticket = await getTicket(String(params.slug));
   return { props: { ticket } };
 };
 

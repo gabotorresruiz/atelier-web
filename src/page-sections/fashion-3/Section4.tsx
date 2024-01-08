@@ -45,6 +45,32 @@ const StyledButton = styled(Button)({
   position: 'absolute'
 });
 
+// ============================================================================
+// eslint-disable-next-line react/no-unused-prop-types
+type SingleCategoryProps = { img: string; url: string; buttonText: string };
+// ===============================================================================
+
+const SingleCategory: FC<SingleCategoryProps> = (props) => {
+  const { img, buttonText } = props;
+
+  return (
+    <Category2Wrapper>
+      <Image
+        src={img}
+        width={580}
+        height={280}
+        alt="category"
+        layout="responsive"
+        objectFit="cover"
+      />
+
+      <StyledButton variant="contained" color="primary">
+        {buttonText}
+      </StyledButton>
+    </Category2Wrapper>
+  );
+};
+
 const Section4: FC = () => (
   <Container mt="4rem">
     <H2 textAlign="center" mb={4}>
@@ -104,30 +130,5 @@ const Section4: FC = () => (
     </Grid>
   </Container>
 );
-
-// ============================================================================
-type SingleCategoryProps = { img: string; url: string; buttonText: string };
-// ===============================================================================
-
-const SingleCategory: FC<SingleCategoryProps> = (props) => {
-  const { img, buttonText } = props;
-
-  return (
-    <Category2Wrapper>
-      <Image
-        src={img}
-        width={580}
-        height={280}
-        alt="category"
-        layout="responsive"
-        objectFit="cover"
-      />
-
-      <StyledButton variant="contained" color="primary">
-        {buttonText}
-      </StyledButton>
-    </Category2Wrapper>
-  );
-};
 
 export default Section4;

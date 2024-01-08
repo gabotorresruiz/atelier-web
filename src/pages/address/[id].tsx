@@ -1,6 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Router from 'next/router';
-import { Card1 } from '@component/Card1';
+import Card1 from '@component/Card1';
 import { Button } from '@component/buttons';
 import AddressForm from '@component/address/AddressForm';
 import DashboardLayout from '@component/layout/customer-dashboard';

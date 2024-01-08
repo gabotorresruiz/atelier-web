@@ -81,8 +81,8 @@ const Section1: FC<Props> = ({ id, carouselData }) => {
         totalSlides={carouselData.length}
         dotColor={theme.colors.primary.main}
       >
-        {carouselData.map(({ id, imgUrl, title }) => (
-          <StyledGrid container key={id}>
+        {carouselData.map(({ idx, imgUrl, title }) => (
+          <StyledGrid container key={idx}>
             <GridItemOne item md={6} xs={12}>
               <Box py={6}>
                 <H1 mb={4}>{title}</H1>

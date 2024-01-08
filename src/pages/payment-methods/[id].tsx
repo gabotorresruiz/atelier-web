@@ -3,7 +3,7 @@ import * as yup from 'yup';
 import { Formik } from 'formik';
 import Box from '@component/Box';
 import Grid from '@component/grid/Grid';
-import { Card1 } from '@component/Card1';
+import Card1 from '@component/Card1';
 import { Button } from '@component/buttons';
 import TextField from '@component/text-field';
 import DashboardLayout from '@component/layout/customer-dashboard';

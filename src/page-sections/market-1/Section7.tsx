@@ -1,4 +1,5 @@
 import { FC, useEffect, useState } from 'react';
+import Image from '@component/Image';
 import Box from '@component/Box';
 import Hidden from '@component/hidden';
 import Grid from '@component/grid/Grid';
@@ -88,7 +89,7 @@ const Section7: FC<Props> = ({ shops, brands, title, productList }) => {
                 shadow={selected.match(brand.slug) ? 4 : null}
                 bg={selected.match(brand.slug) ? 'white' : 'gray.100'}
               >
-                <img
+                <Image
                   height={20}
                   width={20}
                   alt=""

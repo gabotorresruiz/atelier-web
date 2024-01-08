@@ -10,6 +10,8 @@ import { Span } from '../Typography';
 import TextField from '../text-field';
 import SearchBoxStyle from './styled';
 
+const dummySearchResult = ['Macbook Air 13', 'Ksus K555LA', 'Acer Aspire X453', 'iPad Mini 3'];
+
 const SearchInput: FC = () => {
   const [resultList, setResultList] = useState([]);
 
@@ -20,10 +22,13 @@ const SearchInput: FC = () => {
     else setResultList(dummySearchResult);
   }, 200);
 
-  const hanldeSearch = useCallback((event) => {
-    event.persist();
-    search(event);
-  }, []);
+  const hanldeSearch = useCallback(
+    (event) => {
+      event.persist();
+      search(event);
+    },
+    [search]
+  );
 
   const handleDocumentClick = () => setResultList([]);
 
@@ -69,7 +74,5 @@ const SearchInput: FC = () => {
     </Box>
   );
 };
-
-const dummySearchResult = ['Macbook Air 13', 'Ksus K555LA', 'Acer Aspire X453', 'iPad Mini 3'];
 
 export default SearchInput;

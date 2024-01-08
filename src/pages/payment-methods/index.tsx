@@ -1,4 +1,5 @@
 import Router from 'next/router';
+import Image from '@component/Image';
 import Card from '@component/Card';
 import Icon from '@component/icon/Icon';
 import FlexBox from '@component/FlexBox';
@@ -57,9 +58,9 @@ const AddressList = () => {
         <TableRow key={item.orderNo} my="1rem" padding="6px 18px">
           <FlexBox alignItems="center" m="6px">
             <Card width="42px" height="28px" mr="10px" elevation={4}>
-              <img
-                width="100%"
+              <Image
                 alt={item.payment_method}
+                width="100%"
                 src={`/assets/images/payment-methods/${item.payment_method}.svg`}
               />
             </Card>

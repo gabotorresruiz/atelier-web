@@ -42,6 +42,41 @@ const StyledContent = styled.div`
   }
 `;
 
+const list = [
+  {
+    imgUrl: '/assets/images/logos/react.png',
+    title: 'React.Js'
+  },
+  {
+    imgUrl: '/assets/images/logos/next-js.png',
+    title: 'Next.Js'
+  },
+  {
+    imgUrl: '/assets/images/logos/typescript.png',
+    title: 'Typescript'
+  },
+  {
+    imgUrl: '/assets/images/logos/styled-component.png',
+    title: 'Styled Component'
+  },
+  {
+    imgUrl: '/assets/images/logos/styled-system.png',
+    title: 'Styled System'
+  },
+  {
+    imgUrl: '/assets/images/logos/carousel.png',
+    title: 'Pure React Carousel'
+  },
+  {
+    imgUrl: '/assets/images/logos/chart-js.png',
+    title: 'Chart.Js'
+  },
+  {
+    imgUrl: '/assets/images/logos/formik.png',
+    title: 'Formik'
+  }
+];
+
 const Section4: FC = () => (
   <Container mb="7rem" id="technologies">
     <H3 fontSize="40px" textAlign="center" fontWeight="900" color="secondary.main" mb="3.75rem">
@@ -80,40 +115,5 @@ const Section4: FC = () => (
     </StyledContent>
   </Container>
 );
-
-const list = [
-  {
-    imgUrl: '/assets/images/logos/react.png',
-    title: 'React.Js'
-  },
-  {
-    imgUrl: '/assets/images/logos/next-js.png',
-    title: 'Next.Js'
-  },
-  {
-    imgUrl: '/assets/images/logos/typescript.png',
-    title: 'Typescript'
-  },
-  {
-    imgUrl: '/assets/images/logos/styled-component.png',
-    title: 'Styled Component'
-  },
-  {
-    imgUrl: '/assets/images/logos/styled-system.png',
-    title: 'Styled System'
-  },
-  {
-    imgUrl: '/assets/images/logos/carousel.png',
-    title: 'Pure React Carousel'
-  },
-  {
-    imgUrl: '/assets/images/logos/chart-js.png',
-    title: 'Chart.Js'
-  },
-  {
-    imgUrl: '/assets/images/logos/formik.png',
-    title: 'Formik'
-  }
-];
 
 export default Section4;

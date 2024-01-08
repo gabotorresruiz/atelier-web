@@ -26,8 +26,8 @@ const MegaMenu3: FC<MegaMenu3Props> = ({ data: { categories, rightImage }, minWi
                   ) : (
                     <SemiSpan className="title-link">{item.title}</SemiSpan>
                   )}
-                  {item.subCategories?.map((sub, ind) => (
-                    <NavLink key={ind} className="child-link" href={sub.href}>
+                  {item.subCategories?.map((sub, indx) => (
+                    <NavLink key={indx} className="child-link" href={sub.href}>
                       {sub.title}
                     </NavLink>
                   ))}
@@ -91,6 +91,7 @@ const MegaMenu3: FC<MegaMenu3Props> = ({ data: { categories, rightImage }, minWi
     </StyledMegaMenu1>
   ) : null;
 
+// eslint-disable-next-line react/default-props-match-prop-types
 MegaMenu3.defaultProps = { minWidth: '760px' };
 
 export default MegaMenu3;

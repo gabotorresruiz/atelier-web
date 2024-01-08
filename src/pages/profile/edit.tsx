@@ -7,13 +7,13 @@ import Hidden from '@component/hidden';
 import Avatar from '@component/avatar';
 import Grid from '@component/grid/Grid';
 import Icon from '@component/icon/Icon';
-import { Card1 } from '@component/Card1';
+import Card1 from '@component/Card1';
 import FlexBox from '@component/FlexBox';
 import { Button } from '@component/buttons';
 import TextField from '@component/text-field';
 import DashboardLayout from '@component/layout/customer-dashboard';
 import DashboardPageHeader from '@component/layout/DashboardPageHeader';
-import api from '@utils/__api__/users';
+import { getUser } from '@utils/__api__/users';
 import User from '@models/user.model';
 import { format } from 'date-fns';
 
@@ -172,7 +172,7 @@ const ProfileEditor = ({ user }: Props) => {
 ProfileEditor.layout = DashboardLayout;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const user = await api.getUser();
+  const user = await getUser();
   return { props: { user } };
 };
 

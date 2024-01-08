@@ -49,7 +49,6 @@ const ProductReview: FC = () => {
   });
 
   const handleFormSubmit = async (values, { resetForm }) => {
-    console.log(values);
     resetForm();
   };
 
@@ -71,7 +70,7 @@ const ProductReview: FC = () => {
 
   return (
     <Box>
-      {commentList.map((item, ind) => (
+      {commentList.map((item) => (
         <ProductComment {...item} key={item.name} />
       ))}
 

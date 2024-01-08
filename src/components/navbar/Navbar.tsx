@@ -120,6 +120,7 @@ const Navbar: FC<NavbarProps> = ({ navListOpen }) => {
             </Box>
           );
       }
+      return null;
     });
 
   return (

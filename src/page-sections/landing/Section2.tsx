@@ -42,6 +42,17 @@ const StyledContent = styled.div`
   }
 `;
 
+const list = [
+  { iconName: 'verify', title: 'SEO Friendly' },
+  { iconName: 'cloud-data', title: 'Server Side Rendered' },
+  { iconName: 'multivendor', title: 'Multi-Vendor Support' },
+  { iconName: 'code', title: 'Clean Code' },
+  { iconName: 'optimization', title: 'Optimized for Mobile' },
+  { iconName: 'lighting', title: 'Blazing Fast' },
+  { iconName: 'admin-dashboard', title: 'Admin Dashboard' },
+  { iconName: 'figma', title: 'Figma Ready' }
+];
+
 const Section2: FC = () => (
   <Container mb="7rem" id="features">
     <H3 fontSize="40px" textAlign="center" fontWeight="900" color="secondary.main" mb="3.75rem">
@@ -74,16 +85,5 @@ const Section2: FC = () => (
     </StyledContent>
   </Container>
 );
-
-const list = [
-  { iconName: 'verify', title: 'SEO Friendly' },
-  { iconName: 'cloud-data', title: 'Server Side Rendered' },
-  { iconName: 'multivendor', title: 'Multi-Vendor Support' },
-  { iconName: 'code', title: 'Clean Code' },
-  { iconName: 'optimization', title: 'Optimized for Mobile' },
-  { iconName: 'lighting', title: 'Blazing Fast' },
-  { iconName: 'admin-dashboard', title: 'Admin Dashboard' },
-  { iconName: 'figma', title: 'Figma Ready' }
-];
 
 export default Section2;

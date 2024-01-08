@@ -11,7 +11,7 @@ import ProductFilterCard from '@component/products/ProductFilterCard';
 import ShopIntroCard from '@sections/shop/ShopIntroCard';
 import useWindowSize from '@hook/useWindowSize';
 import Shop from '@models/shop.model';
-import api from '@utils/__api__/shops';
+import { getShopBySlug, getSlugs } from '@utils/__api__/shops';
 
 // ============================================================
 type Props = { shop: Shop };
@@ -63,7 +63,7 @@ const ShopDetails = ({ shop }: Props) => {
 ShopDetails.layout = NavbarLayout;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = await api.getSlugs();
+  const paths = await getSlugs();
 
   return {
     paths, // indicates that no page needs be created at build time
@@ -72,7 +72,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const shop = await api.getShopBySlug(String(params.slug));
+  const shop = await getShopBySlug(String(params.slug));
   return { props: { shop } };
 };
 

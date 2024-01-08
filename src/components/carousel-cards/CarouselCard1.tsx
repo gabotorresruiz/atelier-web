@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import Image from '@component/Image';
 import styled from 'styled-components';
 import Box from '@component/Box';
 import { Button } from '@component/buttons';
@@ -73,7 +74,7 @@ const CarouselCard1: FC<Props> = ({ title, image, buttonText, description }) => 
     </Box>
 
     <div className="image-holder">
-      <img src={image} alt="apple-watch-1" />
+      <Image alt="apple-watch-1" src={image} />
     </div>
   </StyledCarouselCard1>
 );

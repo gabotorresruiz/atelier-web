@@ -31,7 +31,9 @@ const Accordion: FC<AccordionProps> = ({ expanded = false, children }) => {
       setHeaderHeight(parent.children[0].scrollHeight);
       setParentHeight(parent.scrollHeight);
     }
-  }, [ref.current]);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ref?.current]);
 
   const modifiedChildren = Children.map(children, (child, ind) => {
     if (ind === 0) return cloneElement(child, { open, onClick: toggle });

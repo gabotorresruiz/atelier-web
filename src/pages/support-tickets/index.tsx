@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { GetStaticProps } from 'next';
 import { format } from 'date-fns';
 import Box from '@component/Box';
-import { Chip } from '@component/Chip';
+import Chip from '@component/Chip';
 import Hidden from '@component/hidden';
 import Icon from '@component/icon/Icon';
 import FlexBox from '@component/FlexBox';
@@ -13,7 +13,7 @@ import Typography, { SemiSpan, Small } from '@component/Typography';
 import DashboardLayout from '@component/layout/customer-dashboard';
 import DashboardPageHeader from '@component/layout/DashboardPageHeader';
 import Ticket from '@models/Ticket.model';
-import api from '@utils/__api__/ticket';
+import { getTicketList } from '@utils/__api__/ticket';
 
 // ==========================================================
 type TicketListProps = { ticketList: Ticket[] };
@@ -71,7 +71,7 @@ const TicketList = ({ ticketList }: TicketListProps) => (
 TicketList.layout = DashboardLayout;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const ticketList = await api.getTicketList();
+  const ticketList = await getTicketList();
   return { props: { ticketList } };
 };
 

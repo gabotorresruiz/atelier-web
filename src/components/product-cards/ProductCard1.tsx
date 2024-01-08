@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { useAppContext } from '@context/AppContext';
 import Box from '@component/Box';
 import Rating from '@component/rating';
-import { Chip } from '@component/Chip';
+import Chip from '@component/Chip';
 import Icon from '@component/icon/Icon';
 import FlexBox from '@component/FlexBox';
 import { Button } from '@component/buttons';

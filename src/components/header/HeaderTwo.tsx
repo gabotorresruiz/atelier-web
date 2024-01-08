@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from '@component/Image';
 import { FC, useState } from 'react';
 import Icon from '@component/icon/Icon';
 import FlexBox from '@component/FlexBox';
@@ -59,7 +60,7 @@ const HeaderTwo: FC<HeaderProps> = ({ className }) => {
         <FlexBox className="logo" alignItems="center" mr="1rem">
           <Link href="/">
             <a>
-              <img src="/assets/images/logo.svg" alt="logo" />
+              <Image alt="logo" src="/assets/images/logo.svg" />
             </a>
           </Link>
         </FlexBox>

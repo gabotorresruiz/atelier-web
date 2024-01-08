@@ -77,23 +77,23 @@ const Header: FC = () => {
   const [isFixed, setFixed] = useState(false);
 
   const toggleSidenav = () => {
-    setOpen((open) => !open);
+    setOpen((prevOpen) => !prevOpen);
   };
 
-  const scrollListener = useCallback(
+  const scrollListener = useCallback(() => {
     debounce(() => {
-      if (window?.pageYOffset >= headerHeight) setFixed(true);
+      if (window?.scrollY >= headerHeight) setFixed(true);
       else setFixed(false);
-    }, 50),
-    []
-  );
+    }, 50);
+  }, []);
 
   useEffect(() => {
     if (!window) return;
 
     window.addEventListener('scroll', scrollListener);
+    // eslint-disable-next-line consistent-return
     return () => window.removeEventListener('scroll', scrollListener);
-  }, []);
+  }, [scrollListener]);
 
   return (
     <HeaderWrapper fixed={isFixed}>

@@ -1,4 +1,4 @@
-export const orders = [
+const orders = [
   {
     users: {
       id: 'd6182878-c107-43f4-9f96-6898a573cd0c',
@@ -225,3 +225,5 @@ export const orders = [
     deliveredAt: null
   }
 ];
+
+export default orders;
