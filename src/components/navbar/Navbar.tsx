@@ -1,5 +1,6 @@
 import { FC } from 'react';
-import navbarNavigations from '@data/navbarNavigations';
+import Category from '@models/category.model';
+import Macrocategory from '@models/macrocategory.model';
 import Box from '../Box';
 import Card from '../Card';
 import Badge from '../badge';
@@ -21,9 +22,10 @@ interface Nav {
   extLink?: boolean;
 }
 
-type NavbarProps = { navListOpen?: boolean };
+type NavbarProps = { navListOpen?: boolean; dataList: Macrocategory[] | Category[] };
 
-const Navbar: FC<NavbarProps> = ({ navListOpen }) => {
+const Navbar: FC<NavbarProps> = ({ navListOpen, dataList }) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const renderNestedNav = (list: any[], isRoot = false) =>
     list?.map((nav: Nav) => {
       if (isRoot) {
@@ -126,20 +128,17 @@ const Navbar: FC<NavbarProps> = ({ navListOpen }) => {
   return (
     <StyledNavbar>
       <Container height="100%" display="flex" alignItems="center" justifyContent="space-between">
-        <Categories open={navListOpen}>
+        <Categories open={navListOpen} dataList={dataList}>
           <Button width="278px" height="40px" bg="body.default" variant="text">
             <Icon>categories</Icon>
             <Typography ml="10px" flex="1 1 0" fontWeight="600" textAlign="left" color="text.muted">
-              Categories
+              Categorias
             </Typography>
-
             <Icon className="dropdown-icon" variant="small">
               chevron-right
             </Icon>
           </Button>
         </Categories>
-
-        <FlexBox>{renderNestedNav(navbarNavigations, true)}</FlexBox>
       </Container>
     </StyledNavbar>
   );

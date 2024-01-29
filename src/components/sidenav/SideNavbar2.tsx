@@ -76,7 +76,7 @@ const SideNavbar2: FC<Props> = ({ navList }) => {
             backgroundColor: baseTheme.colors.gray[300]
           }}
         >
-          <H4>Categories</H4>
+          <H4>Categorias</H4>
         </FlexBox>
 
         {navList.map((item, ind) => (

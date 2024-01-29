@@ -1,26 +1,42 @@
 import Link from 'next/link';
+import styled from 'styled-components';
 import { FC, useState } from 'react';
 import Box from '@component/Box';
-import Image from '@component/Image';
 import Icon from '@component/icon/Icon';
 import FlexBox from '@component/FlexBox';
 import MiniCart from '@component/mini-cart';
 import Container from '@component/Container';
 import { Tiny } from '@component/Typography';
-import Login from '@component/sessions/Login';
 import { IconButton } from '@component/buttons';
 import Sidenav from '@component/sidenav/Sidenav';
 import Categories from '@component/categories/Categories';
-import { SearchInputWithCategory } from '@component/search-box';
+import { SearchInput } from '@component/search-box';
 import { useAppContext } from '@context/AppContext';
+import Branding from '@models/branding.model';
+import Category from '@models/category.model';
+import Macrocategory from '@models/macrocategory.model';
 import StyledHeader from './styles';
-import UserLoginDialog from './LoginDialog';
+
+const StyledLogoWrapper = styled.div`
+  height: 55px;
+`;
+
+const StyledLogoImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: scale-down;
+`;
 
 // ====================================================================
-type HeaderProps = { isFixed?: boolean; className?: string };
+type HeaderProps = {
+  isFixed?: boolean;
+  className?: string;
+  brandingResource: Branding;
+  dataList: Macrocategory[] | Category[];
+};
 // =====================================================================
 
-const Header: FC<HeaderProps> = ({ isFixed, className }) => {
+const Header: FC<HeaderProps> = ({ isFixed, className, brandingResource, dataList }) => {
   const { state } = useAppContext();
   const [open, setOpen] = useState(false);
   const toggleSidenav = () => setOpen(!open);
@@ -51,11 +67,11 @@ const Header: FC<HeaderProps> = ({ isFixed, className }) => {
     </Box>
   );
 
-  const LOGIN_HANDLE = (
-    <IconButton ml="1rem" bg="gray.200" p="8px">
-      <Icon size="28px">user</Icon>
-    </IconButton>
-  );
+  // const LOGIN_HANDLE = (
+  //   <IconButton ml="1rem" bg="gray.200" p="8px">
+  //     <Icon size="28px">user</Icon>
+  //   </IconButton>
+  // );
 
   return (
     <StyledHeader className={className}>
@@ -63,13 +79,15 @@ const Header: FC<HeaderProps> = ({ isFixed, className }) => {
         <FlexBox className="logo" alignItems="center" mr="1rem">
           <Link href="/">
             <a>
-              <Image src="/assets/images/logo.svg" alt="logo" />
+              <StyledLogoWrapper>
+                <StyledLogoImage src={brandingResource.logoImageUrl} alt="logo" />
+              </StyledLogoWrapper>
             </a>
           </Link>
 
           {isFixed && (
             <div className="category-holder">
-              <Categories>
+              <Categories dataList={dataList}>
                 <FlexBox color="text.hint" alignItems="center" ml="1rem">
                   <Icon>categories</Icon>
                   <Icon>arrow-down-filled</Icon>
@@ -80,13 +98,13 @@ const Header: FC<HeaderProps> = ({ isFixed, className }) => {
         </FlexBox>
 
         <FlexBox justifyContent="center" flex="1 1 0">
-          <SearchInputWithCategory />
+          <SearchInput />
         </FlexBox>
 
         <FlexBox className="header-right" alignItems="center">
-          <UserLoginDialog handle={LOGIN_HANDLE}>
+          {/* <UserLoginDialog handle={LOGIN_HANDLE}>
             <Login />
-          </UserLoginDialog>
+          </UserLoginDialog> */}
 
           <Sidenav
             open={open}

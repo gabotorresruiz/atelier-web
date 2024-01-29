@@ -51,11 +51,11 @@ type FurnitureShopProps = {
 // ======================================================================
 
 const FurnitureShop = ({
-  topNewProducts,
-  furnitureProducts,
-  topSellingProducts,
+  topNewProducts = [],
+  furnitureProducts = [],
+  topSellingProducts = [],
   sidebarNavList,
-  mainCarouselData
+  mainCarouselData = []
 }: FurnitureShopProps) => {
   const pageContentRef = useRef<HTMLDivElement>();
   const [sidebarHeight, setSidebarHeight] = useState(0);
@@ -104,19 +104,15 @@ const FurnitureShop = ({
 FurnitureShop.layout = AppLayout;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const topNewProducts = await api.getTopNewProducts();
-  const mainCarouselData = await api.getMainCarouselData();
-  const furnitureProducts = await api.getFurnitureProducts();
+  // const topNewProducts = await api.getTopNewProducts();
+  // const mainCarouselData = await api.getMainCarouselData();
+  // const furnitureProducts = await api.getFurnitureProducts();
   const sidebarNavList = await api.getFurnitureShopNavList();
-  const topSellingProducts = await api.getTopSellingProducts();
+  // const topSellingProducts = await api.getTopSellingProducts();
 
   return {
     props: {
-      sidebarNavList,
-      topNewProducts,
-      mainCarouselData,
-      furnitureProducts,
-      topSellingProducts
+      sidebarNavList
     }
   };
 };

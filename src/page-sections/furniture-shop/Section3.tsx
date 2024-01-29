@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import Box from '@component/Box';
 import { Carousel } from '@component/carousel';
-import { H1, Paragraph } from '@component/Typography';
+import { H1 } from '@component/Typography';
 import { ProductCard13 } from '@component/product-cards';
 import useWindowSize from '@hook/useWindowSize';
 import Product from '@models/product.model';
@@ -24,7 +24,6 @@ const Section3: FC<Props> = ({ products, title }) => {
     <Box mt={5}>
       <Box mb={4}>
         <H1 mb="4px">{title}</H1>
-        <Paragraph color="grey.600">Tall blind but were, been folks not the expand</Paragraph>
       </Box>
 
       <Box my="-0.25rem">
@@ -36,17 +35,7 @@ const Section3: FC<Props> = ({ products, title }) => {
         >
           {products.map((item, ind) => (
             <Box py="0.25rem" key={ind}>
-              <ProductCard13
-                id={item.id}
-                slug={item.slug}
-                title={item.title}
-                price={item.price}
-                off={item.discount}
-                status={item.status}
-                rating={item.rating}
-                imgUrl={item.thumbnail}
-                productColors={item.colors}
-              />
+              <ProductCard13 id={item.id} title={item.name} imgUrl={item.imageUrl} />
             </Box>
           ))}
         </Carousel>

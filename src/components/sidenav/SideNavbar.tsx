@@ -1,14 +1,16 @@
 import { FC } from 'react';
 import styled from 'styled-components';
+import { kebabCase } from 'lodash';
 import Box from '@component/Box';
 import Card from '@component/Card';
-import Icon from '@component/icon/Icon';
 import FlexBox from '@component/FlexBox';
 import NavLink from '@component/nav-link';
 import Scrollbar from '@component/Scrollbar';
 import { H5, Span } from 'components/Typography';
 import { Accordion, AccordionHeader } from 'components/accordion';
-import CategoryNavList from '@models/categoryNavList.model';
+import Macrocategory from '@models/macrocategory.model';
+import CategorySubcategory from '@models/category-subcategory.model';
+import Category from '@models/category.model';
 
 // styled components
 const NavbarRoot = styled(Card)<{
@@ -71,66 +73,73 @@ const Circle = styled('span')(() => ({
 // ==================================================================
 type SideNavbarProps = {
   isFixed?: boolean;
-  navList: CategoryNavList[];
+  navList: Macrocategory[] | Category[];
   lineStyle?: 'dash' | 'solid';
   sidebarHeight?: string | number;
   sidebarStyle?: 'style1' | 'style2';
 };
 // ==================================================================
 
-const SideNavbar: FC<SideNavbarProps> = (props) => {
-  const { isFixed, navList, lineStyle, sidebarStyle, sidebarHeight } = props;
+const SideNavbar: FC<SideNavbarProps> = ({
+  isFixed,
+  navList,
+  lineStyle,
+  sidebarStyle,
+  sidebarHeight
+}) => {
+  const getIterableItem = (item: any): any =>
+    item?.categories ? item.categories : item.subcategories;
 
-  const renderChild = (childList: any[]) =>
-    childList.map((item, ind) => (
-      <NavLink key={ind} href={item.href} color="grey.700">
-        <StyledList>
-          <Circle className="listCircle" />
-          <Span py={0.75} flex="1 1 0" fontSize={14}>
-            {item.title}
-          </Span>
-        </StyledList>
-      </NavLink>
-    ));
+  const renderChild = (childList: CategorySubcategory[]) =>
+    childList.map((item) => {
+      const slugName = kebabCase(item.subcategory.name);
+
+      return (
+        <NavLink
+          key={item.subcategory.id}
+          href={`${item.subcategory.id}-${slugName}`}
+          color="grey.700"
+        >
+          <StyledList>
+            <Circle className="listCircle" />
+            <Span py={0.75} flex="1 1 0" fontSize={14}>
+              {item.subcategory.name}
+            </Span>
+          </StyledList>
+        </NavLink>
+      );
+    });
 
   return (
     <Scrollbar autoHide={false} sx={{ maxHeight: sidebarHeight }}>
       <NavbarRoot isfixed={isFixed} sidebarstyle={sidebarStyle}>
-        {navList.map((item, i) => (
+        {navList.map((item: any, i: number) => (
           <Box key={i}>
             <Box padding="16px 20px 5px 20px">
-              <H5>{item.category}</H5>
+              <H5>{item.name}</H5>
               <BorderBox linestyle={lineStyle}>
                 <ColorBorder />
                 <ColorBorder grey={1} />
               </BorderBox>
             </Box>
-
-            {item.categoryItem.map((itemx, ind) => (
+            {getIterableItem(item).map((itemx: any, ind: any) => (
               <Box mb="2px" color="grey.700" key={ind}>
-                {itemx.child ? (
+                {itemx?.categories_subcategories && itemx?.categories_subcategories.length ? (
                   <Accordion>
                     <AccordionHeader px="0" py="0.75" className="linkList">
                       <FlexBox alignItems="center">
-                        <Icon mr="10px" size="20px" defaultcolor="currentColor">
-                          {itemx.icon}
-                        </Icon>
                         <Span fontWeight="600" fontSize={14}>
-                          {itemx.title}
+                          {itemx.name}
                         </Span>
                       </FlexBox>
                     </AccordionHeader>
-
-                    {itemx.child ? renderChild(itemx.child) : null}
+                    {itemx.name ? renderChild(itemx.categories_subcategories) : null}
                   </Accordion>
                 ) : (
-                  <NavLink key={itemx.title} href={itemx.href} color="grey.700">
+                  <NavLink key={itemx.name} href="#" color="grey.700">
                     <FlexBox className="linkList" py={0.75}>
-                      <Icon mr="10px" size="20px" defaultcolor="currentColor">
-                        {itemx.icon}
-                      </Icon>
                       <Span fontWeight="600" fontSize={14}>
-                        {itemx.title}
+                        {itemx.name}
                       </Span>
                     </FlexBox>
                   </NavLink>

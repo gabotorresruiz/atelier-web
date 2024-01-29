@@ -8,6 +8,7 @@
         "alias": {
           "@component": "./src/components",
           "@api": "./src/api",
+          "@config": "./src/config",
           "@models": "./src/models",
           "@screens": "./src/screens",
           "@hook": "./src/hooks",

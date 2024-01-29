@@ -28,7 +28,7 @@ export const StyledCategoryDropdown = styled.div<CategoryDropdownProps>`
   transform-origin: top;
   position: ${({ position }) => position};
   transform: ${({ open }) => (open ? 'scaleY(1)' : 'scaleY(0)')};
-  top: ${({ position }) => (position === 'absolute' ? 'calc(100% + 0.7rem)' : '0.5rem')};
+  top: ${({ position }) => (position === 'absolute' ? 'calc(100% + 1rem)' : '0.5rem')};
   background-color: ${getTheme('colors.body.paper')};
   box-shadow: ${getTheme('shadows.regular')};
   transition: all 250ms ease-in-out;

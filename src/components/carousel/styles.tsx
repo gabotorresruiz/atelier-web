@@ -18,6 +18,7 @@ export const StyledCarousel = styled(
   ({ ...props }: CarouselProviderProps & StyledCarouselProps) => <CarouselProvider {...props} />
 )`
   position: relative;
+  margin-bottom: 64px;
   min-width: 0px;
 
   .custom-slider {
@@ -32,7 +33,7 @@ export const StyledCarousel = styled(
 
   .arrow-button {
     position: absolute;
-    $top: calc(50% - ${(props) => (props.$showDots ? props.$dotGroupMarginTop : '0px')});
+    top: calc(50% - ${(props) => (props.$showDots ? props.$dotGroupMarginTop : '0px')});
     transform: translateY(-50%);
     box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
   }

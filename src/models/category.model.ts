@@ -1,12 +1,16 @@
+import Subcategory from './subcategory.model';
+
+interface CategorySubcategory {
+  subcategoryId: number;
+  categoryId: number;
+  subcategory: Subcategory;
+}
+
 interface Category {
-  id: string;
+  id: number;
   name: string;
-  slug: string;
-  icon?: string;
-  image?: string;
-  parent: string[];
-  featured?: boolean;
-  description?: string;
+  subcategories: Subcategory[];
+  categories_subcategories?: CategorySubcategory[];
 }
 
 export default Category;

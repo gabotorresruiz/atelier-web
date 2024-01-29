@@ -48,11 +48,11 @@ const SearchInput: FC = () => {
           fullwidth
           onChange={hanldeSearch}
           className="search-field"
-          placeholder="Search and hit enter..."
+          placeholder="Busca un producto..."
         />
 
-        <Button className="search-button" variant="contained" color="primary">
-          Search
+        <Button className="search-button" variant="contained" btnColor="primary">
+          Buscar
         </Button>
 
         <Box className="menu-button" ml="14px" cursor="pointer">
