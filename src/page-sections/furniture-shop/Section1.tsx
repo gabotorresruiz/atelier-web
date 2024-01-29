@@ -2,12 +2,11 @@ import { FC } from 'react';
 import styled from 'styled-components';
 import Box from '@component/Box';
 import Grid from '@component/grid/Grid';
-import { Button } from '@component/buttons';
 import { Carousel } from 'components/carousel';
-import { H1, H6, Paragraph } from 'components/Typography';
+import { H1, H2 } from 'components/Typography';
 import { theme } from '@utils/theme';
 import { deviceSize } from '@utils/constants';
-import { FurnitureCarouselItem } from '@models/carousel.model';
+import Branding from '@models/branding.model';
 
 // styled components
 const StyledBox = styled(Box)({
@@ -26,7 +25,6 @@ const Container = styled(Box)({
   minHeight: 650,
   display: 'flex',
   alignItems: 'center',
-  backgroundImage: "url('/assets/images/Furniture Shop/Furniture Shop Header.jpg')",
   backgroundSize: 'cover',
   backgroundRepeat: 'no-repeat',
   backgroundPosition: 'center',
@@ -37,78 +35,47 @@ const Container = styled(Box)({
 
 const StyledGrid = styled(Grid)({
   maxWidth: 1280,
-  margin: 'auto',
+  margin: '0 8rem',
   position: 'relative',
   alignItems: 'center',
   padding: '2rem 0px 5rem 0px'
 });
 
 const GridItemOne = styled(Grid)({
-  padding: 20,
-  '& h1': { fontSize: 60 },
-  [`@media(max-width:${deviceSize.md}px)`]: {
-    '& h1': { fontSize: 50 }
-  },
-  [`@media(max-width:${deviceSize.sm}px)`]: {
-    textAlign: 'center',
-    '& h1': { fontSize: 40 }
-  }
-});
-
-const StyledButton = styled(Button)({
-  color: '#fff',
-  fontWeight: 400,
-  fontSize: '16px',
-  borderRadius: 0,
-  padding: '8px 30px',
-  [`@media(max-width:${deviceSize.sm}px)`]: {
-    margin: 'auto'
-  }
-});
-
-const TextBox = styled(Box)({
-  marginTop: 5,
-  marginBottom: 40,
-  paddingRight: 100,
-  [`@media(max-width:${deviceSize.md}px)`]: { paddingRight: 0 }
+  backdropFilter: 'blur(50px)',
+  borderRadius: '10px',
+  padding: '30px 40px',
+  width: '100%'
 });
 
 // ===============================================================
-type Props = { mainCarouselData: FurnitureCarouselItem[] };
+type Props = { mainCarouselData: Branding };
 // ===============================================================
 
-const Section1: FC<Props> = ({ mainCarouselData }) => (
-  <StyledBox id="carouselBox">
-    <Carousel
-      spacing="0px"
-      showDots
-      autoPlay={false}
-      visibleSlides={1}
-      showArrow={false}
-      dotClass="carousel-dot"
-      dotColor={theme.colors.primary.main}
-      totalSlides={mainCarouselData.length}
-    >
-      {mainCarouselData.map((item) => (
-        <Container key={item.id}>
+const Section1: FC<Props> = ({ mainCarouselData }) => {
+  const homeImageUrl =
+    mainCarouselData.homeImageUrl || '/assets/images/Furniture Shop/Furniture Shop Header.jpg';
+
+  return (
+    <StyledBox id="carouselBox">
+      <Carousel spacing="0px" autoPlay={false} visibleSlides={1} showArrow={false} totalSlides={1}>
+        <Container
+          style={{
+            backgroundImage: `url(${homeImageUrl})`
+          }}
+        >
           <StyledGrid container>
             <GridItemOne item lg={6} md={8} xs={12}>
-              <H6>{item.subTitle}</H6>
-              <H1 fontSize={60}>{item.title}</H1>
-
-              <TextBox>
-                <Paragraph color="grey.600">{item.description}</Paragraph>
-              </TextBox>
-
-              <StyledButton color="primary" variant="contained">
-                {item.buttonText}
-              </StyledButton>
+              <H1 color="#de6f0f" fontSize={60}>
+                {mainCarouselData.title}
+              </H1>
+              <H2 color="#881537">{mainCarouselData.subtitle}</H2>
             </GridItemOne>
           </StyledGrid>
         </Container>
-      ))}
-    </Carousel>
-  </StyledBox>
-);
+      </Carousel>
+    </StyledBox>
+  );
+};
 
 export default Section1;

@@ -47,7 +47,7 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav }) => {
           >
             <NextImage src="/assets/images/logos/shopping-bag.svg" width="90px" height="100%" />
             <Paragraph mt="1rem" color="text.muted" textAlign="center" maxWidth="200px">
-              Your shopping bag is empty. Start shopping
+              Tu carrito de compras está vacío
             </Paragraph>
           </FlexBox>
         )}

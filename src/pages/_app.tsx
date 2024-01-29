@@ -7,7 +7,7 @@ import NProgress from 'nprogress';
 import { ThemeProvider } from 'styled-components';
 import GoogleAnalytics from '@component/GoogleAnalytics';
 import { AppProvider } from '@context/AppContext';
-import '../__server__';
+// import '../__server__';
 import GlobalStyles from 'theme/globalStyles';
 import theme from '../theme';
 
@@ -49,8 +49,7 @@ const App = ({ Component, pageProps }: MyAppProps) => {
       <AppProvider>
         <ThemeProvider theme={theme()}>
           <GlobalStyles />
-
-          <Layout>
+          <Layout {...pageProps}>
             <Component {...pageProps} />
           </Layout>
         </ThemeProvider>

@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import navigations from '@data/navigations';
-import MegaMenu1 from './mega-menu/MegaMenu1';
+import Category from '@models/category.model';
+import Macrocategory from '@models/macrocategory.model';
 import MegaMenu2 from './mega-menu/MegaMenu2';
 import CategoryMenuItem from './CategoryMenuItem';
 import { StyledCategoryDropdown } from './styles';
@@ -8,30 +8,27 @@ import { StyledCategoryDropdown } from './styles';
 // =========================================
 type CategoryDropdownProps = {
   open: boolean;
+  dataList: Macrocategory[] | Category[];
   position?: 'absolute' | 'relative';
 };
 // =========================================
 
-const CategoryDropdown: FC<CategoryDropdownProps> = ({ open, position }) => {
-  const megaMenu = { MegaMenu1, MegaMenu2 };
+const CategoryDropdown: FC<CategoryDropdownProps> = ({ open, dataList, position }) => {
+  const getIterableItem = (item: any): any =>
+    item?.categories ? item.categories : item.subcategories;
 
   return (
     <StyledCategoryDropdown open={open} position={position}>
-      {navigations.map((item) => {
-        let MegaMenu = megaMenu[item.menuComponent];
-
-        return (
-          <CategoryMenuItem
-            key={item.title}
-            href={item.href}
-            icon={item.icon}
-            title={item.title}
-            caret={!!item.menuData}
-          >
-            <MegaMenu data={item.menuData || {}} />
-          </CategoryMenuItem>
-        );
-      })}
+      {dataList.map((item: Macrocategory | Category) => (
+        <CategoryMenuItem
+          key={item.name}
+          href="#"
+          title={item.name}
+          caret={getIterableItem(item).length > 0}
+        >
+          <MegaMenu2 data={getIterableItem(item) || {}} />
+        </CategoryMenuItem>
+      ))}
     </StyledCategoryDropdown>
   );
 };

@@ -3,7 +3,7 @@ import ReactPaginate from 'react-paginate';
 import { SpaceProps } from 'styled-system';
 import Icon from '../icon/Icon';
 import { Button } from '../buttons';
-import { StyledPagination } from './styled';
+import StyledPagination from './styled';
 
 export interface PaginationProps extends SpaceProps {
   pageCount: number;

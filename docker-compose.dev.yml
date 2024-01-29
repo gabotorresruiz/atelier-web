@@ -4,7 +4,7 @@ services:
   atelier-web:
     build:
       context: ./
-      target: runner
+      dockerfile: Dockerfile.dev
     volumes:
       - .:/app
     command: npm run dev

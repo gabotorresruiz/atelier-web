@@ -42,7 +42,6 @@ const Topbar: FC = () => {
           <div className="logo">
             <Image src="/assets/images/logo.svg" alt="logo" />
           </div>
-
           <FlexBox alignItems="center">
             <Icon size="14px">phone-call</Icon>
             <span>+88012 3456 7894</span>
@@ -52,52 +51,6 @@ const Topbar: FC = () => {
             <Icon size="14px">mail</Icon>
             <span>support@ui-lib.com</span>
           </FlexBox>
-        </FlexBox>
-
-        <FlexBox className="topbar-right" alignItems="center">
-          <NavLink className="link" href="/">
-            Theme FAQ"s
-          </NavLink>
-
-          <NavLink className="link" href="/">
-            Need Help?
-          </NavLink>
-
-          <Menu
-            direction="right"
-            handler={
-              <FlexBox className="dropdown-handler" alignItems="center" height="40px" mr="1.25rem">
-                <Image src={language.imgUrl} alt={language.title} />
-                <Small fontWeight="600">{language.title}</Small>
-                <Icon size="1rem">chevron-down</Icon>
-              </FlexBox>
-            }
-          >
-            {languageList.map((item) => (
-              <MenuItem key={item.title} onClick={handleLanguageClick(item)}>
-                <Image src={item.imgUrl} borderRadius="2px" mr="0.5rem" alt={item.title} />
-                <Small fontWeight="600">{item.title}</Small>
-              </MenuItem>
-            ))}
-          </Menu>
-
-          <Menu
-            direction="right"
-            handler={
-              <FlexBox className="dropdown-handler" alignItems="center" height="40px">
-                <Image src={currency.imgUrl} alt={currency.title} />
-                <Small fontWeight="600">{currency.title}</Small>
-                <Icon size="1rem">chevron-down</Icon>
-              </FlexBox>
-            }
-          >
-            {currencyList.map((item) => (
-              <MenuItem key={item.title} onClick={handleCurrencyClick(item)}>
-                <Image src={item.imgUrl} borderRadius="2px" mr="0.5rem" alt={item.title} />
-                <Small fontWeight="600">{item.title}</Small>
-              </MenuItem>
-            ))}
-          </Menu>
         </FlexBox>
       </Container>
     </StyledTopbar>

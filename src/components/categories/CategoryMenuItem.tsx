@@ -9,27 +9,29 @@ type CategoryMenuItemProps = {
   icon?: string;
   title: string;
   caret?: boolean;
-  children: any;
+  children?: any;
 };
 // ===============================================================
 
-const CategoryMenuItem: FC<CategoryMenuItemProps> = (props) => {
-  const { href, icon, title, caret, children } = props;
+const CategoryMenuItem: FC<CategoryMenuItemProps> = ({
+  href,
+  icon,
+  title,
+  caret,
+  children = null
+}) => (
+  <StyledCategoryMenuItem>
+    <Link href={href}>
+      <div className="category-dropdown-link">
+        {icon && <Icon variant="small">{icon}</Icon>}
+        <span className="title">{title}</span>
+        {caret && <Icon variant="small">chevron-right</Icon>}
+      </div>
+    </Link>
 
-  return (
-    <StyledCategoryMenuItem>
-      <Link href={href}>
-        <div className="category-dropdown-link">
-          {icon && <Icon variant="small">{icon}</Icon>}
-          <span className="title">{title}</span>
-          {caret && <Icon variant="small">chevron-right</Icon>}
-        </div>
-      </Link>
-
-      {children}
-    </StyledCategoryMenuItem>
-  );
-};
+    {children}
+  </StyledCategoryMenuItem>
+);
 
 CategoryMenuItem.defaultProps = { caret: true };
 

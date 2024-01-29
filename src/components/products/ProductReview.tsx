@@ -49,6 +49,7 @@ const ProductReview: FC = () => {
   });
 
   const handleFormSubmit = async (values, { resetForm }) => {
+    console.log(values);
     resetForm();
   };
 

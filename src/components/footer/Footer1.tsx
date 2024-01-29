@@ -6,112 +6,64 @@ import Image from '@component/Image';
 import Grid from '@component/grid/Grid';
 import Icon from '@component/icon/Icon';
 import FlexBox from '@component/FlexBox';
-import AppStore from '@component/AppStore';
 import Container from '@component/Container';
-import Typography, { Paragraph } from '@component/Typography';
-import { getTheme } from '@utils/utils';
+import Typography from '@component/Typography';
+import Branding from '@models/branding.model';
 
 // styled component
-const StyledLink = styled.a`
-  position: relative;
-  display: block;
-  padding: 0.3rem 0rem;
-  color: ${getTheme('colors.gray.500')};
-  cursor: pointer;
-  border-radius: 4px;
-  :hover {
-    color: ${getTheme('colors.gray.100')};
-  }
+const StyledGrid = styled(Grid)`
+  justify-content: space-between;
 `;
 
-const aboutLinks = ['Careers', 'Our Stores', 'Our Cares', 'Terms & Conditions', 'Privacy Policy'];
-const iconList = [
-  { iconName: 'facebook', url: 'https://www.facebook.com/UILibOfficial' },
-  { iconName: 'twitter', url: '/' },
-  {
-    iconName: 'youtube',
-    url: 'https://www.youtube.com/channel/UCsIyD-TSO1wQFz-n2Y4i3Rg'
-  },
-  { iconName: 'google', url: '/' },
-  { iconName: 'instagram', url: '/' }
-];
+const StyledLeftGrid = styled(Grid)`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 15%;
+`;
 
-const customerCareLinks = [
-  'Help Center',
-  'How to Buy',
-  'Track Your Order',
-  'Corporate & Bulk Purchasing',
-  'Returns & Refunds'
-];
+const StyledLogoWrapper = styled.div`
+  align-items: center;
+  display: flex;
+  justify-content: flex-start;
+`;
 
-const Footer1: FC = () => (
+const StyledLogoImage = styled(Image)`
+  width: 55%;
+  height: auto;
+`;
+
+// const iconList = [
+//   { iconName: 'facebook', url: 'https://www.facebook.com/UILibOfficial' },
+//   { iconName: 'twitter', url: '/' },
+//   {
+//     iconName: 'youtube',
+//     url: 'https://www.youtube.com/channel/UCsIyD-TSO1wQFz-n2Y4i3Rg'
+//   },
+//   { iconName: 'google', url: '/' },
+//   { iconName: 'instagram', url: '/' }
+//   { iconName: 'linkedin', url: '/' }
+// ];
+
+type Footer1Props = {
+  brandingResource: Branding;
+};
+
+const Footer1: FC<Footer1Props> = ({ brandingResource }) => (
   <footer>
     <Box bg="#0F3460">
       <Container p="1rem" color="white">
-        <Box py="5rem" overflow="hidden">
-          <Grid container spacing={6}>
-            <Grid item lg={4} md={6} sm={6} xs={12}>
+        <Box py="1rem" overflow="hidden">
+          <StyledGrid container spacing={6}>
+            <StyledLeftGrid item lg={4} md={6} sm={6} xs={12}>
               <Link href="/">
                 <a>
-                  <Image alt="logo" mb="1.25rem" src="/assets/images/logo.svg" />
+                  <StyledLogoWrapper>
+                    <StyledLogoImage src={brandingResource.logoImageUrl} alt="logo" />
+                  </StyledLogoWrapper>
                 </a>
               </Link>
-
-              <Paragraph mb="1.25rem" color="gray.500">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor libero id et, in
-                gravida. Sit diam duis mauris nulla cursus. Erat et lectus vel ut sollicitudin elit
-                at amet.
-              </Paragraph>
-
-              <AppStore />
-            </Grid>
-
-            <Grid item lg={2} md={6} sm={6} xs={12}>
-              <Typography mb="1.25rem" lineHeight="1" fontSize="25px" fontWeight="600">
-                About Us
-              </Typography>
-
-              <div>
-                {aboutLinks.map((item, ind) => (
-                  <Link href="/" key={ind}>
-                    <StyledLink>{item}</StyledLink>
-                  </Link>
-                ))}
-              </div>
-            </Grid>
-
-            <Grid item lg={3} md={6} sm={6} xs={12}>
-              <Typography mb="1.25rem" lineHeight="1" fontSize="25px" fontWeight="600">
-                Customer Care
-              </Typography>
-
-              <div>
-                {customerCareLinks.map((item, ind) => (
-                  <Link href="/" key={ind}>
-                    <StyledLink>{item}</StyledLink>
-                  </Link>
-                ))}
-              </div>
-            </Grid>
-
-            <Grid item lg={3} md={6} sm={6} xs={12}>
-              <Typography mb="1.25rem" lineHeight="1" fontSize="25px" fontWeight="600">
-                Contact Us
-              </Typography>
-
-              <Typography py="0.3rem" color="gray.500">
-                70 Washington Square South, New York, NY 10012, United States
-              </Typography>
-
-              <Typography py="0.3rem" color="gray.500">
-                Email: uilib.help@gmail.com
-              </Typography>
-
-              <Typography py="0.3rem" mb="1rem" color="gray.500">
-                Phone: +1 1123 456 780
-              </Typography>
-
-              <FlexBox className="flex" mx="-5px">
+              {/* <FlexBox className="flex" mx="-5px">
                 {iconList.map((item) => (
                   <a href={item.url} target="_blank" key={item.iconName} rel="noreferrer noopener">
                     <Box m="5px" p="10px" size="small" borderRadius="50%" bg="rgba(0,0,0,0.2)">
@@ -121,9 +73,29 @@ const Footer1: FC = () => (
                     </Box>
                   </a>
                 ))}
-              </FlexBox>
+              </FlexBox> */}
+            </StyledLeftGrid>
+            <Grid item lg={3} md={6} sm={6} xs={12}>
+              <Typography mb="1.25rem" lineHeight="1" fontSize="25px" fontWeight="600">
+                Contactanos
+              </Typography>
+              <Typography py="0.3rem" color="gray.500">
+                Dirección: {brandingResource.address}
+              </Typography>
+              <Typography py="0.3rem" color="gray.500">
+                Email:{' '}
+                <a
+                  style={{ color: '#AEB4BE', textDecoration: 'underline' }}
+                  href={`mailto:${brandingResource.email}`}
+                >
+                  {brandingResource.email}
+                </a>
+              </Typography>
+              <Typography py="0.3rem" mb="1rem" color="gray.500">
+                Teléfono: {brandingResource.phone}
+              </Typography>
             </Grid>
-          </Grid>
+          </StyledGrid>
         </Box>
       </Container>
     </Box>

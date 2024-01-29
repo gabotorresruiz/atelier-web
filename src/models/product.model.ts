@@ -1,24 +1,15 @@
-import Shop from './shop.model';
-import Review from './Review.model';
+import ProductSize from './product-size.model';
+import Subcategory from './subcategory.model';
 
 interface Product {
-  unit?: any;
-  slug: string;
-  price: number;
-  title: string;
-  rating: number;
-  discount: number;
-  thumbnail: string;
-  id: string;
-  shop?: Shop;
-  brand?: string;
-  size?: string[];
-  status?: string;
-  colors?: string[];
-  images?: string[];
-  categories: any[];
-  reviews?: Review[];
-  published?: boolean;
+  id: number;
+  name: string;
+  imageUrl: string;
+  withTintometric: boolean;
+  code: string;
+  sku: string;
+  subcategories: Subcategory[];
+  products_sizes: ProductSize[];
 }
 
 export default Product;

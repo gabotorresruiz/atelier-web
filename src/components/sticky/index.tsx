@@ -37,7 +37,8 @@ const Sticky: FC<StickyProps> = (props) => {
       notifyOnScroll(distance >= notifyPosition);
     }
 
-    let isFixed = distance >= fixedOn;
+    let isFixed = distance > fixedOn;
+
     setFixed(isFixed);
   }, [containerRef, fixedOn, notifyOnScroll, notifyPosition]);
 
