@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import styled from 'styled-components';
-import { kebabCase } from 'lodash';
 import Box from '@component/Box';
 import Card from '@component/Card';
 import FlexBox from '@component/FlexBox';
@@ -11,6 +10,7 @@ import { Accordion, AccordionHeader } from 'components/accordion';
 import Macrocategory from '@models/macrocategory.model';
 import CategorySubcategory from '@models/category-subcategory.model';
 import Category from '@models/category.model';
+import { getSlug } from '@utils/utils';
 
 // styled components
 const NavbarRoot = styled(Card)<{
@@ -91,24 +91,20 @@ const SideNavbar: FC<SideNavbarProps> = ({
     item?.categories ? item.categories : item.subcategories;
 
   const renderChild = (childList: CategorySubcategory[]) =>
-    childList.map((item) => {
-      const slugName = kebabCase(item.subcategory.name);
-
-      return (
-        <NavLink
-          key={item.subcategory.id}
-          href={`${item.subcategory.id}-${slugName}`}
-          color="grey.700"
-        >
-          <StyledList>
-            <Circle className="listCircle" />
-            <Span py={0.75} flex="1 1 0" fontSize={14}>
-              {item.subcategory.name}
-            </Span>
-          </StyledList>
-        </NavLink>
-      );
-    });
+    childList.map((item) => (
+      <NavLink
+        key={item.subcategory.id}
+        href={`subcategory/${item.subcategory.id}-${getSlug(item.subcategory.name)}`}
+        color="grey.700"
+      >
+        <StyledList>
+          <Circle className="listCircle" />
+          <Span py={0.75} flex="1 1 0" fontSize={14}>
+            {item.subcategory.name}
+          </Span>
+        </StyledList>
+      </NavLink>
+    ));
 
   return (
     <Scrollbar autoHide={false} sx={{ maxHeight: sidebarHeight }}>

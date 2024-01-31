@@ -24,7 +24,7 @@ const StyledLinearProgress = styled.div<LinearProgressProps>`
   &:after {
     top: 0;
     bottom: 0;
-    content: ' ';
+    content: '';
     position: absolute;
     width: ${(props) => props.value}%;
     background-color: ${(props) => themeGet(`colors.${props.color}.main`)};

@@ -1,14 +1,22 @@
 version: '3.8'
 
 services:
-  atelier-web:
+  atelier-e-commerce:
+    container_name: e-commerce-service
     build:
       context: ./
       dockerfile: Dockerfile.dev
+    networks:
+      - frontend
     volumes:
       - .:/app
     command: npm run dev
+    env_file:
+      - ./.env.development.local
     ports:
       - '3001:3001'
     environment:
       NODE_ENV: development
+networks:
+  frontend:
+    external: true

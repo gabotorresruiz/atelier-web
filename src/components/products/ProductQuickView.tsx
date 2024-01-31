@@ -12,34 +12,24 @@ type Props = {
   product: {
     slug: string;
     title: string;
-    price: number;
-    images: string[];
+    imgUrl: string;
     id: string | number;
   };
 };
 // ===================================================
 
-const ProductQuickView: FC<Props> = (props) => {
-  const { open, onClose, product } = props;
+const ProductQuickView: FC<Props> = ({ open, onClose, product }: Props) => (
+  <Modal open={open} onClose={onClose}>
+    <Card p="1rem" position="relative" maxWidth="800px" width="100%">
+      <ProductIntro id={product.id} title={product.title} image={product.imgUrl} />
 
-  return (
-    <Modal open={open} onClose={onClose}>
-      <Card p="1rem" position="relative" maxWidth="800px" width="100%">
-        <ProductIntro
-          id={product.id}
-          title={product.title}
-          price={product.price}
-          images={product.images}
-        />
-
-        <Box position="absolute" top="0.75rem" right="0.75rem" cursor="pointer">
-          <Icon className="close" color="primary" variant="small" onClick={onClose}>
-            close
-          </Icon>
-        </Box>
-      </Card>
-    </Modal>
-  );
-};
+      <Box position="absolute" top="0.75rem" right="0.75rem" cursor="pointer">
+        <Icon className="close" color="primary" variant="small" onClick={onClose}>
+          close
+        </Icon>
+      </Box>
+    </Card>
+  </Modal>
+);
 
 export default ProductQuickView;

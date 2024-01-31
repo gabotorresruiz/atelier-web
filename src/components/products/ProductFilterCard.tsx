@@ -1,5 +1,7 @@
 import { FC } from 'react';
+import styled from 'styled-components';
 import Card from '@component/Card';
+import NavLink from '@component/nav-link';
 import Avatar from '@component/avatar';
 import Rating from '@component/rating';
 import Divider from '@component/Divider';
@@ -7,134 +9,148 @@ import FlexBox from '@component/FlexBox';
 import CheckBox from '@component/CheckBox';
 import TextField from '@component/text-field';
 import { Accordion, AccordionHeader } from '@component/accordion';
-import { H5, H6, Paragraph, SemiSpan } from '@component/Typography';
+import { H5, H6, Paragraph, SemiSpan, Span } from '@component/Typography';
+import Category from '@models/category.model';
+import Macrocategory from '@models/macrocategory.model';
+import Box from '@component/Box';
+import CategorySubcategory from '@models/category-subcategory.model';
+import { getSlug } from '@utils/utils';
+import Scrollbar from '@component/Scrollbar';
+import Subcategory from '@models/subcategory.model';
 
 const categroyList = [
-  {
-    title: 'Bath Preparations',
-    child: ['Bubble Bath', 'Bath Capsules', 'Others']
-  },
+  { title: 'Bath Preparations', child: ['Bubble Bath', 'Bath Capsules', 'Others'] },
   { title: 'Eye Makeup Preparations' },
   { title: 'Fragrance' },
   { title: 'Hair Preparations' }
 ];
 
-const otherOptions = ['On Sale', 'In Stock', 'Featured'];
-const brandList = ['Maccs', 'Karts', 'Baars', 'Bukks', 'Luasis'];
-const colorList = ['#1C1C1C', '#FF7A7A', '#FFC672', '#84FFB5', '#70F6FF', '#6B7AFF'];
+const NavbarRoot = styled(Card)<{
+  isfixed: boolean;
+  sidebarstyle: 'style1' | 'style2';
+}>(({ isfixed, sidebarstyle, theme }) => ({
+  height: '100%',
+  boxShadow: theme.shadows[3],
+  borderRadius: '8px',
+  position: 'relative',
+  overflow: isfixed ? 'auto' : 'unset',
+  '& .linkList': {
+    transition: 'all 0.2s',
+    padding: '8px 20px',
+    '&:hover': { color: theme.colors.primary.main }
+  },
+  ...(sidebarstyle === 'style2' && {
+    height: '100%',
+    paddingBottom: 10,
+    backgroundColor: theme.colors.paste[50]
+  })
+}));
 
-const ProductFilterCard: FC = () => {
-  const render = (items: string[]) =>
-    items.map((name) => (
-      <Paragraph
-        py="6px"
-        pl="22px"
-        key={name}
-        fontSize="14px"
-        color="text.muted"
-        className="cursor-pointer"
+const BorderBox = styled(FlexBox)<{ linestyle: 'dash' | 'solid' }>(({ linestyle, theme }) => ({
+  marginTop: 5,
+  marginBottom: 15,
+  '& span': { width: '100%' },
+  ...(linestyle === 'dash' && {
+    borderBottom: '2px',
+    borderStyle: 'none none dashed none',
+    borderColor: theme.colors.primary.main,
+    '& span': { display: 'none' }
+  })
+}));
+
+const ColorBorder = styled(Span)<{ grey?: any }>(({ grey, theme }) => ({
+  borderRadius: '2px 0 0 2px',
+  height: grey ? '2px' : '3px',
+  background: grey ? theme.colors.gray[400] : theme.colors.primary.main
+}));
+
+const StyledList = styled(FlexBox)(({ theme }) => ({
+  padding: '4px 20px',
+  alignItems: 'center',
+  transition: 'all 0.2s',
+  '& .listCircle': { background: theme.colors.gray[600] },
+  '&:hover': {
+    '& .listCircle': { background: theme.colors.primary.main }
+  }
+}));
+
+const Circle = styled('span')(() => ({
+  width: '4px',
+  height: '4px',
+  marginLeft: '2rem',
+  marginRight: '8px',
+  borderRadius: '3px'
+}));
+
+// ==================================================================
+type ProductFilterCardProps = {
+  navList: Macrocategory[] | Category[];
+};
+// ==================================================================
+
+const ProductFilterCard: FC<ProductFilterCardProps> = ({
+  navList = []
+}: ProductFilterCardProps) => {
+  const getIterableItem = (item: any): any =>
+    item?.categories ? item.categories : item.subcategories;
+
+  const renderChild = (childList: CategorySubcategory[]) =>
+    childList.map((item) => (
+      <NavLink
+        key={item.subcategory.id}
+        href={`/subcategory/${item.subcategory.id}-${getSlug(item.subcategory.name)}`}
+        color="grey.700"
       >
-        {name}
-      </Paragraph>
+        <StyledList>
+          <Circle className="listCircle" />
+          <Span py={0.75} flex="1 1 0" fontSize={14}>
+            {item.subcategory.name}
+          </Span>
+        </StyledList>
+      </NavLink>
     ));
 
   return (
     <Card p="18px 27px" elevation={5}>
-      <H6 mb="10px">Categories</H6>
-
-      {categroyList.map((item) =>
-        item.child ? (
-          <Accordion key={item.title} expanded>
-            <AccordionHeader px="0px" py="6px" color="text.muted">
-              <SemiSpan className="cursor-pointer" mr="9px">
-                {item.title}
-              </SemiSpan>
-            </AccordionHeader>
-
-            {render(item.child)}
-          </Accordion>
-        ) : (
-          <Paragraph
-            py="6px"
-            fontSize="14px"
-            key={item.title}
-            color="text.muted"
-            className="cursor-pointer"
-          >
-            {item.title}
-          </Paragraph>
-        )
-      )}
-
-      <Divider mt="18px" mb="24px" />
-
-      {/* PRICE RANGE FILTER */}
-      <H6 mb="16px">Price Range</H6>
-      <FlexBox justifyContent="space-between" alignItems="center">
-        <TextField placeholder="0" type="number" fullwidth />
-
-        <H5 color="text.muted" px="0.5rem">
-          -
-        </H5>
-
-        <TextField placeholder="250" type="number" fullwidth />
-      </FlexBox>
-
-      <Divider my="24px" />
-
-      {/* BRANDS FILTER */}
-      <H6 mb="16px">Brands</H6>
-      {brandList.map((item) => (
-        <CheckBox
-          my="10px"
-          key={item}
-          name={item}
-          value={item}
-          color="secondary"
-          label={<SemiSpan color="inherit">{item}</SemiSpan>}
-          onChange={(e) => console.log(e.target.value, e.target.checked)}
-        />
-      ))}
-
-      <Divider my="24px" />
-
-      {/* STOCK AND SALES FILTERS */}
-      {otherOptions.map((item) => (
-        <CheckBox
-          my="10px"
-          key={item}
-          name={item}
-          value={item}
-          color="secondary"
-          label={<SemiSpan color="inherit">{item}</SemiSpan>}
-          onChange={(e) => console.log(e.target.value, e.target.checked)}
-        />
-      ))}
-
-      <Divider my="24px" />
-
-      {/* RATING FILTER */}
-      <H6 mb="16px">Ratings</H6>
-      {[5, 4, 3, 2, 1].map((item) => (
-        <CheckBox
-          my="10px"
-          key={item}
-          value={item}
-          color="secondary"
-          label={<Rating value={item} outof={5} color="warn" />}
-          onChange={(e) => console.log(e.target.value, e.target.checked)}
-        />
-      ))}
-
-      <Divider my="24px" />
-
-      {/* COLORS FILTER */}
-      <H6 mb="16px">Colors</H6>
-      <FlexBox mb="1rem">
-        {colorList.map((item) => (
-          <Avatar key={item} bg={item} size={25} mr="10px" style={{ cursor: 'pointer' }} />
-        ))}
-      </FlexBox>
+      <Scrollbar autoHide={false} sx={{ maxHeight: '85vh' }}>
+        <NavbarRoot isfixed sidebarstyle="style1">
+          {navList.map((item: any, i: number) => (
+            <Box key={i}>
+              <Box padding="16px 20px 5px 20px">
+                <H6>{item.name}</H6>
+                <BorderBox linestyle="dash">
+                  <ColorBorder />
+                  <ColorBorder grey={1} />
+                </BorderBox>
+              </Box>
+              {getIterableItem(item).map((itemx: any, ind: any) => (
+                <Box mb="2px" color="grey.700" key={ind}>
+                  {itemx?.categories_subcategories && itemx?.categories_subcategories.length ? (
+                    <Accordion>
+                      <AccordionHeader px="0" py="0.75" className="linkList">
+                        <FlexBox alignItems="center">
+                          <Span fontWeight="600" fontSize={14}>
+                            {itemx.name}
+                          </Span>
+                        </FlexBox>
+                      </AccordionHeader>
+                      {itemx.name ? renderChild(itemx.categories_subcategories) : null}
+                    </Accordion>
+                  ) : (
+                    <NavLink key={itemx.name} href="#" color="grey.700">
+                      <FlexBox className="linkList" py={0.75}>
+                        <Span fontWeight="600" fontSize={14}>
+                          {itemx.name}
+                        </Span>
+                      </FlexBox>
+                    </NavLink>
+                  )}
+                </Box>
+              ))}
+            </Box>
+          ))}
+        </NavbarRoot>
+      </Scrollbar>
     </Card>
   );
 };

@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import Category from '@models/category.model';
 import Macrocategory from '@models/macrocategory.model';
+import { getSlug } from '@utils/utils';
 import MegaMenu2 from './mega-menu/MegaMenu2';
 import CategoryMenuItem from './CategoryMenuItem';
 import { StyledCategoryDropdown } from './styles';
@@ -22,7 +23,7 @@ const CategoryDropdown: FC<CategoryDropdownProps> = ({ open, dataList, position 
       {dataList.map((item: Macrocategory | Category) => (
         <CategoryMenuItem
           key={item.name}
-          href="#"
+          href={`/subcategory/${item.id}-${getSlug(item.name)}`}
           title={item.name}
           caret={getIterableItem(item).length > 0}
         >

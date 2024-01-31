@@ -9,6 +9,7 @@ import FlexBox from '@component/FlexBox';
 import Container from '@component/Container';
 import Typography from '@component/Typography';
 import Branding from '@models/branding.model';
+import { colors } from '@utils/themeColors';
 
 // styled component
 const StyledGrid = styled(Grid)`
@@ -51,7 +52,7 @@ type Footer1Props = {
 
 const Footer1: FC<Footer1Props> = ({ brandingResource }) => (
   <footer>
-    <Box bg="#0F3460">
+    <Box bg="secondary.main">
       <Container p="1rem" color="white">
         <Box py="1rem" overflow="hidden">
           <StyledGrid container spacing={6}>
@@ -79,19 +80,19 @@ const Footer1: FC<Footer1Props> = ({ brandingResource }) => (
               <Typography mb="1.25rem" lineHeight="1" fontSize="25px" fontWeight="600">
                 Contactanos
               </Typography>
-              <Typography py="0.3rem" color="gray.500">
+              <Typography py="0.3rem" color="gray.white">
                 Dirección: {brandingResource.address}
               </Typography>
-              <Typography py="0.3rem" color="gray.500">
+              <Typography py="0.3rem" color="gray.white">
                 Email:{' '}
                 <a
-                  style={{ color: '#AEB4BE', textDecoration: 'underline' }}
+                  style={{ color: colors.gray.white, textDecoration: 'underline' }}
                   href={`mailto:${brandingResource.email}`}
                 >
                   {brandingResource.email}
                 </a>
               </Typography>
-              <Typography py="0.3rem" mb="1rem" color="gray.500">
+              <Typography py="0.3rem" mb="1rem" color="gray.white">
                 Teléfono: {brandingResource.phone}
               </Typography>
             </Grid>

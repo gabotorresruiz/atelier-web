@@ -6,9 +6,9 @@ import Container from '@component/Container';
 import Navbar from '@component/navbar/Navbar';
 import AppLayout from '@component/layout/AppLayout';
 import SideNavbar from '@component/sidenav/SideNavbar';
-import Section1 from '@sections/furniture-shop/Section1';
-import Section2 from '@sections/furniture-shop/Section2';
-import Section3 from '@sections/furniture-shop/Section3';
+import Section1 from '@sections/home/Section1';
+import Section2 from '@sections/home/Section2';
+import Section3 from '@sections/home/Section3';
 import { deviceSize, layoutConstant } from '@utils/constants';
 import {
   branding,

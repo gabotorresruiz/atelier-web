@@ -1,10 +1,11 @@
 import { FC } from 'react';
-import FlexBox from '@component/FlexBox';
+// import FlexBox from '@component/FlexBox';
 import Grid from '@component/grid/Grid';
-import Pagination from '@component/pagination';
+// import Pagination from '@component/pagination';
 import { ProductCard1 } from '@component/product-cards';
-import { SemiSpan } from '@component/Typography';
+// import { SemiSpan } from '@component/Typography';
 import Product from '@models/product.model';
+import { getSlug } from '@utils/utils';
 
 // ==========================================================
 type Props = { products: Product[] };
@@ -17,22 +18,19 @@ const ProductCard1List: FC<Props> = ({ products }) => (
         <Grid item lg={4} sm={6} xs={12} key={item.id}>
           <ProductCard1
             id={item.id}
-            slug={item.slug}
-            price={item.price}
-            title={item.title}
-            off={item.discount}
-            images={item.images}
-            imgUrl={item.thumbnail}
-            rating={item.rating || 4}
+            slug={getSlug(item.name)}
+            title={item.name}
+            imgUrl={item.imageUrl}
           />
         </Grid>
       ))}
     </Grid>
-
-    <FlexBox flexWrap="wrap" justifyContent="space-between" alignItems="center" mt="32px">
-      <SemiSpan>Showing 1-9 of 1.3k Products</SemiSpan>
-      <Pagination pageCount={products.length} />
-    </FlexBox>
+    {/* <FlexBox flexWrap="wrap" justifyContent="space-between" alignItems="center" mt="32px">
+      <SemiSpan>
+        Mostrando {products.length > 9 ? '9' : products.length} de {products.length} Productos
+      </SemiSpan>
+      <Pagination pageCount={Math.ceil(products.length / 9)} />
+    </FlexBox> */}
   </div>
 );
 

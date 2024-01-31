@@ -1,12 +1,12 @@
 import Link from 'next/link';
 import { FC } from 'react';
-import { kebabCase } from 'lodash';
 import styled from 'styled-components';
 import Box from '@component/Box';
 import Grid from '@component/grid/Grid';
 import { H1, H3 } from 'components/Typography';
 import { theme } from '@utils/theme';
 import Trend from '@models/trend.model';
+import { getSlug } from '@utils/utils';
 
 // styled components
 const ContentBox = styled(Box)<{ imgUrl: string }>(({ imgUrl }) => ({
@@ -41,33 +41,29 @@ type Section2Props = {
   title: string;
 };
 
-const Section2: FC<Section2Props> = ({ dataList, title }) => {
-  const getSlugTitle = (name: string): string => kebabCase(name);
-
-  return (
-    <>
-      <Box mb={4}>
-        <H1 mb="4px">{title}</H1>
-      </Box>
-      <Grid container spacing={6}>
-        {dataList.map((item) => (
-          <Grid key={item.id} item xs={12} md={6}>
-            <Link href={`/sales/${item.id}-${getSlugTitle(item.name)}`}>
-              <a>
-                <RightContentBox imgUrl={item.imageUrl} mb={2}>
-                  <StyledTitleBox textAlign="center" pt={3}>
-                    <H3 fontSize={23} color="primary.main">
-                      {item.name}
-                    </H3>
-                  </StyledTitleBox>
-                </RightContentBox>
-              </a>
-            </Link>
-          </Grid>
-        ))}
-      </Grid>
-    </>
-  );
-};
+const Section2: FC<Section2Props> = ({ dataList, title }) => (
+  <>
+    <Box mb={4}>
+      <H1 mb="4px">{title}</H1>
+    </Box>
+    <Grid container spacing={6}>
+      {dataList.map((item) => (
+        <Grid key={item.id} item xs={12} md={6}>
+          <Link href={`/sales/${item.id}-${getSlug(item.name)}`}>
+            <a>
+              <RightContentBox imgUrl={item.imageUrl} mb={2}>
+                <StyledTitleBox textAlign="center" pt={3}>
+                  <H3 fontSize={23} color="primary.main">
+                    {item.name}
+                  </H3>
+                </StyledTitleBox>
+              </RightContentBox>
+            </a>
+          </Link>
+        </Grid>
+      ))}
+    </Grid>
+  </>
+);
 
 export default Section2;

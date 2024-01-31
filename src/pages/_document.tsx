@@ -25,7 +25,7 @@ export default class extends Document {
 
   render() {
     return (
-      <Html lang="en">
+      <Html lang="es">
         <Head>
           <link
             href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;900&display=swap"
