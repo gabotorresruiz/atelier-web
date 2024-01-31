@@ -66,10 +66,10 @@ const Section1: FC<Props> = ({ mainCarouselData }) => {
         >
           <StyledGrid container>
             <GridItemOne item lg={6} md={8} xs={12}>
-              <H1 color="#de6f0f" fontSize={60}>
+              <H1 color="primary.main" fontSize={60}>
                 {mainCarouselData.title}
               </H1>
-              <H2 color="#881537">{mainCarouselData.subtitle}</H2>
+              <H2 color="secondary.main">{mainCarouselData.subtitle}</H2>
             </GridItemOne>
           </StyledGrid>
         </Container>

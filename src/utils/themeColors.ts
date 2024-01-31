@@ -11,23 +11,9 @@ const gray = {
   white: '#FFFFFF'
 };
 
-const textColor = {
-  hint: gray[600],
-  muted: gray[600],
-  primary: gray[900],
-  disabled: gray[400],
-  secondary: gray[800]
-};
-
-const bodyColor = {
-  default: gray[100],
-  paper: gray.white,
-  text: textColor.primary
-};
-
 const primaryColor = {
-  light: '#FFE1E6',
-  main: '#E94560',
+  light: '#FFF5E9',
+  main: '#DE6F0F',
   dark: '#4F4CB6',
   text: '#ffffff',
   100: '#FCE9EC',
@@ -41,9 +27,24 @@ const primaryColor = {
   900: '#D91F33'
 };
 
+const textColor = {
+  hint: gray[600],
+  muted: gray[600],
+  primary: gray[900],
+  disabled: gray[400],
+  secondary: gray[800],
+  colored: primaryColor.main
+};
+
+const bodyColor = {
+  default: gray[100],
+  paper: gray.white,
+  text: textColor.primary
+};
+
 const secondaryColor = {
   light: 'rgba(15, 52, 96, 0.2)',
-  main: 'rgba(15, 52, 96, 1)',
+  main: '#881537',
   dark: '#303A47',
   text: '#ffffff',
   900: '#041533',
@@ -55,8 +56,8 @@ const dark = { main: '#222' };
 const warningColor = { main: '#FFCD4E', text: textColor.primary };
 
 const errorColor = {
-  main: '#E94560',
-  light: '#FFE1E6',
+  main: '#DE6F0F',
+  light: '#FFF5E9',
   text: textColor.primary
 };
 

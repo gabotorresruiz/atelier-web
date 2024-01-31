@@ -1,5 +1,6 @@
 import { ceil } from 'lodash';
 import { differenceInMinutes } from 'date-fns';
+import { kebabCase } from 'lodash';
 import { themeGet } from '@styled-system/theme-get';
 
 export const getTheme = (query: string, fallback?: string) => themeGet(query, fallback);
@@ -90,4 +91,8 @@ export function currency(price: number, fraction = 2) {
   });
 
   return formatCurrency.format(price);
+}
+
+export function getSlug(name: string): string {
+  return kebabCase(name);
 }

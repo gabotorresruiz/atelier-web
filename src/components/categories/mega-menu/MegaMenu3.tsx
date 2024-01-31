@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import Card from '@component/Card';
+import { getSlug } from '@utils/utils';
 import CategoryMenuItem from '../CategoryMenuItem';
 import { StyledMegaMenu1 } from './styles';
 import { MegaMenu3Props } from './type';
@@ -10,7 +11,7 @@ const MegaMenu3: FC<MegaMenu3Props> = ({ data }) => (
       {data.map((item) => (
         <CategoryMenuItem
           key={item.subcategory.name}
-          href="#"
+          href={`/subcategory/${item.subcategory.id}-${getSlug(item.subcategory.name)}`}
           title={item.subcategory.name}
           caret={false}
         />

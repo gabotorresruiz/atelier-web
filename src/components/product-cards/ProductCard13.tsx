@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import { FC } from 'react';
-import { kebabCase } from 'lodash';
 import styled from 'styled-components';
 import Box from '@component/Box';
 import FlexBox from '@component/FlexBox';
 import LazyImage from '@component/LazyImage';
 import { H3 } from '@component/Typography';
+import { getSlug } from '@utils/utils';
 
 // styled components
 const StyledCard = styled(Box)(({ theme }) => ({
@@ -44,7 +44,7 @@ interface Props {
 // =====================================================================
 
 const ProductCard13: FC<Props> = ({ id, title, imgUrl }) => {
-  const slugTitle = kebabCase(title);
+  const slugTitle = getSlug(title);
 
   return (
     <StyledCard>
@@ -73,7 +73,8 @@ const ProductCard13: FC<Props> = ({ id, title, imgUrl }) => {
                   fontSize="24px"
                   fontWeight="700"
                   className="title"
-                  color="text.secondary"
+                  color="text.primary"
+                  textAlign="center"
                 >
                   {title}
                 </H3>

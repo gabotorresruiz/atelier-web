@@ -6,7 +6,7 @@ const getSubcategories = async (): Promise<Subcategory[]> => {
   return response.data;
 };
 
-const getSubcategory = async (id: number): Promise<Subcategory> => {
+const getSubcategory = async (id: string): Promise<Subcategory> => {
   const response = await axiosInterceptorInstance.get(`api/sub-categories/${id}`);
   return response.data;
 };

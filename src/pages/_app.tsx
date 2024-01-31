@@ -25,7 +25,7 @@ interface MyAppProps extends AppProps {
 // ============================================================
 
 const App = ({ Component, pageProps }: MyAppProps) => {
-  let Layout = Component.layout || Fragment;
+  const Layout = Component.layout || Fragment;
 
   return (
     <>

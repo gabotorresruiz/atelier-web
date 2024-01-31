@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { useRouter } from 'next/router';
 import Box from '@component/Box';
 import Image from '@component/Image';
@@ -15,31 +15,26 @@ import { currency } from '@utils/utils';
 
 // ========================================
 type ProductIntroProps = {
-  price: number;
   title: string;
-  images: string[];
+  image: string;
   id: string | number;
 };
 // ========================================
 
-const ProductIntro: FC<ProductIntroProps> = ({ images, title, price, id }) => {
+const ProductIntro: FC<ProductIntroProps> = ({ image, title, id }) => {
   const router = useRouter();
   const { state, dispatch } = useAppContext();
-  const [selectedImage, setSelectedImage] = useState(0);
 
   const routerId = router.query.id as string;
   const cartItem = state.cart.find((item) => item.id === id || item.id === routerId);
-
-  const handleImageClick = (ind: number) => () => setSelectedImage(ind);
 
   const handleCartAmountChange = (amount: number) => () => {
     dispatch({
       type: 'CHANGE_CART_AMOUNT',
       payload: {
-        price,
         qty: amount,
         name: title,
-        imgUrl: images[0],
+        imgUrl: image,
         id: id || routerId
       }
     });
@@ -51,35 +46,25 @@ const ProductIntro: FC<ProductIntroProps> = ({ images, title, price, id }) => {
         <Grid item md={6} xs={12} alignItems="center">
           <Box>
             <FlexBox justifyContent="center" mb="50px">
-              <Image
-                width={300}
-                height={300}
-                src={images[selectedImage]}
-                style={{ objectFit: 'contain' }}
-              />
+              <Image width={300} height={300} src={image} style={{ objectFit: 'contain' }} />
             </FlexBox>
 
             <FlexBox overflow="auto">
-              {images.map((url, ind) => (
-                <Box
-                  key={ind}
-                  size={70}
-                  bg="white"
-                  minWidth={70}
-                  display="flex"
-                  cursor="pointer"
-                  border="1px solid"
-                  borderRadius="10px"
-                  alignItems="center"
-                  justifyContent="center"
-                  ml={ind === 0 && 'auto'}
-                  mr={ind === images.length - 1 ? 'auto' : '10px'}
-                  borderColor={selectedImage === ind ? 'primary.main' : 'gray.400'}
-                  onClick={handleImageClick(ind)}
-                >
-                  <Avatar src={url} borderRadius="10px" size={40} />
-                </Box>
-              ))}
+              <Box
+                size={70}
+                bg="white"
+                minWidth={70}
+                display="flex"
+                cursor="pointer"
+                border="1px solid"
+                borderRadius="10px"
+                alignItems="center"
+                justifyContent="center"
+                mr="auto"
+                borderColor="primary.main"
+              >
+                <Avatar src={image} borderRadius="10px" size={40} />
+              </Box>
             </FlexBox>
           </Box>
         </Grid>
@@ -99,15 +84,6 @@ const ProductIntro: FC<ProductIntroProps> = ({ images, title, price, id }) => {
             </Box>
             <H6>(50)</H6>
           </FlexBox>
-
-          <Box mb="24px">
-            <H2 color="primary.main" mb="4px" lineHeight="1">
-              {currency(price)}
-            </H2>
-
-            <SemiSpan color="inherit">Stock Available</SemiSpan>
-          </Box>
-
           {!cartItem?.qty ? (
             <Button
               mb="36px"
