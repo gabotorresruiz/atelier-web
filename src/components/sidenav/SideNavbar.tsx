@@ -94,7 +94,7 @@ const SideNavbar: FC<SideNavbarProps> = ({
     childList.map((item) => (
       <NavLink
         key={item.subcategory.id}
-        href={`subcategory/${item.subcategory.id}-${getSlug(item.subcategory.name)}`}
+        href={`/subcategory/${item.subcategory.id}-${getSlug(item.subcategory.name)}`}
         color="grey.700"
       >
         <StyledList>

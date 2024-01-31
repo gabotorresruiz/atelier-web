@@ -124,10 +124,10 @@ const ProductCard1: FC<ProductCard1Props> = ({ id, slug, title, imgUrl, ...props
           <Link href={`/product/${id}-${slug}`}>
             <a>
               <H3
-                mb="10px"
+                mb="0"
                 title={title}
-                fontSize="14px"
-                textAlign="left"
+                fontSize="16px"
+                textAlign="center"
                 fontWeight="600"
                 className="title"
                 color="text.secondary"

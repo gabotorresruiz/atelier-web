@@ -49,7 +49,7 @@ const Section2: FC<Section2Props> = ({ dataList, title }) => (
     <Grid container spacing={6}>
       {dataList.map((item) => (
         <Grid key={item.id} item xs={12} md={6}>
-          <Link href={`/sales/${item.id}-${getSlug(item.name)}`}>
+          <Link href={`/trends/${item.id}-${getSlug(item.name)}`}>
             <a>
               <RightContentBox imgUrl={item.imageUrl} mb={2}>
                 <StyledTitleBox textAlign="center" pt={3}>
