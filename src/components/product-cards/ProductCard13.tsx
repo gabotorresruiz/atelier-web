@@ -3,7 +3,7 @@ import { FC } from 'react';
 import styled from 'styled-components';
 import Box from '@component/Box';
 import FlexBox from '@component/FlexBox';
-import LazyImage from '@component/LazyImage';
+import Image from '@component/Image';
 import { H3 } from '@component/Typography';
 import { getSlug } from '@utils/utils';
 
@@ -51,13 +51,12 @@ const ProductCard13: FC<Props> = ({ id, title, imgUrl }) => {
       <Link href={`/product/${id}-${slugTitle}`}>
         <a>
           <ImgBox id="imgBox">
-            <LazyImage
-              width={100}
-              height={100}
+            <Image
+              width="100%"
+              height="100%"
               src={imgUrl}
               id="productImg"
-              layout="responsive"
-              objectFit="contain"
+              style={{ objectFit: 'contain' }}
             />
           </ImgBox>
         </a>

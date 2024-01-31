@@ -87,7 +87,7 @@ const Home = ({
       {/* HERO CAROUSEL AREA */}
       <Section1 mainCarouselData={brandingResource} />
 
-      <Container>
+      <Container style={{ minHeight: '115vh' }}>
         <StyledContainer>
           {/* SIDBAR NAVIGATION AREA */}
           <Box className="sidenav">
@@ -102,7 +102,9 @@ const Home = ({
             <Section2 dataList={trendList} title="Tendencias" />
           </div>
         </StyledContainer>
-        <Section3 products={productList} title="Agregados recientemente" />
+        {productList.length ? (
+          <Section3 products={productList} title="Agregados recientemente" />
+        ) : null}
       </Container>
     </>
   );
