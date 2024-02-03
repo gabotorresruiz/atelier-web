@@ -1,50 +1,40 @@
-import { useState } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
-import Box from '@component/Box';
-import FlexBox from '@component/FlexBox';
-import { H5 } from '@component/Typography';
+import { filter, sample } from 'lodash';
 import NavbarLayout from '@component/layout/NavbarLayout';
 import ProductIntro from '@component/products/ProductIntro';
-import ProductReview from '@component/products/ProductReview';
-import AvailableShops from '@component/products/AvailableShops';
 import RelatedProducts from '@component/products/RelatedProducts';
-import FrequentlyBought from '@component/products/FrequentlyBought';
-import ProductDescription from '@component/products/ProductDescription';
-import api from '@utils/__api__/products';
-import Shop from '@models/shop.model';
 import Product from '@models/product.model';
+import { branding, categories, macrocategories, products } from '@utils/page_resources/product';
+// import Box from '@component/Box';
+// import FlexBox from '@component/FlexBox';
+// import { H5 } from '@component/Typography';
+// import ProductReview from '@component/products/ProductReview';
+// import ProductDescription from '@component/products/ProductDescription';
 
 // ===============================================================
 type Props = {
   product: Product;
-  shops: Shop[];
   relatedProducts: Product[];
-  frequentlyBought: Product[];
 };
 // ===============================================================
 
-const ProductDetails = ({ product, shops, relatedProducts, frequentlyBought }: Props) => {
+const ProductDetails = ({ product, relatedProducts }: Props) => {
   const router = useRouter();
-  const [selectedOption, setSelectedOption] = useState('description');
-
-  const handleOptionClick = (opt) => () => setSelectedOption(opt);
 
   // Show a loading state when the fallback is rendered
-  if (router.isFallback) {
-    return <h1>Loading...</h1>;
-  }
+  if (router.isFallback) return <h1>Loading...</h1>;
 
   return (
     <>
       <ProductIntro
         id={product.id}
-        price={product.price}
-        title={product.title}
-        images={product.images}
+        product={product}
+        // price={product.price}
+        // title={product.name}
+        // image={product.imageUrl}
       />
-
-      <FlexBox borderBottom="1px solid" borderColor="gray.400" mt="80px" mb="26px">
+      {/* <FlexBox borderBottom="1px solid" borderColor="gray.400" mt="80px" mb="26px">
         <H5
           mr="25px"
           p="4px 10px"
@@ -67,44 +57,44 @@ const ProductDetails = ({ product, shops, relatedProducts, frequentlyBought }: P
         >
           Review (3)
         </H5>
-      </FlexBox>
-
+      </FlexBox> */}
       {/* DESCRIPTION AND REVIEW TAB DETAILS */}
-      <Box mb="50px">
+      {/* <Box mb="50px">
         {selectedOption === 'description' && <ProductDescription />}
         {selectedOption === 'review' && <ProductReview />}
-      </Box>
-
-      {/* FREQUENTLY BOUGHT TOGETHER PRODUCTS */}
+      </Box> */}
+      {/* FREQUENTLY BOUGHT TOGETHER PRODUCTS
       {frequentlyBought && <FrequentlyBought products={frequentlyBought} />}
 
-      {/* AVAILABLE SHOPS */}
-      {shops && <AvailableShops shops={shops} />}
+      AVAILABLE SHOPS
+      {shops && <AvailableShops shops={shops} />} */}
 
       {/* RELATED PRODUCTS */}
-      {relatedProducts && <RelatedProducts products={relatedProducts} />}
+      {relatedProducts.length ? <RelatedProducts products={relatedProducts} /> : null}
     </>
   );
 };
 
 ProductDetails.layout = NavbarLayout;
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = await api.getSlugs();
-
-  return {
-    paths, // indicates that no page needs be created at build time
-    fallback: 'blocking' // indicates the type of fallback
-  };
-};
+export const getStaticPaths: GetStaticPaths = async () => ({
+  paths: [],
+  fallback: 'blocking'
+});
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const shops = await api.getAvailableShop();
-  const relatedProducts = await api.getRelatedProducts();
-  const frequentlyBought = await api.getFrequentlyBought();
-  const product = await api.getProduct(params.slug as string);
+  const productId = (params.slug as string).split('-')[0];
 
-  return { props: { frequentlyBought, relatedProducts, product, shops } };
+  const brandingResource = await branding.getBranding();
+  const categoryList = await categories.getCategories();
+  const macrocategoryList = await macrocategories.getMacrocategories();
+  const product = await products.getProduct(productId);
+  const relatedProducts = filter(
+    (await products.getRelatedProducts(sample(product.subcategories).id)).products,
+    (prod) => prod.id.toString() !== productId
+  );
+
+  return { props: { brandingResource, categoryList, macrocategoryList, product, relatedProducts } };
 };
 
 export default ProductDetails;

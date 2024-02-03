@@ -44,7 +44,7 @@ const Header: FC<HeaderProps> = ({ isFixed, className, brandingResource, dataLis
   const CART_HANDLE = (
     <Box ml="20px" position="relative">
       <IconButton bg="gray.200" p="12px">
-        <Icon size="20px">bag</Icon>
+        <Icon size="20px">shopping-cart</Icon>
       </IconButton>
 
       {!!state.cart.length && (

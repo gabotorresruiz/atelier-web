@@ -100,8 +100,8 @@ const Button = styled.button<
         },
         contained: {
           border: 'none',
-          color: `${color}.text`,
-          bg: `${color}.main`,
+          color: 'white',
+          bg: 'primary.main',
           '&:focus': {
             boxShadow: `0px 1px 4px 0px ${theme.colors[btnColor]?.light}`
           },
