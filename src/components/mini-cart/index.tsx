@@ -30,9 +30,9 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav }) => {
     <StyledMiniCart>
       <div className="cart-list">
         <FlexBox alignItems="center" m="0px 20px" height="74px">
-          <Icon size="1.75rem">bag</Icon>
+          <Icon size="1.75rem">shopping-cart</Icon>
           <Typography fontWeight={600} fontSize="16px" ml="0.5rem">
-            {state.cart.length} item
+            {state.cart.length} {state.cart.length === 1 ? 'producto' : 'productos'}
           </Typography>
         </FlexBox>
 
@@ -45,7 +45,7 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav }) => {
             justifyContent="center"
             height="calc(100% - 80px)"
           >
-            <NextImage src="/assets/images/logos/shopping-bag.svg" width="90px" height="100%" />
+            <NextImage src="/assets/images/logos/shopping-cart.svg" width="100%" height="100%" />
             <Paragraph mt="1rem" color="text.muted" textAlign="center" maxWidth="200px">
               Tu carrito de compras está vacío
             </Paragraph>

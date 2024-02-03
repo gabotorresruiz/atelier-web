@@ -26,7 +26,7 @@ const AppLayout: FC<Props> = ({
   macrocategoryList = [],
   navbar,
   children,
-  title = 'React Next.js Ecommerce Template'
+  title = 'Creative ColorLabs - Atelier'
 }) => (
   <StyledAppLayout>
     <Head>

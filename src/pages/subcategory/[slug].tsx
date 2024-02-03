@@ -109,7 +109,7 @@ SubcategoryResult.layout = NavbarLayout;
 export async function getStaticPaths() {
   return {
     paths: [],
-    fallback: true
+    fallback: 'blocking'
   };
 }
 
@@ -117,7 +117,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const brandingResource = await branding.getBranding();
   const macrocategoryList = await macrocategories.getMacrocategories();
   const categoryList = await categories.getCategories();
-  const subcategory = await subcategories.getSubcategory((params.slug as string).charAt(0));
+  const subcategory = await subcategories.getSubcategory((params.slug as string).split('-')[0]);
 
   return { props: { brandingResource, categoryList, macrocategoryList, subcategory } };
 };

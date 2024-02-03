@@ -23,7 +23,6 @@ const CategoryDropdown: FC<CategoryDropdownProps> = ({ open, dataList, position 
       {dataList.map((item: Macrocategory | Category) => (
         <CategoryMenuItem
           key={item.name}
-          href={`/subcategory/${item.id}-${getSlug(item.name)}`}
           title={item.name}
           caret={getIterableItem(item).length > 0}
         >

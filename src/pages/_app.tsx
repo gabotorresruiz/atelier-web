@@ -35,7 +35,7 @@ const App = ({ Component, pageProps }: MyAppProps) => {
         <meta property="og:url" content="https://bonik-react.vercel.app" />
         {/* thumbnail And title for social media */}
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="React Next JS Ecommerce Template" />
+        <meta property="og:title" content="Creative ColorLabs - Atelier" />
         <meta
           property="og:description"
           content="Minimal, clean and Fast Next js ecommerce template. Build Super store, Grocery delivery app, Multivendor store and niche market"

@@ -5,7 +5,7 @@ import { StyledCategoryMenuItem } from './styles';
 
 // ===============================================================
 type CategoryMenuItemProps = {
-  href: string;
+  href?: string;
   icon?: string;
   title: string;
   caret?: boolean;
@@ -21,16 +21,23 @@ const CategoryMenuItem: FC<CategoryMenuItemProps> = ({
   children = null
 }) => (
   <StyledCategoryMenuItem>
-    <Link href={href}>
-      <a>
-        <div className="category-dropdown-link">
-          {icon && <Icon variant="small">{icon}</Icon>}
-          <span className="title">{title}</span>
-          {caret && <Icon variant="small">chevron-right</Icon>}
-        </div>
-      </a>
-    </Link>
-
+    {href ? (
+      <Link href={href}>
+        <a className="category-dropdown-link">
+          <div>
+            {icon && <Icon variant="small">{icon}</Icon>}
+            <span className="title">{title}</span>
+            {caret && <Icon variant="small">chevron-right</Icon>}
+          </div>
+        </a>
+      </Link>
+    ) : (
+      <div className="category-dropdown">
+        {icon && <Icon variant="small">{icon}</Icon>}
+        <span className="title">{title}</span>
+        {caret && <Icon variant="small">chevron-right</Icon>}
+      </div>
+    )}
     {children}
   </StyledCategoryMenuItem>
 );

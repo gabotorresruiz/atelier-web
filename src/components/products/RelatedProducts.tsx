@@ -4,14 +4,15 @@ import Grid from '@component/grid/Grid';
 import { H3 } from '@component/Typography';
 import { ProductCard1 } from '@component/product-cards';
 import Product from '@models/product.model';
+import { getSlug } from '@utils/utils';
 
 // ============================================================
 type Props = { products: Product[] };
 // ============================================================
 
 const RelatedProducts: FC<Props> = ({ products }) => (
-  <Box mb="3.75rem">
-    <H3 mb="1.5rem">Realted Products</H3>
+  <Box mt="1rem" mb="3.75rem">
+    <H3 mb="1.5rem">Productos Relacionados</H3>
 
     <Grid container spacing={8}>
       {products.map((item) => (
@@ -19,13 +20,9 @@ const RelatedProducts: FC<Props> = ({ products }) => (
           <ProductCard1
             hoverEffect
             id={item.id}
-            slug={item.slug}
-            price={item.price}
-            title={item.title}
-            off={item.discount}
-            images={item.images}
-            imgUrl={item.thumbnail}
-            rating={item.rating || 4}
+            slug={getSlug(item.name)}
+            title={item.name}
+            imgUrl={item.imageUrl}
           />
         </Grid>
       ))}

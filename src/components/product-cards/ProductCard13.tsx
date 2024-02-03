@@ -64,7 +64,7 @@ const ProductCard13: FC<Props> = ({ id, title, imgUrl }) => {
       <ContentWrapper>
         <FlexBox>
           <Box flex="1 1 0" minWidth="0px" mr={1}>
-            <Link href={`/product/${slugTitle}`}>
+            <Link href={`/product/${id}-${slugTitle}`}>
               <a>
                 <H3
                   mb={1}

@@ -36,10 +36,14 @@ export const StyledCategoryDropdown = styled.div<CategoryDropdownProps>`
 `;
 
 export const StyledCategoryMenuItem = styled.div`
+  .category-dropdown {
+    cursor: default;
+  }
+
+  .category-dropdown,
   .category-dropdown-link {
     height: 40px;
     display: flex;
-    cursor: pointer;
     min-width: 278px;
     white-space: pre;
     padding: 0px 1rem;
@@ -53,6 +57,11 @@ export const StyledCategoryMenuItem = styled.div`
   }
 
   :hover {
+    & > .category-dropdown {
+      color: ${getTheme('colors.primary.main')};
+      background: ${getTheme('colors.primary.light')};
+    }
+
     & > .category-dropdown-link {
       color: ${getTheme('colors.primary.main')};
       background: ${getTheme('colors.primary.light')};

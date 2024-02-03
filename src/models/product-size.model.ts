@@ -4,8 +4,8 @@ interface ProductSize {
   id: number;
   productId: number;
   sizeId: number;
-  baseProce: number;
-  size: Size[];
+  basePrice: number;
+  size: Size;
 }
 
 export default ProductSize;
