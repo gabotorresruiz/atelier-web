@@ -82,7 +82,7 @@ const ProductIntro: FC<ProductIntroProps> = ({ id, product }) => {
             Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
             mollit anim id est laborum.
           </Paragraph>
-          <Grid container justifyContent="center" spacing={16}>
+          <Grid container justifyContent="center" spacing={10}>
             {productsSizes.length ? (
               <Grid item md={6} xs={12} alignItems="center" justifyContent="center">
                 <Box mb="20px">
@@ -121,6 +121,7 @@ const ProductIntro: FC<ProductIntroProps> = ({ id, product }) => {
                     Colores
                   </Typography>
                   <Button
+                    fullwidth
                     size="small"
                     btnColor="primary"
                     variant="outlined"
@@ -133,8 +134,8 @@ const ProductIntro: FC<ProductIntroProps> = ({ id, product }) => {
             ) : null}
           </Grid>
           {selectedSize ? (
-            <Grid container justifyContent="center" spacing={16}>
-              <Grid item md={6} xs={12} alignItems="center" justifyContent="center">
+            <Grid container justifyContent="center" spacing={10}>
+              <Grid item xs={6} alignItems="center" justifyContent="center">
                 <Box mb="24px">
                   <H2 color="primary.main" mb="4px" lineHeight="1">
                     {currency(selectedSize.value.basePrice * selectedQty)}
@@ -144,7 +145,7 @@ const ProductIntro: FC<ProductIntroProps> = ({ id, product }) => {
                   </Small>
                 </Box>
               </Grid>
-              <Grid item md={6} xs={12} alignItems="center" justifyContent="center">
+              <Grid item xs={6} alignItems="center" justifyContent="center">
                 <FlexBox alignItems="center">
                   <Button
                     disabled={selectedQty === 1}
@@ -177,6 +178,7 @@ const ProductIntro: FC<ProductIntroProps> = ({ id, product }) => {
           <Grid container justifyContent="space-between" spacing={16}>
             <Grid item md={6} xs={12} alignItems="center" justifyContent="center">
               <Button
+                fullwidth
                 disabled={!selectedSize}
                 mb="36px"
                 size="small"

@@ -14,6 +14,10 @@ import { colors } from '@utils/themeColors';
 // styled component
 const StyledGrid = styled(Grid)`
   justify-content: space-between;
+
+  @media screen and (max-width: 768px) {
+    padding-bottom: 50px;
+  }
 `;
 
 const StyledLeftGrid = styled(Grid)`
