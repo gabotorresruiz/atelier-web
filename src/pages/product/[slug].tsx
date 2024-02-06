@@ -5,7 +5,14 @@ import NavbarLayout from '@component/layout/NavbarLayout';
 import ProductIntro from '@component/products/ProductIntro';
 import RelatedProducts from '@component/products/RelatedProducts';
 import Product from '@models/product.model';
-import { branding, categories, macrocategories, products } from '@utils/page_resources/product';
+import Color from '@models/color.model';
+import {
+  branding,
+  categories,
+  colors,
+  macrocategories,
+  products
+} from '@utils/page_resources/product';
 // import Box from '@component/Box';
 // import FlexBox from '@component/FlexBox';
 // import { H5 } from '@component/Typography';
@@ -16,10 +23,11 @@ import { branding, categories, macrocategories, products } from '@utils/page_res
 type Props = {
   product: Product;
   relatedProducts: Product[];
+  tintometricSystem: Color[];
 };
 // ===============================================================
 
-const ProductDetails = ({ product, relatedProducts }: Props) => {
+const ProductDetails = ({ product, relatedProducts, tintometricSystem }: Props) => {
   const router = useRouter();
 
   // Show a loading state when the fallback is rendered
@@ -30,6 +38,7 @@ const ProductDetails = ({ product, relatedProducts }: Props) => {
       <ProductIntro
         id={product.id}
         product={product}
+        tintometricSystem={tintometricSystem}
         // price={product.price}
         // title={product.name}
         // image={product.imageUrl}
@@ -85,6 +94,7 @@ export const getStaticPaths: GetStaticPaths = async () => ({
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const productId = (params.slug as string).split('-')[0];
 
+  let tintometricSystem = [];
   const brandingResource = await branding.getBranding();
   const categoryList = await categories.getCategories();
   const macrocategoryList = await macrocategories.getMacrocategories();
@@ -94,7 +104,18 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     (prod) => prod.id.toString() !== productId
   );
 
-  return { props: { brandingResource, categoryList, macrocategoryList, product, relatedProducts } };
+  if (product.withTintometric) tintometricSystem = await colors.getColors();
+
+  return {
+    props: {
+      brandingResource,
+      categoryList,
+      macrocategoryList,
+      product,
+      relatedProducts,
+      tintometricSystem
+    }
+  };
 };
 
 export default ProductDetails;

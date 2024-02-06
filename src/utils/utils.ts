@@ -83,8 +83,8 @@ export function currency(price: number, fraction = 2) {
   // const { publicRuntimeConfig } = getConfig();
   // currency: publicRuntimeConfig.currency,
 
-  const formatCurrency = new Intl.NumberFormat(undefined, {
-    currency: 'USD',
+  const formatCurrency = new Intl.NumberFormat('es-UY', {
+    currency: 'UYU',
     style: 'currency',
     maximumFractionDigits: fraction,
     minimumFractionDigits: fraction
