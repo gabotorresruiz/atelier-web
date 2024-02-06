@@ -10,6 +10,7 @@ interface Product {
   sku: string;
   subcategories: Subcategory[];
   products_sizes: ProductSize[];
+  price: number;
 }
 
 export default Product;

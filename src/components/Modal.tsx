@@ -38,7 +38,10 @@ const Modal: FC<ModalProps> = ({ children, open, onClose }) => {
   };
 
   const handleBackdropClick = () => {
-    if (onClose) onClose();
+    if (onClose) {
+      document.body.style.overflow = 'auto';
+      onClose();
+    }
   };
 
   if (globalThis.document && open) {
@@ -47,6 +50,7 @@ const Modal: FC<ModalProps> = ({ children, open, onClose }) => {
     if (!modal) {
       modal = document.createElement('div');
       modal.setAttribute('id', 'modal-root');
+      document.body.style.overflow = 'hidden';
       document.body.appendChild(modal);
     }
 
