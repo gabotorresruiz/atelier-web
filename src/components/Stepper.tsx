@@ -1,4 +1,5 @@
 import { FC, Fragment, useEffect, useState } from 'react';
+import { useAppContext } from '@context/AppContext';
 import Box from './Box';
 import Chip from './Chip';
 import FlexBox from './FlexBox';
@@ -12,10 +13,22 @@ type StepperProps = {
 };
 
 const Stepper: FC<StepperProps> = ({ selectedStep, stepperList, onChange }) => {
+  const { state } = useAppContext();
+
   const [selected, setSelected] = useState(selectedStep - 1);
 
+  const getTotalPrice = () =>
+    state.cart.reduce((accumulator, item) => accumulator + item.price * item.qty, 0) || 0;
+
+  const getBuyerUser = () => {
+    const buyerUser = localStorage.getItem('buyingUser') || null;
+    if (buyerUser) return true;
+
+    return false;
+  };
+
   const handleStepClick = (step: Step, ind: number) => () => {
-    if (!step.disabled) {
+    if (!step.disabled && getTotalPrice() !== 0 && getBuyerUser()) {
       setSelected(ind);
       if (onChange) onChange(step, ind);
     }
@@ -33,7 +46,9 @@ const Stepper: FC<StepperProps> = ({ selectedStep, stepperList, onChange }) => {
             fontWeight="600"
             p="0.5rem 1.5rem"
             color={ind <= selected ? 'white' : 'primary.main'}
-            cursor={step.disabled ? 'not-allowed' : 'pointer'}
+            cursor={
+              step.disabled || getTotalPrice() === 0 || !getBuyerUser() ? 'not-allowed' : 'pointer'
+            }
             bg={ind <= selected ? 'primary.main' : 'primary.light'}
             onClick={handleStepClick(step, ind)}
           >

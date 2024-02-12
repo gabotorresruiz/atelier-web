@@ -69,7 +69,9 @@ const Section1: FC<Props> = ({ mainCarouselData }) => {
               <H1 color="primary.main" fontSize={60}>
                 {mainCarouselData.title}
               </H1>
-              <H2 color="secondary.main">{mainCarouselData.subtitle}</H2>
+              {mainCarouselData.subtitle && mainCarouselData.subtitle !== 'null' ? (
+                <H2 color="secondary.main">{mainCarouselData.subtitle}</H2>
+              ) : null}
             </GridItemOne>
           </StyledGrid>
         </Container>

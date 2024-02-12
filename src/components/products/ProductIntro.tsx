@@ -1,7 +1,6 @@
 import { FC, Fragment, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import ReactSelect from 'react-select';
-import { useRouter } from 'next/router';
 import { capitalize, groupBy } from 'lodash';
 import { Accordion, AccordionHeader } from '@component/accordion';
 import Card from '@component/Card';
@@ -43,19 +42,22 @@ const customStyles = {
 
 // ========================================
 type ProductIntroProps = {
-  id: string | number;
   product: Product;
   tintometricSystem: Color[];
 };
 // ========================================
 
-const ProductIntro: FC<ProductIntroProps> = ({ id, product, tintometricSystem }) => {
-  const router = useRouter();
-  const { state, dispatch } = useAppContext();
-  const { imageUrl, name, withTintometric, products_sizes: productsSizes } = product;
+const ProductIntro: FC<ProductIntroProps> = ({ product, tintometricSystem }) => {
+  const { dispatch } = useAppContext();
+  const { description, imageUrl, name, withTintometric, products_sizes: productsSizes } = product;
 
-  const tintometricSystemGrouped = groupBy(tintometricSystem, ({ familyColor }) => familyColor);
+  const tintometricSystemGrouped =
+    tintometricSystem.length > 0
+      ? groupBy(tintometricSystem, ({ familyColor }) => familyColor)
+      : null;
   const [open, setOpen] = useState(false);
+  const [selectedQty, setSelectedQty] = useState(1);
+  const [selectedColor, setSelectedColor] = useState(null);
   const [selectedSize, setSelectedSize] = useState(
     productsSizes
       ? {
@@ -64,20 +66,9 @@ const ProductIntro: FC<ProductIntroProps> = ({ id, product, tintometricSystem })
         }
       : null
   );
-  const [selectedQty, setSelectedQty] = useState(1);
   const [totalPrice, setTotalPrice] = useState(
     (productsSizes ? product.products_sizes[0].basePrice : product?.price || 0) * selectedQty
   );
-  const [selectedColor, setSelectedColor] = useState(null);
-
-  const routerId = router.query.id as string;
-  const cartItem = state.cart.find((item) => item.id === id || item.id === routerId) || {
-    id,
-    name,
-    qty: 0,
-    price: 0,
-    imgUrl: imageUrl
-  };
 
   const handleCartAmountChangeDown = () => {
     if (selectedQty === 1) setSelectedQty(1);
@@ -87,7 +78,7 @@ const ProductIntro: FC<ProductIntroProps> = ({ id, product, tintometricSystem })
       let newTotalPrice =
         (selectedSize ? selectedSize.value.basePrice : product?.price || 0) * newQty;
 
-      if (product.withTintometric && selectedColor !== null)
+      if (withTintometric && selectedColor !== null)
         newTotalPrice =
           (selectedSize.value.basePrice + selectedColor.price * selectedSize.value.size.quantity) *
           newQty;
@@ -104,7 +95,7 @@ const ProductIntro: FC<ProductIntroProps> = ({ id, product, tintometricSystem })
       let newTotalPrice =
         (selectedSize ? selectedSize.value.basePrice : product?.price || 0) * newQty;
 
-      if (product.withTintometric && selectedColor !== null)
+      if (withTintometric && selectedColor !== null)
         newTotalPrice =
           (selectedSize.value.basePrice + selectedColor.price * selectedSize.value.size.quantity) *
           newQty;
@@ -138,7 +129,7 @@ const ProductIntro: FC<ProductIntroProps> = ({ id, product, tintometricSystem })
 
     let newTotalPrice = size.value.basePrice * selectedQty;
 
-    if (product.withTintometric && selectedColor !== null)
+    if (withTintometric && selectedColor !== null)
       newTotalPrice =
         (size.value.basePrice + selectedColor.price * size.value.size.quantity) * selectedQty;
 
@@ -146,10 +137,23 @@ const ProductIntro: FC<ProductIntroProps> = ({ id, product, tintometricSystem })
   };
 
   const handleDisabledCartBtn = useMemo(() => {
-    if (product.withTintometric) return selectedSize === null || selectedColor === null;
+    if (withTintometric) return selectedSize === null || selectedColor === null;
 
     return selectedSize === null;
-  }, [product.withTintometric, selectedColor, selectedSize]);
+  }, [withTintometric, selectedColor, selectedSize]);
+
+  const handleAddToCart = () => {
+    dispatch({
+      type: 'CHANGE_CART_AMOUNT',
+      payload: {
+        product,
+        price: totalPrice / selectedQty,
+        qty: selectedQty,
+        color: selectedColor,
+        size: selectedSize.value
+      }
+    });
+  };
 
   return (
     <>
@@ -163,29 +167,38 @@ const ProductIntro: FC<ProductIntroProps> = ({ id, product, tintometricSystem })
           <H2 fontSize="32px" mb="1.5rem">
             Colores del Sistema Tintométrico
           </H2>
-          {Object.entries(tintometricSystemGrouped).map(([familyColor, familyColors], idx) => (
-            <Fragment key={familyColor}>
-              <Divider />
-              <Accordion expanded={idx === 0}>
-                <AccordionHeader px="0px" py="10px">
-                  <H3 fontSize="24px">{capitalize(familyColor)}</H3>
-                </AccordionHeader>
-                <Grid container justifyContent="center" spacing={8}>
-                  {familyColors.map((tintometricColor) => (
-                    <Grid key={tintometricColor.id} item lg={3} md={6} xs={12} alignItems="center">
-                      <Paragraph mb=".3rem" color="text.primary" fontWeight={600}>
-                        {tintometricColor.name} - {tintometricColor.code}
-                      </Paragraph>
-                      <StyledColorBox
-                        onClick={() => handleSelectedColor(tintometricColor)}
-                        style={{ backgroundColor: tintometricColor.hex }}
-                      />
+          {tintometricSystemGrouped
+            ? Object.entries(tintometricSystemGrouped).map(([familyColor, familyColors], idx) => (
+                <Fragment key={familyColor}>
+                  <Divider />
+                  <Accordion expanded={idx === 0}>
+                    <AccordionHeader px="0px" py="10px">
+                      <H3 fontSize="24px">{capitalize(familyColor)}</H3>
+                    </AccordionHeader>
+                    <Grid container justifyContent="center" spacing={8}>
+                      {familyColors.map((tintometricColor) => (
+                        <Grid
+                          key={tintometricColor.id}
+                          item
+                          lg={3}
+                          md={6}
+                          xs={12}
+                          alignItems="center"
+                        >
+                          <Paragraph mb=".3rem" color="text.primary" fontWeight={600}>
+                            {tintometricColor.name} - {tintometricColor.code}
+                          </Paragraph>
+                          <StyledColorBox
+                            onClick={() => handleSelectedColor(tintometricColor)}
+                            style={{ backgroundColor: tintometricColor.hex }}
+                          />
+                        </Grid>
+                      ))}
                     </Grid>
-                  ))}
-                </Grid>
-              </Accordion>
-            </Fragment>
-          ))}
+                  </Accordion>
+                </Fragment>
+              ))
+            : null}
         </Card>
       </Modal>
       <Box overflow="hidden">
@@ -199,19 +212,12 @@ const ProductIntro: FC<ProductIntroProps> = ({ id, product, tintometricSystem })
           </Grid>
           <Grid item md={6} xs={12} alignItems="center">
             <H1 mb="1rem">{name}</H1>
-            <Paragraph mb="2.5rem">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-              exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-              dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-              mollit anim id est laborum.
-            </Paragraph>
-            <Grid container justifyContent="center" spacing={10}>
-              {productsSizes.length ? (
+            <Paragraph mb="2rem">{description}</Paragraph>
+            {productsSizes.length > 0 && withTintometric ? (
+              <Grid container justifyContent="center" spacing={10}>
                 <Grid item md={6} xs={12} alignItems="center" justifyContent="center">
                   <Box mb="20px">
-                    <Typography fontSize="0.875rem" mb="6px">
+                    <Typography fontSize="0.875rem" fontWeight={600} mb="6px">
                       Tamaños
                     </Typography>
                     <ReactSelect
@@ -238,12 +244,12 @@ const ProductIntro: FC<ProductIntroProps> = ({ id, product, tintometricSystem })
                     />
                   </Box>
                 </Grid>
-              ) : null}
-              {withTintometric ? (
                 <Grid item md={6} xs={12} alignItems="center" justifyContent="center">
                   <Box mb="20px">
-                    <Typography fontSize="0.875rem" mb="6px">
-                      Colores
+                    <Typography fontSize="0.875rem" fontWeight={600} mb="6px">
+                      {selectedColor !== null
+                        ? `${selectedColor.name} - ${selectedColor.code}`
+                        : 'Colores'}
                     </Typography>
                     {selectedColor !== null ? (
                       <Button
@@ -252,15 +258,7 @@ const ProductIntro: FC<ProductIntroProps> = ({ id, product, tintometricSystem })
                         style={{ backgroundColor: selectedColor.hex }}
                         variant="outlined"
                         onClick={handleOpenModal}
-                      >
-                        <Typography
-                          style={{
-                            color: 'white'
-                          }}
-                        >
-                          {selectedColor.name} - {selectedColor.code}
-                        </Typography>
-                      </Button>
+                      />
                     ) : (
                       <Button
                         fullwidth
@@ -274,24 +272,89 @@ const ProductIntro: FC<ProductIntroProps> = ({ id, product, tintometricSystem })
                     )}
                   </Box>
                 </Grid>
-              ) : null}
-            </Grid>
+              </Grid>
+            ) : null}
+            {productsSizes.length > 0 && !withTintometric ? (
+              <Grid container justifyContent="center" spacing={10}>
+                <Grid item xs={12} alignItems="center" justifyContent="center">
+                  <Box mb="20px">
+                    <Typography fontSize="0.875rem" fontWeight={600} mb="6px">
+                      Tamaños
+                    </Typography>
+                    <ReactSelect
+                      value={selectedSize}
+                      isMulti={false}
+                      onChange={(size) => handleSelectedSize(size)}
+                      options={productsSizes.map((option) => ({
+                        label: `${option.size.quantity} L`,
+                        value: option
+                      }))}
+                      styles={customStyles}
+                      maxMenuHeight={400}
+                      placeholder="Selecciona un tamaño"
+                      noOptionsMessage={() => 'No hay tamaños disponibles'}
+                      theme={(theme) => ({
+                        ...theme,
+                        colors: {
+                          ...theme.colors,
+                          primary50: colors.gray[100],
+                          primary: colors.primary.main,
+                          neutral20: colors.text.disabled
+                        }
+                      })}
+                    />
+                  </Box>
+                </Grid>
+              </Grid>
+            ) : null}
+            {productsSizes.length === 0 && withTintometric ? (
+              <Grid container justifyContent="center" spacing={10}>
+                <Grid item xs={12} alignItems="center" justifyContent="center">
+                  <Box mb="20px">
+                    <Typography fontSize="0.875rem" fontWeight={600} mb="6px">
+                      {selectedColor !== null
+                        ? `${selectedColor.name} - ${selectedColor.code}`
+                        : 'Colores'}
+                    </Typography>
+                    {selectedColor !== null ? (
+                      <Button
+                        fullwidth
+                        size="small"
+                        style={{ backgroundColor: selectedColor.hex }}
+                        variant="outlined"
+                        onClick={handleOpenModal}
+                      />
+                    ) : (
+                      <Button
+                        fullwidth
+                        size="small"
+                        btnColor="primary"
+                        variant="outlined"
+                        onClick={handleOpenModal}
+                      >
+                        Seleccionar color
+                      </Button>
+                    )}
+                  </Box>
+                </Grid>
+              </Grid>
+            ) : null}
             {product?.price || selectedSize ? (
               <Grid container justifyContent="center" spacing={10}>
                 <Grid item xs={6} alignItems="center" justifyContent="center">
-                  {!product.withTintometric || (product.withTintometric && selectedColor) ? (
+                  {!withTintometric || (withTintometric && selectedColor) ? (
                     <Box mb="24px">
                       <H2 color="primary.main" mb="4px" lineHeight="1">
                         {currency(totalPrice)}
                       </H2>
                       <Small fontWeight={700} color="text.primary">
-                        {selectedQty} x {currency(totalPrice)}
+                        {currency(totalPrice)} x {selectedQty}
                       </Small>
                     </Box>
                   ) : null}
                 </Grid>
                 <Grid item xs={6} alignItems="center" justifyContent="center">
-                  {!product.withTintometric || (product.withTintometric && selectedColor) ? (
+                  {!withTintometric || (withTintometric && selectedColor) ? (
                     <FlexBox alignItems="center">
                       <Button
                         disabled={selectedQty === 1}
@@ -331,7 +394,7 @@ const ProductIntro: FC<ProductIntroProps> = ({ id, product, tintometricSystem })
                   size="small"
                   btnColor="primary"
                   variant="contained"
-                  // onClick={handleCartAmountChange(1)}
+                  onClick={handleAddToCart}
                 >
                   Añadir al Carrito
                 </Button>

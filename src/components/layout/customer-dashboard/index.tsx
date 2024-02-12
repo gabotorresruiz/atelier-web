@@ -1,28 +1,45 @@
 import { FC, ReactNode } from 'react';
-import Hidden from '@component/hidden';
+import styled from 'styled-components';
+import Branding from '@models/branding.model';
+import Category from '@models/category.model';
+import Macrocategory from '@models/macrocategory.model';
 import Grid from '@component/grid/Grid';
 import Container from '@component/Container';
 import Navbar from '@component/navbar/Navbar';
 import AppLayout from '../AppLayout';
-import DashboardNavigation from '../DashboardNavigation';
+
+const StyledContainer = styled(Container)`
+  min-height: calc(100vh - 409px);
+`;
 
 // ======================================================
-type Props = { children: ReactNode };
+type Props = {
+  brandingResource: Branding;
+  categoryList: Category[];
+  macrocategoryList: Macrocategory[];
+  children: ReactNode;
+};
 // ======================================================
 
-const CustomerDashboardLayout: FC<Props> = ({ children }) => (
-  <AppLayout navbar={<Navbar />}>
-    <Container my="2rem">
+const CustomerDashboardLayout: FC<Props> = ({
+  brandingResource,
+  categoryList = [],
+  macrocategoryList = [],
+  children
+}) => (
+  <AppLayout
+    brandingResource={brandingResource}
+    categoryList={categoryList}
+    macrocategoryList={macrocategoryList}
+    navbar={<Navbar dataList={macrocategoryList.length ? macrocategoryList : categoryList} />}
+  >
+    <StyledContainer my="2rem">
       <Grid container spacing={6}>
-        <Hidden as={Grid} item lg={3} xs={12} down={1024}>
-          <DashboardNavigation />
-        </Hidden>
-
-        <Grid item lg={9} xs={12}>
+        <Grid item xs={12}>
           {children}
         </Grid>
       </Grid>
-    </Container>
+    </StyledContainer>
   </AppLayout>
 );
 

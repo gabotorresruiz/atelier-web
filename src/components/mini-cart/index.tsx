@@ -1,4 +1,5 @@
 import { FC, Fragment } from 'react';
+import styled from 'styled-components';
 import Link from 'next/link';
 import NextImage from 'next/image';
 import Icon from '@component/icon/Icon';
@@ -8,18 +9,28 @@ import Avatar from '@component/avatar';
 import { Button } from '@component/buttons';
 import Typography, { H5, Paragraph, Tiny } from '@component/Typography';
 import { useAppContext } from '@context/AppContext';
-import { currency } from '@utils/utils';
+import { currency, getSlug } from '@utils/utils';
 import StyledMiniCart from './styles';
+
+const StyledColorBox = styled.div`
+  border-radius: 4px;
+  transition: box-shadow 0.3s;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 30px;
+`;
 
 type MiniCartProps = { toggleSidenav?: () => void };
 
 const MiniCart: FC<MiniCartProps> = ({ toggleSidenav }) => {
   const { state, dispatch } = useAppContext();
 
-  const handleCartAmountChange = (amount: number, product: any) => () => {
+  const handleCartAmountChange = (amount: number, item: any) => () => {
     dispatch({
       type: 'CHANGE_CART_AMOUNT',
-      payload: { ...product, qty: amount }
+      payload: { ...item, qty: amount }
     });
   };
 
@@ -52,8 +63,8 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav }) => {
           </FlexBox>
         )}
 
-        {state.cart.map((item) => (
-          <Fragment key={item.id}>
+        {state.cart.map((item, idx) => (
+          <Fragment key={`${item.product.id}-${idx}`}>
             <div className="cart-item">
               <FlexBox alignItems="center" flexDirection="column">
                 <Button
@@ -68,7 +79,7 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav }) => {
                   <Icon variant="small">plus</Icon>
                 </Button>
 
-                <Typography fontWeight={600} fontSize="15px" my="3px">
+                <Typography fontWeight={600} fontSize="15px" my="10px">
                   {item.qty}
                 </Typography>
 
@@ -86,29 +97,35 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav }) => {
                 </Button>
               </FlexBox>
 
-              <Link href={`/product/${item.slug}`}>
+              <Link href={`/product/${item.product.id}-${getSlug(item.product.name)}`}>
                 <a>
-                  <Avatar
-                    size={76}
-                    mx="1rem"
-                    alt={item.name}
-                    src={item.imgUrl || '/assets/images/products/iphone-x.png'}
-                  />
+                  <Avatar size={76} mx="1rem" alt={item.product.name} src={item.product.imageUrl} />
                 </a>
               </Link>
 
               <div className="product-details">
-                <Link href={`/product/${item.id}`}>
+                <Link href={`/product/${item.product.id}-${getSlug(item.product.name)}`}>
                   <a>
                     <H5 className="title" fontSize="14px">
-                      {item.name}
+                      {item.product.name}
                     </H5>
                   </a>
                 </Link>
 
                 <Tiny color="text.muted">
-                  {currency(item.price, 0)} x {item.qty}
+                  {currency(item.price)} x {item.qty}
                 </Tiny>
+
+                <FlexBox alignItems="center" justifyContent="space-between">
+                  {item.size !== null ? (
+                    <Typography fontWeight={600} fontSize="14px" color="text.primary" mt="4px">
+                      {item.size.size.quantity} L
+                    </Typography>
+                  ) : null}
+                  {item.color !== null ? (
+                    <StyledColorBox style={{ backgroundColor: item.color.hex }} />
+                  ) : null}
+                </FlexBox>
 
                 <Typography fontWeight={600} fontSize="14px" color="primary.main" mt="4px">
                   {currency(item.qty * item.price)}
@@ -138,13 +155,13 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav }) => {
               m="1rem 1rem 0.75rem"
               onClick={toggleSidenav}
             >
-              <Typography fontWeight={600}>Checkout Now ({currency(getTotalPrice())})</Typography>
+              <Typography fontWeight={600}>Comprar Ahora ({currency(getTotalPrice())})</Typography>
             </Button>
           </Link>
 
           <Link href="/cart">
             <Button color="primary" variant="outlined" m="0px 1rem 0.75rem" onClick={toggleSidenav}>
-              <Typography fontWeight={600}>View Cart</Typography>
+              <Typography fontWeight={600}>Ver Carrito</Typography>
             </Button>
           </Link>
         </>
