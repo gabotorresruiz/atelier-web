@@ -1,23 +1,40 @@
 import { FC, ReactNode, useEffect, useState } from 'react';
+import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import Box from '@component/Box';
 import Grid from '@component/grid/Grid';
 import Container from '@component/Container';
+import Branding from '@models/branding.model';
+import Category from '@models/category.model';
+import Macrocategory from '@models/macrocategory.model';
 import Stepper from '../Stepper';
 import AppLayout from './AppLayout';
 import Navbar from '../navbar/Navbar';
 
+const StyledContainer = styled(Container)`
+  min-height: calc(100vh - 404px);
+`;
+
 // ======================================================
-type Props = { children: ReactNode };
+type Props = {
+  brandingResource: Branding;
+  categoryList: Category[];
+  macrocategoryList: Macrocategory[];
+  children: ReactNode;
+};
 // ======================================================
 const stepperList = [
-  { title: 'Cart', disabled: false },
-  { title: 'Details', disabled: false },
-  { title: 'Payment', disabled: false },
-  { title: 'Review', disabled: true }
+  { title: 'Carrito', disabled: false },
+  { title: 'Detalles', disabled: false },
+  { title: 'Pago', disabled: false }
 ];
 
-const CheckoutNavLayout: FC<Props> = ({ children }) => {
+const CheckoutNavLayout: FC<Props> = ({
+  brandingResource,
+  categoryList = [],
+  macrocategoryList = [],
+  children
+}) => {
   const [selectedStep, setSelectedStep] = useState(0);
 
   const router = useRouter();
@@ -33,9 +50,6 @@ const CheckoutNavLayout: FC<Props> = ({ children }) => {
         break;
       case 2:
         router.push('/payment');
-        break;
-      case 3:
-        router.push('/orders');
         break;
       default:
         break;
@@ -59,8 +73,13 @@ const CheckoutNavLayout: FC<Props> = ({ children }) => {
   }, [pathname]);
 
   return (
-    <AppLayout navbar={<Navbar />}>
-      <Container my="2rem">
+    <AppLayout
+      brandingResource={brandingResource}
+      categoryList={categoryList}
+      macrocategoryList={macrocategoryList}
+      navbar={<Navbar dataList={macrocategoryList.length ? macrocategoryList : categoryList} />}
+    >
+      <StyledContainer my="2rem">
         <Box mb="14px">
           <Grid container spacing={6}>
             <Grid item lg={8} md={8} xs={12}>
@@ -73,7 +92,7 @@ const CheckoutNavLayout: FC<Props> = ({ children }) => {
           </Grid>
         </Box>
         {children}
-      </Container>
+      </StyledContainer>
     </AppLayout>
   );
 };

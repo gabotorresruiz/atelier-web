@@ -35,14 +35,7 @@ const ProductDetails = ({ product, relatedProducts, tintometricSystem }: Props) 
 
   return (
     <>
-      <ProductIntro
-        id={product.id}
-        product={product}
-        tintometricSystem={tintometricSystem}
-        // price={product.price}
-        // title={product.name}
-        // image={product.imageUrl}
-      />
+      <ProductIntro product={product} tintometricSystem={tintometricSystem} />
       {/* <FlexBox borderBottom="1px solid" borderColor="gray.400" mt="80px" mb="26px">
         <H5
           mr="25px"

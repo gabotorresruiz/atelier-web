@@ -18,7 +18,7 @@ interface Order {
   totalPrice: number;
   isDelivered: boolean;
   shippingAddress: string;
-  status: 'Pending' | 'Processing' | 'Delivered' | 'Cancelled';
+  status: 'PENDIENTE' | 'EN PROCESO' | 'ENVIADO' | 'CANCELADO';
 }
 
 export default Order;

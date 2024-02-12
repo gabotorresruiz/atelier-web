@@ -7,7 +7,7 @@ import Pagination from '@component/pagination';
 import OrderRow from '@component/orders/OrderRow';
 import DashboardPageHeader from '@component/layout/DashboardPageHeader';
 import CustomerDashboardLayout from '@component/layout/customer-dashboard';
-import api from '@utils/__api__/orders';
+import { branding, categories, macrocategories } from '@utils/page_resources/orders';
 import Order from '@models/order.model';
 
 // ====================================================
@@ -21,43 +21,47 @@ const OrderList = ({ orderList }: OrderListProps) => (
     <Hidden down={769}>
       <TableRow padding="0px 18px" boxShadow="none" bg="none">
         <H5 color="text.muted" my="0px" mx="6px" textAlign="left">
-          Order #
+          # Orden
         </H5>
-
         <H5 color="text.muted" my="0px" mx="6px" textAlign="left">
           Status
         </H5>
-
         <H5 color="text.muted" my="0px" mx="6px" textAlign="left">
-          Date purchased
+          Fecha de compra
         </H5>
-
         <H5 color="text.muted" my="0px" mx="6px" textAlign="left">
           Total
         </H5>
-
-        <H5 flex="0 0 0 !important" color="text.muted" px="22px" my="0px" />
       </TableRow>
     </Hidden>
 
-    {orderList.map((item) => (
+    {/* {orderList.map((item) => (
       <OrderRow order={item} key={item.id} />
-    ))}
+    ))} */}
 
-    <FlexBox justifyContent="center" mt="2.5rem">
+    {/* <FlexBox justifyContent="center" mt="2.5rem">
       <Pagination
         onChange={(data) => console.log(data)}
         pageCount={Math.ceil(orderList.length / 10)}
       />
-    </FlexBox>
+    </FlexBox> */}
   </>
 );
 
 OrderList.layout = CustomerDashboardLayout;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const orderList = await api.getOrders();
-  return { props: { orderList } };
+  const brandingResource = await branding.getBranding();
+  const macrocategoryList = await macrocategories.getMacrocategories();
+  const categoryList = await categories.getCategories();
+
+  return {
+    props: {
+      brandingResource,
+      categoryList,
+      macrocategoryList
+    }
+  };
 };
 
 export default OrderList;

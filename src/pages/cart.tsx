@@ -1,24 +1,26 @@
+import { GetStaticProps } from 'next';
+import styled from 'styled-components';
 import Link from 'next/link';
-import Box from '@component/Box';
-import Select from '@component/Select';
 import Grid from '@component/grid/Grid';
 import Card1 from '@component/Card1';
 import Divider from '@component/Divider';
 import FlexBox from '@component/FlexBox';
-import TextArea from '@component/textarea';
 import { Button } from '@component/buttons';
-import TextField from '@component/text-field';
 import Typography from '@component/Typography';
 import { ProductCard7 } from '@component/product-cards';
 import CheckoutNavLayout from '@component/layout/CheckoutNavLayout';
 import { useAppContext } from '@context/AppContext';
-import countryList from '@data/countryList';
-import { currency } from '@utils/utils';
+import { currency, getSlug } from '@utils/utils';
+import { branding, categories, macrocategories } from '@utils/page_resources/cart';
+import { colors } from 'theme/colors';
 
-const stateList = [
-  { value: 'New York', label: 'New York' },
-  { value: 'Chicago', label: 'Chicago' }
-];
+const StyledAlert = styled(FlexBox)`
+  background-color: ${colors.gray.white};
+  border-radius: 8px;
+  flex-direction: column;
+  height: 142px;
+  padding: 15px;
+`;
 
 const Cart = () => {
   const { state } = useAppContext();
@@ -29,86 +31,45 @@ const Cart = () => {
   return (
     <Grid container spacing={6}>
       <Grid item lg={8} md={8} xs={12}>
-        {state.cart.map((item) => (
-          <ProductCard7
-            mb="1.5rem"
-            id={item.id}
-            key={item.id}
-            qty={item.qty}
-            slug={item.slug}
-            name={item.name}
-            price={item.price}
-            imgUrl={item.imgUrl}
-          />
-        ))}
+        {state.cart.length > 0 ? (
+          state.cart.map((item, idx) => (
+            <ProductCard7
+              mb="1rem"
+              key={`${item.product.id}-${idx}`}
+              qty={item.qty}
+              slug={getSlug(item.product.name)}
+              price={item.price}
+              product={item.product}
+              selectedSize={item.size}
+              color={item.color}
+            />
+          ))
+        ) : (
+          <StyledAlert justifyContent="center" alignItems="center">
+            <Typography mb="15px" fontSize="18px" fontWeight="600" color="gray.primary">
+              No hay elementos en el carrito
+            </Typography>
+            <Link href="/">
+              <Button variant="contained" color="primary">
+                Seguir comprando
+              </Button>
+            </Link>
+          </StyledAlert>
+        )}
       </Grid>
 
       <Grid item lg={4} md={4} xs={12}>
         <Card1>
           <FlexBox justifyContent="space-between" alignItems="center" mb="1rem">
             <Typography color="gray.600">Total:</Typography>
-
             <Typography fontSize="18px" fontWeight="600" lineHeight="1">
               {currency(getTotalPrice())}
             </Typography>
           </FlexBox>
-
           <Divider mb="1rem" />
-
-          <FlexBox alignItems="center" mb="1rem">
-            <Typography fontWeight="600" mr="10px">
-              Additional Comments
-            </Typography>
-
-            <Box p="3px 10px" bg="primary.light" borderRadius="3px">
-              <Typography fontSize="12px" color="primary.main">
-                Note
-              </Typography>
-            </Box>
-          </FlexBox>
-
-          <TextArea rows={6} fullwidth mb="1rem" />
-
-          <Divider mb="1rem" />
-
-          <TextField placeholder="Voucher" fullwidth />
-
-          <Button variant="outlined" color="primary" mt="1rem" mb="30px" fullwidth>
-            Apply Voucher
-          </Button>
-
-          <Divider mb="1.5rem" />
-
-          <Typography fontWeight="600" mb="1rem">
-            Shipping Estimates
-          </Typography>
-
-          <Select
-            mb="1rem"
-            label="Country"
-            options={countryList}
-            placeholder="Select Country"
-            onChange={(e) => console.log(e)}
-          />
-
-          <Select
-            label="State"
-            options={stateList}
-            placeholder="Select State"
-            onChange={(e) => console.log(e)}
-          />
-
-          <Box mt="1rem">
-            <TextField label="Zip Code" placeholder="3100" fullwidth />
-          </Box>
-
-          <Button variant="outlined" color="primary" my="1rem" fullwidth>
-            Calculate Shipping
-          </Button>
-
           <Link href="/checkout">
-            <Button variant="contained" color="primary" fullwidth>
-              Checkout Now
+            <Button disabled={getTotalPrice() === 0} variant="contained" color="primary" fullwidth>
+              Comprar Ahora
             </Button>
           </Link>
         </Card1>
@@ -118,5 +79,19 @@ const Cart = () => {
 };
 
 Cart.layout = CheckoutNavLayout;
+
+export const getStaticProps: GetStaticProps = async () => {
+  const brandingResource = await branding.getBranding();
+  const macrocategoryList = await macrocategories.getMacrocategories();
+  const categoryList = await categories.getCategories();
+
+  return {
+    props: {
+      brandingResource,
+      categoryList,
+      macrocategoryList
+    }
+  };
+};
 
 export default Cart;

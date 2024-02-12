@@ -10,18 +10,21 @@ import FlexBox from '@component/FlexBox';
 import { Button, IconButton } from '@component/buttons';
 import Typography from '@component/Typography';
 import { currency, getTheme } from '@utils/utils';
+import Product from '@models/product.model';
+import Color from '@models/color.model';
 
 // styled component
 const Wrapper = styled.div`
   display: flex;
   overflow: hidden;
+  padding: 5px 10px;
   position: relative;
   border-radius: 10px;
   box-shadow: ${getTheme('shadows.4')};
   background-color: ${getTheme('colors.body.paper')};
 
   .product-details {
-    padding: 20px;
+    padding: 15px 30px;
   }
   .title {
     overflow: hidden;
@@ -42,37 +45,64 @@ const Wrapper = styled.div`
   ${space}
 `;
 
+const StyledImageWrapper = styled.div`
+  height: 140px;
+`;
+
+const StyledColorBox = styled.div`
+  border-radius: 3px;
+  transition: box-shadow 0.3s;
+  width: 70px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 // =====================================================================
 interface ProductCard7Props extends SpaceProps {
   qty: number;
-  name: string;
+  product: Product;
   slug: string;
   price: number;
-  imgUrl?: string;
-  id: string | number;
+  selectedSize: any;
+  color: Color;
 }
 // =====================================================================
 
-const ProductCard7: FC<ProductCard7Props> = (props) => {
-  const { id, name, qty, price, imgUrl, slug, ...others } = props;
-
+const ProductCard7: FC<ProductCard7Props> = ({
+  product,
+  qty,
+  price,
+  color,
+  slug,
+  selectedSize,
+  ...others
+}) => {
   const { dispatch } = useAppContext();
+
   const handleCartAmountChange = (amount: number) => () => {
     dispatch({
       type: 'CHANGE_CART_AMOUNT',
-      payload: { qty: amount, name, price, imgUrl, id }
+      payload: { qty: amount, size: selectedSize, product, price, color }
     });
   };
 
   return (
     <Wrapper {...others}>
-      <Image
-        size={140}
-        alt={name}
-        display="block"
-        src={imgUrl || '/assets/images/products/iphone-xi.png'}
-      />
-
+      <StyledImageWrapper>
+        <Link href={`/product/${product.id}-${slug}`}>
+          <a>
+            <Image
+              style={{ objectFit: 'contain' }}
+              size="100%"
+              alt={product.name}
+              display="block"
+              src={product.imageUrl}
+            />
+          </a>
+        </Link>
+      </StyledImageWrapper>
       <FlexBox
         width="100%"
         minWidth="0px"
@@ -80,26 +110,40 @@ const ProductCard7: FC<ProductCard7Props> = (props) => {
         className="product-details"
         justifyContent="space-between"
       >
-        <Link href={`/product/${slug}`}>
+        <Link href={`/product/${product.id}-${slug}`}>
           <a>
-            <Typography className="title" fontWeight="600" fontSize="18px" mb="0.5rem">
-              {name}
+            <Typography className="title" fontWeight="600" fontSize="18px" mb="1rem">
+              {product.name}
             </Typography>
           </a>
         </Link>
-
         <Box position="absolute" right="1rem" top="1rem">
           <IconButton padding="4px" ml="12px" size="small" onClick={handleCartAmountChange(0)}>
             <Icon size="1.25rem">close</Icon>
           </IconButton>
         </Box>
-
+        <FlexBox justifyContent="flex-start" alignItems="center">
+          {selectedSize ? (
+            <FlexBox mr="15px" flexWrap="wrap" alignItems="center">
+              <Typography color="gray.900" mr="0.5rem">
+                <strong>Tamaño:</strong> {selectedSize.size.quantity} L
+              </Typography>
+            </FlexBox>
+          ) : null}
+          {color ? (
+            <FlexBox flexWrap="wrap" alignItems="center">
+              <Typography color="text.primary" mr="1rem">
+                <strong>Color:</strong> {color.name} - {color.code}
+              </Typography>
+              <StyledColorBox style={{ backgroundColor: color.hex }} />
+            </FlexBox>
+          ) : null}
+        </FlexBox>
         <FlexBox justifyContent="space-between" alignItems="flex-end">
           <FlexBox flexWrap="wrap" alignItems="center">
             <Typography color="gray.600" mr="0.5rem">
               {currency(price)} x {qty}
             </Typography>
-
             <Typography fontWeight={600} color="primary.main" mr="1rem">
               {currency(price * qty)}
             </Typography>
@@ -118,7 +162,7 @@ const ProductCard7: FC<ProductCard7Props> = (props) => {
               <Icon variant="small">minus</Icon>
             </Button>
 
-            <Typography mx="0.5rem" fontWeight="600" fontSize="15px">
+            <Typography mx="1.5rem" fontWeight="600" fontSize="15px">
               {qty}
             </Typography>
 

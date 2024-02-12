@@ -18,7 +18,7 @@ import Macrocategory from '@models/macrocategory.model';
 import StyledHeader from './styles';
 
 const StyledLogoWrapper = styled.div`
-  height: 55px;
+  height: 45px;
 `;
 
 const StyledLogoImage = styled.img`

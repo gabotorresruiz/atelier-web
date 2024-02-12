@@ -4,6 +4,7 @@ import Subcategory from './subcategory.model';
 interface Product {
   id: number;
   name: string;
+  description: string;
   imageUrl: string;
   withTintometric: boolean;
   code: string;
