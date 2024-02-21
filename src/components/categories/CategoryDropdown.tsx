@@ -1,7 +1,6 @@
 import { FC } from 'react';
 import Category from '@models/category.model';
 import Macrocategory from '@models/macrocategory.model';
-import { getSlug } from '@utils/utils';
 import MegaMenu2 from './mega-menu/MegaMenu2';
 import CategoryMenuItem from './CategoryMenuItem';
 import { StyledCategoryDropdown } from './styles';

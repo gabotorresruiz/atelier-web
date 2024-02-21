@@ -1,9 +1,6 @@
 import { FC } from 'react';
-// import FlexBox from '@component/FlexBox';
 import Grid from '@component/grid/Grid';
-// import Pagination from '@component/pagination';
 import { ProductCard1 } from '@component/product-cards';
-// import { SemiSpan } from '@component/Typography';
 import Product from '@models/product.model';
 import { getSlug } from '@utils/utils';
 
@@ -25,12 +22,6 @@ const ProductCard1List: FC<Props> = ({ products }) => (
         </Grid>
       ))}
     </Grid>
-    {/* <FlexBox flexWrap="wrap" justifyContent="space-between" alignItems="center" mt="32px">
-      <SemiSpan>
-        Mostrando {products.length > 9 ? '9' : products.length} de {products.length} Productos
-      </SemiSpan>
-      <Pagination pageCount={Math.ceil(products.length / 9)} />
-    </FlexBox> */}
   </div>
 );
 

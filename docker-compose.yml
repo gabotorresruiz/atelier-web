@@ -5,10 +5,12 @@ services:
     build:
       context: ./
       target: runner
+    env_file:
+      - ./.env
     volumes:
       - .:/app
     command: npm run dev
     ports:
       - '3001:3001'
     environment:
-      NODE_ENV: development
+      NODE_ENV: production

@@ -17,7 +17,8 @@ const nextConfig = {
   publicRuntimeConfig: {
     // Available on both server and client
     theme: 'DEFAULT'
-  }
+  },
+  output: 'standalone'
 };
 
 module.exports = nextConfig;

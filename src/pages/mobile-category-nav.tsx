@@ -4,7 +4,7 @@ import Box from '@component/Box';
 import Grid from '@component/grid/Grid';
 import Icon from '@component/icon/Icon';
 import Divider from '@component/Divider';
-import { Header } from '@component/header';
+// import { Header } from '@component/header';
 import Typography from '@component/Typography';
 import MobileNavigationBar from '@component/mobile-navigation';
 import { Accordion, AccordionHeader } from '@component/accordion';
@@ -70,7 +70,11 @@ const MobileCategoryNav = () => {
 
   return (
     <MobileCategoryNavStyle>
-      <Header className="header" />
+      {/* <Header
+        brandingResource={brandingResource}
+        dataList={macrocategoryList.length ? macrocategoryList : categoryList}
+        className="header"
+      /> */}
 
       <Box className="main-category-holder">
         {navigations.map((item) => (

@@ -7,7 +7,7 @@ import { createContext, FC, ReactNode, useContext, useMemo, useReducer } from 'r
 type InitialState = { cart: CartItem[]; isHeaderFixed: boolean };
 
 export type CartItem = {
-  product: Product;
+  product?: Product;
   price: number;
   qty: number;
   color?: Color;

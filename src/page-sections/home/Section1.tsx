@@ -4,7 +4,6 @@ import Box from '@component/Box';
 import Grid from '@component/grid/Grid';
 import { Carousel } from 'components/carousel';
 import { H1, H2 } from 'components/Typography';
-import { theme } from '@utils/theme';
 import { deviceSize } from '@utils/constants';
 import Branding from '@models/branding.model';
 

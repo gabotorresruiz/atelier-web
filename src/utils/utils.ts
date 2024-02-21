@@ -1,6 +1,5 @@
-import { ceil } from 'lodash';
+import { ceil, kebabCase } from 'lodash';
 import { differenceInMinutes } from 'date-fns';
-import { kebabCase } from 'lodash';
 import { themeGet } from '@styled-system/theme-get';
 
 export const getTheme = (query: string, fallback?: string) => themeGet(query, fallback);

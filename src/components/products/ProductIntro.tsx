@@ -43,7 +43,7 @@ const customStyles = {
 // ========================================
 type ProductIntroProps = {
   product: Product;
-  tintometricSystem: Color[];
+  tintometricSystem?: Color[];
 };
 // ========================================
 

@@ -2,19 +2,18 @@ import { useCallback, useState } from 'react';
 import Box from '@component/Box';
 import Card from '@component/Card';
 import Select from '@component/Select';
-import Hidden from '@component/hidden';
-import Grid from '@component/grid/Grid';
+// import Hidden from '@component/hidden';
+// import Grid from '@component/grid/Grid';
 import Icon from '@component/icon/Icon';
 import FlexBox from '@component/FlexBox';
 import { IconButton } from '@component/buttons';
 import Sidenav from '@component/sidenav/Sidenav';
 import { H5, Paragraph } from '@component/Typography';
 import NavbarLayout from '@component/layout/NavbarLayout';
-import ProductCard1List from '@component/products/ProductCard1List';
-import ProductCard9List from '@component/products/ProductCard9List';
+// import ProductCard1List from '@component/products/ProductCard1List';
+// import ProductCard9List from '@component/products/ProductCard9List';
 import ProductFilterCard from '@component/products/ProductFilterCard';
 import useWindowSize from '@hook/useWindowSize';
-import db from '@data/db';
 
 const sortOptions = [
   { label: 'Relevance', value: 'Relevance' },
@@ -89,15 +88,15 @@ const ProductSearchResult = () => {
                 </IconButton>
               }
             >
-              <ProductFilterCard />
+              <ProductFilterCard navList={[]} />
             </Sidenav>
           )}
         </FlexBox>
       </FlexBox>
 
-      <Grid container spacing={6}>
+      {/* <Grid container spacing={6}>
         <Hidden as={Grid} item lg={3} xs={12} down={1024}>
-          <ProductFilterCard />
+          <ProductFilterCard navList={[]} />
         </Hidden>
 
         <Grid item lg={9} xs={12}>
@@ -107,7 +106,7 @@ const ProductSearchResult = () => {
             <ProductCard9List products={db.slice(95, 104)} />
           )}
         </Grid>
-      </Grid>
+      </Grid> */}
     </Box>
   );
 };
