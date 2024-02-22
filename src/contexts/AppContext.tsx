@@ -57,12 +57,12 @@ const reducer = (state: InitialState, action: ActionType) => {
               (item: CartItem): boolean =>
                 item.product.id === cartItem.product.id &&
                 item.color.id === cartItem.color.id &&
-                item.size.id === cartItem.size.id
+                item?.size.id === cartItem?.size.id
             )
           : cartItem.color === null && cartItem.size !== null
           ? cartList.findIndex(
               (item: CartItem): boolean =>
-                item.product.id === cartItem.product.id && item.size.id === cartItem.size.id
+                item.product.id === cartItem.product.id && item?.size.id === cartItem?.size.id
             )
           : cartList.findIndex(
               (item: CartItem): boolean => item.product.id === cartItem.product.id
@@ -78,12 +78,12 @@ const reducer = (state: InitialState, action: ActionType) => {
                   (item: CartItem) =>
                     item.product.id !== cartItem.product.id ||
                     item.color.id !== cartItem.color.id ||
-                    item.size.id !== cartItem.size.id
+                    item?.size.id !== cartItem?.size.id
                 )
-              : cartItem.color === null && cartItem.size !== null
+              : cartItem.color === null && cartItem?.size !== null
               ? cartList.filter(
                   (item: CartItem) =>
-                    item.product.id !== cartItem.product.id && item.size.id !== cartItem.size.id
+                    item.product.id !== cartItem.product.id && item?.size.id !== cartItem?.size.id
                 )
               : cartList.filter((item: CartItem) => item.product.id !== cartItem.product.id)
         };

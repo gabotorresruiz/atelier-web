@@ -117,7 +117,7 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav }) => {
                 </Tiny>
 
                 <FlexBox alignItems="center" justifyContent="space-between">
-                  {item.size !== null ? (
+                  {item?.size !== null ? (
                     <Typography fontWeight={600} fontSize="14px" color="text.primary" mt="4px">
                       {item.size.size.quantity} L
                     </Typography>

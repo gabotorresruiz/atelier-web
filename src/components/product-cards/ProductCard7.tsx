@@ -108,7 +108,7 @@ const ProductCard7: FC<ProductCard7Props> = ({
         minWidth="0px"
         flexDirection="column"
         className="product-details"
-        justifyContent="space-between"
+        justifyContent="space-evenly"
       >
         <Link href={`/product/${product.id}-${slug}`}>
           <a>
