@@ -59,7 +59,7 @@ const ProductIntro: FC<ProductIntroProps> = ({ product, tintometricSystem }) => 
   const [selectedQty, setSelectedQty] = useState(1);
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedSize, setSelectedSize] = useState(
-    productsSizes
+    productsSizes && productsSizes.length > 0
       ? {
           label: `${productsSizes[0].size.quantity} L`,
           value: productsSizes[0]
@@ -67,7 +67,9 @@ const ProductIntro: FC<ProductIntroProps> = ({ product, tintometricSystem }) => 
       : null
   );
   const [totalPrice, setTotalPrice] = useState(
-    (productsSizes ? product.products_sizes[0].basePrice : product?.price || 0) * selectedQty
+    (productsSizes && productsSizes.length > 0
+      ? product.products_sizes[0].basePrice
+      : product?.price || 0) * selectedQty
   );
 
   const handleCartAmountChangeDown = () => {
@@ -138,9 +140,10 @@ const ProductIntro: FC<ProductIntroProps> = ({ product, tintometricSystem }) => 
 
   const handleDisabledCartBtn = useMemo(() => {
     if (withTintometric) return selectedSize === null || selectedColor === null;
+    if (productsSizes && productsSizes.length > 0) return selectedSize === null;
 
-    return selectedSize === null;
-  }, [withTintometric, selectedColor, selectedSize]);
+    return false;
+  }, [withTintometric, selectedSize, selectedColor, productsSizes]);
 
   const handleAddToCart = () => {
     dispatch({
@@ -150,7 +153,7 @@ const ProductIntro: FC<ProductIntroProps> = ({ product, tintometricSystem }) => 
         price: totalPrice / selectedQty,
         qty: selectedQty,
         color: selectedColor,
-        size: selectedSize.value
+        size: selectedSize?.value ?? null
       }
     });
   };
