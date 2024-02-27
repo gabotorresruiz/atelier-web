@@ -1,5 +1,4 @@
 import Product from '@models/product.model';
-import Subcategory from '@models/subcategory.model';
 import axiosInterceptorInstance from 'config/axiosInterceptorInstance';
 
 const getProducts = async (): Promise<Product[]> => {
@@ -12,13 +11,16 @@ const getProduct = async (id: string): Promise<Product> => {
   return response.data;
 };
 
-const getRelatedProducts = async (subcategoryId: number): Promise<Subcategory> => {
-  const response = await axiosInterceptorInstance.get(`/api/sub-categories/${subcategoryId}`);
+const getSearchProducts = async (slug: string): Promise<Product[]> => {
+  const response = await axiosInterceptorInstance.get(
+    `/api/products?search=${slug}&attribute=name`
+  );
+
   return response.data;
 };
 
 export default {
   getProduct,
   getProducts,
-  getRelatedProducts
+  getSearchProducts
 };

@@ -11,7 +11,8 @@ import {
   categories,
   colors,
   macrocategories,
-  products
+  products,
+  subcategories
 } from '@utils/page_resources/product';
 // import Box from '@component/Box';
 // import FlexBox from '@component/FlexBox';
@@ -59,7 +60,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const macrocategoryList = await macrocategories.getMacrocategories();
   const product = await products.getProduct(productId);
   const relatedProducts = filter(
-    (await products.getRelatedProducts(sample(product.subcategories).id)).products,
+    (await subcategories.getSubcategory(sample(product.subcategories).id.toString())).products,
     (prod) => prod.id.toString() !== productId
   );
 
