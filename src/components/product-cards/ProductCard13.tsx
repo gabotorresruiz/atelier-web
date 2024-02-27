@@ -10,6 +10,7 @@ import { getSlug } from '@utils/utils';
 // styled components
 const StyledCard = styled(Box)(({ theme }) => ({
   height: '100%',
+  minHeight: '384px',
   margin: 'auto',
   borderRadius: 0,
   overflow: 'hidden',
@@ -23,7 +24,11 @@ const StyledCard = styled(Box)(({ theme }) => ({
 }));
 
 const ImgBox = styled(Box)(({ theme }) => ({
-  background: theme.colors.primary[50]
+  alignItems: 'center',
+  background: theme.colors.primary[50],
+  display: 'flex',
+  height: '100%',
+  minHeight: '384px'
 }));
 
 const ContentWrapper = styled(Box)({
