@@ -7,12 +7,12 @@ import Product from '@models/product.model';
 import { getSlug } from '@utils/utils';
 
 // ============================================================
-type Props = { products: Product[] };
+type Props = { products: Product[]; title?: string };
 // ============================================================
 
-const RelatedProducts: FC<Props> = ({ products }) => (
+const RelatedProducts: FC<Props> = ({ products, title = 'Productos Relacionados' }) => (
   <Box mt="1rem" mb="3.75rem">
-    <H3 mb="1.5rem">Productos Relacionados</H3>
+    <H3 mb="1.5rem">{title}</H3>
 
     <Grid container spacing={8}>
       {products.map((item) => (
