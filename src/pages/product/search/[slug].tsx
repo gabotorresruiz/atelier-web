@@ -1,33 +1,50 @@
-import { useCallback, useState } from 'react';
+import { GetStaticProps } from 'next';
+import { useRouter } from 'next/router';
 import Box from '@component/Box';
 import Card from '@component/Card';
-import Select from '@component/Select';
-// import Hidden from '@component/hidden';
-// import Grid from '@component/grid/Grid';
+import Hidden from '@component/hidden';
+import Grid from '@component/grid/Grid';
 import Icon from '@component/icon/Icon';
 import FlexBox from '@component/FlexBox';
 import { IconButton } from '@component/buttons';
 import Sidenav from '@component/sidenav/Sidenav';
 import { H5, Paragraph } from '@component/Typography';
 import NavbarLayout from '@component/layout/NavbarLayout';
-// import ProductCard1List from '@component/products/ProductCard1List';
-// import ProductCard9List from '@component/products/ProductCard9List';
+import SideNavbar from '@component/sidenav/SideNavbar';
+import ProductCard1List from '@component/products/ProductCard1List';
 import ProductFilterCard from '@component/products/ProductFilterCard';
 import useWindowSize from '@hook/useWindowSize';
+import {
+  branding,
+  categories,
+  macrocategories,
+  products
+} from '@utils/page_resources/product-search';
+import Category from '@models/category.model';
+import Macrocategory from '@models/macrocategory.model';
+import Product from '@models/product.model';
 
-const sortOptions = [
-  { label: 'Relevance', value: 'Relevance' },
-  { label: 'Date', value: 'Date' },
-  { label: 'Price Low to High', value: 'Price Low to High' },
-  { label: 'Price High to Low', value: 'Price High to Low' }
-];
+// ======================================================================
+type ProductSearchResult = {
+  categoryList: Category[];
+  macrocategoryList: Macrocategory[];
+  searchProducts: Product[];
+  searchValue: string;
+};
+// ======================================================================
 
-const ProductSearchResult = () => {
+const ProductSearchResult = ({
+  categoryList = [],
+  macrocategoryList = [],
+  searchProducts = [],
+  searchValue = ''
+}: ProductSearchResult) => {
+  const router = useRouter();
   const width = useWindowSize();
-  const [view, setView] = useState<'grid' | 'list'>('grid');
-
   const isTablet = width < 1025;
-  const toggleView = useCallback((v) => () => setView(v), []);
+
+  // Show a loading state when the fallback is rendered
+  if (router.isFallback) return <h1>Loading...</h1>;
 
   return (
     <Box pt="20px">
@@ -41,43 +58,14 @@ const ProductSearchResult = () => {
         justifyContent="space-between"
       >
         <div>
-          <H5>Searching for “ mobile phone ”</H5>
-          <Paragraph color="text.muted">48 results found</Paragraph>
+          <H5 color="primary.main">Búsqueda: {searchValue}</H5>
+          <Paragraph color="text.muted">
+            {searchProducts.length}{' '}
+            {searchProducts.length === 0 || searchProducts.length > 1 ? 'productos' : 'producto'}
+          </Paragraph>
         </div>
 
         <FlexBox alignItems="center" flexWrap="wrap">
-          <Paragraph color="text.muted" mr="1rem">
-            Short by:
-          </Paragraph>
-
-          <Box flex="1 1 0" mr="1.75rem" minWidth="150px">
-            <Select placeholder="Short by" defaultValue={sortOptions[0]} options={sortOptions} />
-          </Box>
-
-          <Paragraph color="text.muted" mr="0.5rem">
-            View:
-          </Paragraph>
-
-          <IconButton size="small" onClick={toggleView('grid')}>
-            <Icon
-              variant="small"
-              defaultcolor="auto"
-              color={view === 'grid' ? 'primary' : 'inherit'}
-            >
-              grid
-            </Icon>
-          </IconButton>
-
-          <IconButton size="small" onClick={toggleView('list')}>
-            <Icon
-              variant="small"
-              defaultcolor="auto"
-              color={view === 'list' ? 'primary' : 'inherit'}
-            >
-              menu
-            </Icon>
-          </IconButton>
-
           {isTablet && (
             <Sidenav
               position="left"
@@ -88,29 +76,49 @@ const ProductSearchResult = () => {
                 </IconButton>
               }
             >
-              <ProductFilterCard navList={[]} />
+              <ProductFilterCard
+                navList={macrocategoryList.length ? macrocategoryList : categoryList}
+              />
             </Sidenav>
           )}
         </FlexBox>
       </FlexBox>
-
-      {/* <Grid container spacing={6}>
+      <Grid container spacing={6}>
         <Hidden as={Grid} item lg={3} xs={12} down={1024}>
-          <ProductFilterCard navList={[]} />
+          <SideNavbar
+            lineStyle="solid"
+            sidebarStyle="style1"
+            navList={macrocategoryList.length ? macrocategoryList : categoryList}
+            sidebarHeight="85vh"
+          />
         </Hidden>
-
         <Grid item lg={9} xs={12}>
-          {view === 'grid' ? (
-            <ProductCard1List products={db.slice(95, 104)} />
-          ) : (
-            <ProductCard9List products={db.slice(95, 104)} />
-          )}
+          <ProductCard1List products={searchProducts} />
         </Grid>
-      </Grid> */}
+      </Grid>
     </Box>
   );
 };
 
 ProductSearchResult.layout = NavbarLayout;
+
+export async function getStaticPaths() {
+  return {
+    paths: [],
+    fallback: 'blocking'
+  };
+}
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const searchValue = params.slug as string;
+  const brandingResource = await branding.getBranding();
+  const macrocategoryList = await macrocategories.getMacrocategories();
+  const categoryList = await categories.getCategories();
+  const searchProducts = await products.getSearchProducts(searchValue);
+
+  return {
+    props: { brandingResource, categoryList, macrocategoryList, searchProducts, searchValue }
+  };
+};
 
 export default ProductSearchResult;

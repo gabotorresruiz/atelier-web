@@ -94,6 +94,10 @@ const Wrapper = styled(Card)`
   }
 `;
 
+const StyledImageWrapper = styled.div`
+  min-height: 282px;
+`;
+
 // =======================================================================
 interface ProductCard1Props extends CardProps {
   slug: string;
@@ -105,7 +109,7 @@ interface ProductCard1Props extends CardProps {
 
 const ProductCard1: FC<ProductCard1Props> = ({ id, slug, title, imgUrl, ...props }) => (
   <Wrapper {...props}>
-    <div className="image-holder">
+    <StyledImageWrapper className="image-holder">
       <Link href={`/product/${id}-${slug}`}>
         <a>
           <Image
@@ -117,7 +121,7 @@ const ProductCard1: FC<ProductCard1Props> = ({ id, slug, title, imgUrl, ...props
           />
         </a>
       </Link>
-    </div>
+    </StyledImageWrapper>
     <div className="details">
       <FlexBox>
         <Box flex="1 1 0" minWidth="0px" mr="0.5rem">
