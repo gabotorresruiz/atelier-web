@@ -6,7 +6,7 @@ const getTrends = async (): Promise<Trend[]> => {
   return response.data;
 };
 
-const getTrend = async (id: number): Promise<Trend> => {
+const getTrend = async (id: string): Promise<Trend> => {
   const response = await axiosInterceptorInstance.get(`api/trends/${id}`);
   return response.data;
 };
