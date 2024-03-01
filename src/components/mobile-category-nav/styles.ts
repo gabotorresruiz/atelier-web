@@ -13,12 +13,20 @@ const MobileCategoryNavStyle = styled.div`
   }
 
   .main-category-holder {
-    position: fixed;
-    left: 0;
-    top: ${layoutConstant.mobileHeaderHeight};
-    bottom: ${layoutConstant.mobileNavHeight};
     background: ${getTheme('colors.gray.300')};
-    overflow-y: auto;
+    display: flex;
+    left: 0;
+    overflow: auto;
+    position: fixed;
+    top: 130px;
+    width: 100%;
+
+    @media screen and (min-width: 768px) {
+      bottom: ${layoutConstant.mobileNavHeight};
+      flex-direction: column;
+      top: 75px;
+      width: auto;
+    }
 
     .main-category-box {
       display: flex;
@@ -27,22 +35,27 @@ const MobileCategoryNavStyle = styled.div`
       justify-content: center;
       padding: 0.5rem;
       height: 80px;
-      width: 90px;
-      border-bottom: 1px solid;
-      border-bottom-color: ${getTheme('colors.text.disabled')};
-      border-left-color: ${getTheme('colors.text.hint')};
+      min-width: 90px;
+      border-left-color: ${getTheme('colors.primary.main')};
       cursor: pointer;
     }
   }
 
   .container {
     position: fixed;
-    top: ${layoutConstant.mobileHeaderHeight};
+    top: 210px;
     bottom: ${layoutConstant.mobileNavHeight};
-    left: 90px;
+    left: 0;
     padding: 0.5rem 1rem;
     flex: 1 1 0;
     overflow-y: auto;
+    width: 100%;
+
+    @media screen and (min-width: 768px) {
+      left: 90px;
+      top: 75px;
+      width: calc(100% - 90px);
+    }
   }
 
   .ellipsis {

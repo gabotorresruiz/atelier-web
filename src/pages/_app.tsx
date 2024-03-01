@@ -49,9 +49,13 @@ const App = ({ Component, pageProps }: MyAppProps) => {
       <AppProvider>
         <ThemeProvider theme={theme()}>
           <GlobalStyles />
-          <Layout {...pageProps}>
+          {Component.layout ? (
+            <Layout {...pageProps}>
+              <Component {...pageProps} />
+            </Layout>
+          ) : (
             <Component {...pageProps} />
-          </Layout>
+          )}
         </ThemeProvider>
       </AppProvider>
     </>

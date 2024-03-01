@@ -4,8 +4,6 @@ import styled from 'styled-components';
 import Box from '@component/Box';
 import Image from '@component/Image';
 import Grid from '@component/grid/Grid';
-// import Icon from '@component/icon/Icon';
-// import FlexBox from '@component/FlexBox';
 import Container from '@component/Container';
 import Typography from '@component/Typography';
 import Branding from '@models/branding.model';
@@ -30,25 +28,37 @@ const StyledLeftGrid = styled(Grid)`
 const StyledLogoWrapper = styled.div`
   align-items: center;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
+
+  @media screen and (min-width: 1024px) {
+    justify-content: flex-start;
+  }
 `;
 
 const StyledLogoImage = styled(Image)`
   width: 55%;
   height: auto;
+
+  @media screen and (min-width: 500px) {
+    width: 40%;
+  }
+
+  @media screen and (min-width: 800px) {
+    width: 50%;
+  }
+
+  @media screen and (min-width: 1024px) {
+    width: 55%;
+  }
 `;
 
-// const iconList = [
-//   { iconName: 'facebook', url: 'https://www.facebook.com/UILibOfficial' },
-//   { iconName: 'twitter', url: '/' },
-//   {
-//     iconName: 'youtube',
-//     url: 'https://www.youtube.com/channel/UCsIyD-TSO1wQFz-n2Y4i3Rg'
-//   },
-//   { iconName: 'google', url: '/' },
-//   { iconName: 'instagram', url: '/' }
-//   { iconName: 'linkedin', url: '/' }
-// ];
+const StyledContactGrid = styled(Grid)`
+  text-align: center;
+
+  @media screen and (min-width: 800px) {
+    text-align: left;
+  }
+`;
 
 type Footer1Props = {
   brandingResource: Branding;
@@ -60,7 +70,7 @@ const Footer1: FC<Footer1Props> = ({ brandingResource }) => (
       <Container p="1rem" color="white">
         <Box py="1rem" overflow="hidden">
           <StyledGrid container spacing={6}>
-            <StyledLeftGrid item lg={4} md={6} sm={6} xs={12}>
+            <StyledLeftGrid item lg={4} md={6} sm={12} xs={12}>
               <Link href="/">
                 <a>
                   <StyledLogoWrapper>
@@ -68,19 +78,8 @@ const Footer1: FC<Footer1Props> = ({ brandingResource }) => (
                   </StyledLogoWrapper>
                 </a>
               </Link>
-              {/* <FlexBox className="flex" mx="-5px">
-                {iconList.map((item) => (
-                  <a href={item.url} target="_blank" key={item.iconName} rel="noreferrer noopener">
-                    <Box m="5px" p="10px" size="small" borderRadius="50%" bg="rgba(0,0,0,0.2)">
-                      <Icon size="12px" defaultcolor="auto">
-                        {item.iconName}
-                      </Icon>
-                    </Box>
-                  </a>
-                ))}
-              </FlexBox> */}
             </StyledLeftGrid>
-            <Grid item lg={3} md={6} sm={6} xs={12}>
+            <StyledContactGrid item lg={3} md={6} sm={12} xs={12}>
               <Typography mb="1.25rem" lineHeight="1" fontSize="25px" fontWeight="600">
                 Contactanos
               </Typography>
@@ -99,7 +98,7 @@ const Footer1: FC<Footer1Props> = ({ brandingResource }) => (
               <Typography py="0.3rem" mb="1rem" color="gray.white">
                 Teléfono: {brandingResource.phone}
               </Typography>
-            </Grid>
+            </StyledContactGrid>
           </StyledGrid>
         </Box>
       </Container>

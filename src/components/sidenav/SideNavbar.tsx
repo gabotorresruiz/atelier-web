@@ -110,7 +110,7 @@ const SideNavbar: FC<SideNavbarProps> = ({
     <Scrollbar autoHide={false} sx={{ maxHeight: sidebarHeight }}>
       <NavbarRoot isfixed={isFixed} sidebarstyle={sidebarStyle}>
         {navList.map((item: any, i: number) => (
-          <Box key={i}>
+          <Box padding="10px 5px 15px" key={i}>
             <Box padding="16px 20px 5px 20px">
               <H5>{item.name}</H5>
               <BorderBox linestyle={lineStyle}>

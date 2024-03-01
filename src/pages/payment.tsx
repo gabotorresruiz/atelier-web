@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import styled from 'styled-components';
 import { GetStaticProps } from 'next';
 import { IconButton } from '@component/buttons';
 import Card from '@component/Card';
@@ -12,11 +13,28 @@ import { H1 } from '@component/Typography';
 import Link from 'next/link';
 import Icon from '@component/icon/Icon';
 
+const StyledFlexBox = styled(FlexBox)`
+  padding: 0 10px;
+
+  @media screen and (min-width: 768px) {
+    padding: 0 40px;
+  }
+`;
+
+const StyledTitle = styled(H1)`
+  font-size: 20px;
+  text-align: center;
+
+  @media screen and (min-width: 768px) {
+    font-size: 30px;
+  }
+`;
+
 const Checkout = () => {
   const [paymentSuccess, setPaymentSuccess] = useState(false);
 
   return !paymentSuccess ? (
-    <Grid container flexWrap="wrap-reverse" spacing={6}>
+    <Grid style={{ margin: 0 }} container flexWrap="wrap-reverse" spacing={6}>
       <Grid item lg={8} md={8} xs={12}>
         <PaymentForm setPaymentSuccess={setPaymentSuccess} />
       </Grid>
@@ -25,10 +43,10 @@ const Checkout = () => {
       </Grid>
     </Grid>
   ) : (
-    <FlexBox mt="30px">
+    <StyledFlexBox mt="30px">
       <Card width="100%" py="60px" px="30px">
         <FlexBox flexDirection="column" alignItems="center" justifyContent="center">
-          <H1 mb="2rem">¡Su compra ha sido realizada exitosamente!</H1>
+          <StyledTitle mb="2rem">¡Su compra ha sido realizada exitosamente!</StyledTitle>
           <Link href="/">
             <a>
               <IconButton variant="contained" color="primary" px="1rem">
@@ -43,7 +61,7 @@ const Checkout = () => {
           </Link>
         </FlexBox>
       </Card>
-    </FlexBox>
+    </StyledFlexBox>
   );
 };
 

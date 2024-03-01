@@ -1,7 +1,7 @@
 import Color from '@models/color.model';
 import ProductSize from '@models/product-size.model';
 import Product from '@models/product.model';
-import { createContext, FC, ReactNode, useContext, useMemo, useReducer } from 'react';
+import { createContext, FC, ReactNode, useContext, useEffect, useMemo, useReducer } from 'react';
 
 // =================================================================================
 type InitialState = { cart: CartItem[]; isHeaderFixed: boolean };
@@ -14,10 +14,11 @@ export type CartItem = {
   size?: ProductSize;
 };
 
+type SetState = { type: 'SET_STATE'; payload: InitialState };
 type CartActionType = { type: 'CHANGE_CART_AMOUNT'; payload: CartItem };
 type EmptyCartActionType = { type: 'EMPTY_CART' };
 type LayoutActionType = { type: 'TOGGLE_HEADER'; payload: boolean };
-type ActionType = CartActionType | LayoutActionType | EmptyCartActionType;
+type ActionType = SetState | CartActionType | LayoutActionType | EmptyCartActionType;
 
 // =================================================================================
 
@@ -38,6 +39,7 @@ const AppContext = createContext<ContextProps>({
 const reducer = (state: InitialState, action: ActionType) => {
   let cartList: CartItem[] = [];
   let cartItem: CartItem = null;
+  let cartState: any = null;
   let exist = -1;
 
   switch (action.type) {
@@ -45,7 +47,13 @@ const reducer = (state: InitialState, action: ActionType) => {
       return { ...state, isHeaderFixed: action.payload };
 
     case 'EMPTY_CART':
-      return { ...state, cart: [] };
+      cartState = { ...state, cart: [] };
+      localStorage.setItem('storage', JSON.stringify(cartState));
+
+      return cartState;
+
+    case 'SET_STATE':
+      return action.payload;
 
     case 'CHANGE_CART_AMOUNT':
       cartList = state.cart;
@@ -68,8 +76,8 @@ const reducer = (state: InitialState, action: ActionType) => {
               (item: CartItem): boolean => item.product.id === cartItem.product.id
             );
 
-      if (cartItem.qty < 1)
-        return {
+      if (cartItem.qty < 1) {
+        cartState = {
           ...state,
           cart:
             // eslint-disable-next-line no-nested-ternary
@@ -88,6 +96,10 @@ const reducer = (state: InitialState, action: ActionType) => {
               : cartList.filter((item: CartItem) => item.product.id !== cartItem.product.id)
         };
 
+        localStorage.setItem('storage', JSON.stringify(cartState));
+        return cartState;
+      }
+
       // IF PRODUCT ALREADY EXITS IN CART
       if (exist >= 0) {
         const newCart = cartList.map((item, idx) =>
@@ -96,10 +108,16 @@ const reducer = (state: InitialState, action: ActionType) => {
             : item
         );
 
-        return { ...state, cart: newCart };
+        cartState = { ...state, cart: newCart };
+
+        localStorage.setItem('storage', JSON.stringify(cartState));
+        return cartState;
       }
 
-      return { ...state, cart: [...cartList, cartItem] };
+      cartState = { ...state, cart: [...cartList, cartItem] };
+
+      localStorage.setItem('storage', JSON.stringify(cartState));
+      return cartState;
 
     default: {
       return state;
@@ -114,6 +132,20 @@ type AppProviderProps = { children: ReactNode };
 export const AppProvider: FC<AppProviderProps> = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
   const contextValue = useMemo(() => ({ state, dispatch }), [state, dispatch]);
+
+  useEffect(() => {
+    const storage = localStorage.getItem('storage') || null;
+
+    if (storage) {
+      const jsonCartStorage = JSON.parse(storage);
+
+      dispatch({
+        type: 'SET_STATE',
+        payload: jsonCartStorage
+      });
+    }
+  }, []);
+
   return <AppContext.Provider value={contextValue}>{children}</AppContext.Provider>;
 };
 

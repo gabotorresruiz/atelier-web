@@ -5,8 +5,14 @@ import { getTheme } from '@utils/utils';
 const StyledHeader = styled.header`
   position: relative;
   z-index: 111;
-  height: ${layoutConstant.headerHeight};
+  height: auto;
+  padding: 15px 0;
   background: ${getTheme('colors.body.paper')};
+
+  @media screen and (min-width: 900px) {
+    height: ${layoutConstant.headerHeight};
+    padding: 0;
+  }
 
   .logo {
     img {
@@ -35,9 +41,8 @@ const StyledHeader = styled.header`
   }
 
   @media only screen and (max-width: 900px) {
-    height: ${layoutConstant.mobileHeaderHeight};
+    height: auto;
 
-    .logo,
     .icon-holder,
     .category-holder {
       display: none;

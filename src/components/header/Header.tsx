@@ -27,6 +27,21 @@ const StyledLogoImage = styled.img`
   object-fit: scale-down;
 `;
 
+const StyledContainer = styled(Container)`
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 0 1rem;
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+  }
+
+  @media screen and (min-width: 1200px) {
+    margin: 0 auto;
+  }
+`;
+
 // ====================================================================
 type HeaderProps = {
   isFixed?: boolean;
@@ -67,15 +82,14 @@ const Header: FC<HeaderProps> = ({ isFixed, className, brandingResource, dataLis
     </Box>
   );
 
-  // const LOGIN_HANDLE = (
-  //   <IconButton ml="1rem" bg="gray.200" p="8px">
-  //     <Icon size="28px">user</Icon>
-  //   </IconButton>
-  // );
-
   return (
     <StyledHeader className={className}>
-      <Container display="flex" alignItems="center" justifyContent="space-between" height="100%">
+      <StyledContainer
+        display="flex"
+        alignItems="center"
+        justifyContent="space-between"
+        height="100%"
+      >
         <FlexBox className="logo" alignItems="center" mr="1rem">
           <Link href="/">
             <a>
@@ -84,7 +98,6 @@ const Header: FC<HeaderProps> = ({ isFixed, className, brandingResource, dataLis
               </StyledLogoWrapper>
             </a>
           </Link>
-
           {isFixed && (
             <div className="category-holder">
               <Categories dataList={dataList}>
@@ -96,16 +109,10 @@ const Header: FC<HeaderProps> = ({ isFixed, className, brandingResource, dataLis
             </div>
           )}
         </FlexBox>
-
-        <FlexBox justifyContent="center" flex="1 1 0">
+        <FlexBox style={{ width: '100%' }} justifyContent="center" flex="1 1 0">
           <SearchInput />
         </FlexBox>
-
         <FlexBox className="header-right" alignItems="center">
-          {/* <UserLoginDialog handle={LOGIN_HANDLE}>
-            <Login />
-          </UserLoginDialog> */}
-
           <Sidenav
             open={open}
             width={380}
@@ -116,7 +123,7 @@ const Header: FC<HeaderProps> = ({ isFixed, className, brandingResource, dataLis
             <MiniCart toggleSidenav={toggleSidenav} />
           </Sidenav>
         </FlexBox>
-      </Container>
+      </StyledContainer>
     </StyledHeader>
   );
 };

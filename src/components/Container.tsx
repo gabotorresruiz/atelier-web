@@ -23,6 +23,11 @@ const Container = styled.div<LayoutProps & ColorProps & PositionProps & SpacePro
     margin-right: 1rem;
   }
 
+  @media only screen and (max-width: 768px) {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+
   ${color}
   ${position}
   ${flexbox}

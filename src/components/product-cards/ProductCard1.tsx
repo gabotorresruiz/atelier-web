@@ -117,7 +117,7 @@ const ProductCard1: FC<ProductCard1Props> = ({ id, slug, title, imgUrl, ...props
             width="100%"
             src={imgUrl}
             height="100%"
-            style={{ objectFit: 'scale-down' }}
+            style={{ objectFit: 'scale-down', padding: '20px' }}
           />
         </a>
       </Link>

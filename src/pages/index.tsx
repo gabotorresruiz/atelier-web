@@ -29,6 +29,8 @@ const StyledContainer = styled(Container)({
   gap: '1.75rem',
   display: 'flex',
   padding: '0 !important',
+  margin: '0',
+
   '.sidenav': {
     top: 0,
     bottom: 0,
@@ -87,7 +89,7 @@ const Home = ({
       {/* HERO CAROUSEL AREA */}
       <Section1 mainCarouselData={brandingResource} />
 
-      <Container style={{ minHeight: '115vh' }}>
+      <Container style={{ minHeight: '90vh' }}>
         <StyledContainer>
           {/* SIDBAR NAVIGATION AREA */}
           <Box className="sidenav">

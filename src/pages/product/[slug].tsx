@@ -14,6 +14,7 @@ import {
   products,
   subcategories
 } from '@utils/page_resources/product';
+import Box from '@component/Box';
 // import Box from '@component/Box';
 // import FlexBox from '@component/FlexBox';
 // import { H5 } from '@component/Typography';
@@ -35,12 +36,12 @@ const ProductDetails = ({ product, relatedProducts, tintometricSystem }: Props) 
   if (router.isFallback) return <h1>Loading...</h1>;
 
   return (
-    <>
+    <Box>
       <ProductIntro product={product} tintometricSystem={tintometricSystem} />
 
       {/* RELATED PRODUCTS */}
       {relatedProducts.length ? <RelatedProducts products={relatedProducts} /> : null}
-    </>
+    </Box>
   );
 };
 

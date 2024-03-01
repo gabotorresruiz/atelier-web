@@ -24,8 +24,14 @@ const Wrapper = styled.div`
   background-color: ${getTheme('colors.body.paper')};
 
   .product-details {
-    padding: 15px 30px;
+    gap: 20px;
+    padding: 15px 0;
+
+    @media screen and (min-width: 768px) {
+      padding: 15px 30px;
+    }
   }
+
   .title {
     overflow: hidden;
     white-space: nowrap;
@@ -47,16 +53,35 @@ const Wrapper = styled.div`
 
 const StyledImageWrapper = styled.div`
   height: 140px;
+  padding: 5px 0;
+  width: 100%;
+
+  @media screen and (min-width: 768px) {
+    padding: 0;
+    width: auto;
+  }
+`;
+
+const StyledProductTitle = styled(Typography)`
+  text-align: center;
+
+  @media screen and (min-width: 768px) {
+    text-align: left;
+  }
 `;
 
 const StyledColorBox = styled.div`
   border-radius: 3px;
   transition: box-shadow 0.3s;
-  width: 70px;
+  width: 100%;
   height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media screen and (min-width: 425px) {
+    width: 30%;
+  }
 `;
 
 // =====================================================================
@@ -94,7 +119,7 @@ const ProductCard7: FC<ProductCard7Props> = ({
         <Link href={`/product/${product.id}-${slug}`}>
           <a>
             <Image
-              style={{ objectFit: 'contain' }}
+              style={{ objectFit: 'contain', height: '100%' }}
               size="100%"
               alt={product.name}
               display="block"
@@ -112,9 +137,9 @@ const ProductCard7: FC<ProductCard7Props> = ({
       >
         <Link href={`/product/${product.id}-${slug}`}>
           <a>
-            <Typography className="title" fontWeight="600" fontSize="18px" mb="1rem">
+            <StyledProductTitle className="title" fontWeight="600" fontSize="18px">
               {product.name}
-            </Typography>
+            </StyledProductTitle>
           </a>
         </Link>
         <Box position="absolute" right="1rem" top="1rem">
@@ -122,29 +147,29 @@ const ProductCard7: FC<ProductCard7Props> = ({
             <Icon size="1.25rem">close</Icon>
           </IconButton>
         </Box>
-        <FlexBox justifyContent="flex-start" alignItems="center">
+        <FlexBox style={{ gap: '10px' }} justifyContent="flex-start" alignItems="flex-start">
           {selectedSize ? (
-            <FlexBox mr="15px" flexWrap="wrap" alignItems="center">
-              <Typography color="gray.900" mr="0.5rem">
+            <FlexBox style={{ flex: '1' }} flexWrap="wrap" alignItems="center">
+              <Typography color="gray.900">
                 <strong>Tamaño:</strong> {selectedSize.size.quantity} L
               </Typography>
             </FlexBox>
           ) : null}
           {color ? (
-            <FlexBox flexWrap="wrap" alignItems="center">
-              <Typography color="text.primary" mr="1rem">
-                <strong>Color:</strong> {color.name} - {color.code}
+            <FlexBox style={{ flex: '2' }} flexWrap="wrap" alignItems="center">
+              <Typography color="text.primary" mr="0.5rem">
+                <strong>Color:</strong> {color.name}
               </Typography>
               <StyledColorBox style={{ backgroundColor: color.hex }} />
             </FlexBox>
           ) : null}
         </FlexBox>
-        <FlexBox justifyContent="space-between" alignItems="flex-end">
-          <FlexBox flexWrap="wrap" alignItems="center">
-            <Typography color="gray.600" mr="0.5rem">
+        <FlexBox style={{ gap: '15px' }} justifyContent="flex-start" alignItems="center">
+          <FlexBox style={{ gap: '10px' }} flexWrap="wrap" alignItems="center">
+            <Typography color="gray.600">
               {currency(price)} x {qty}
             </Typography>
-            <Typography fontWeight={600} color="primary.main" mr="1rem">
+            <Typography fontSize="16px" fontWeight={700} color="primary.main" mr="1rem">
               {currency(price * qty)}
             </Typography>
           </FlexBox>
