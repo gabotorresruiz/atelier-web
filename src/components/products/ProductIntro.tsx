@@ -30,6 +30,52 @@ const StyledColorBox = styled.div`
   }
 `;
 
+const StyledImageWrapper = styled(FlexBox)`
+  height: auto;
+  margin-bottom: 0;
+
+  @media screen and (min-width: 768px) {
+    height: 350px;
+    margin-bottom: 50px;
+  }
+`;
+
+const StyledBox = styled(Box)`
+  margin-bottom: 0;
+
+  @media screen and (min-width: 768px) {
+    margin-bottom: 20px;
+  }
+`;
+
+const StyledInfoGrid = styled(Grid)`
+  padding: 2rem 3rem;
+
+  @media screen and (min-width: 500px) {
+    padding: 2rem 6rem;
+  }
+
+  @media screen and (min-width: 800px) {
+    padding: 2rem 3rem 2rem 0;
+  }
+
+  @media screen and (min-width: 900px) {
+    padding: 2rem 4rem;
+  }
+
+  @media screen and (min-width: 1025px) {
+    padding: 2rem;
+  }
+`;
+
+const StyledQtyBox = styled(FlexBox)`
+  justify-content: flex-end;
+
+  @media screen and (min-width: 769px) {
+    justify-content: flex-start;
+  }
+`;
+
 const customStyles = {
   input: (styles) => ({ ...styles, height: 30 }),
   option: (provided, state) => ({
@@ -161,7 +207,7 @@ const ProductIntro: FC<ProductIntroProps> = ({ product, tintometricSystem }) => 
   return (
     <>
       <Modal open={open} onClose={onClose}>
-        <Card p="3rem" position="relative" maxWidth="1200px" width="100%">
+        <Card p="3rem" position="relative" width="100%">
           <Box position="absolute" top="0.75rem" right="0.75rem" cursor="pointer">
             <Icon className="close" color="primary" variant="small" onClick={onClose}>
               close
@@ -208,18 +254,18 @@ const ProductIntro: FC<ProductIntroProps> = ({ product, tintometricSystem }) => 
         <Grid style={{ marginTop: '10px' }} container justifyContent="center" spacing={16}>
           <Grid item md={6} xs={12} alignItems="center">
             <Box>
-              <FlexBox style={{ height: '350px' }} justifyContent="center" mb="50px">
+              <StyledImageWrapper justifyContent="center">
                 <Image width="100%" height="100%" src={imageUrl} style={{ objectFit: 'contain' }} />
-              </FlexBox>
+              </StyledImageWrapper>
             </Box>
           </Grid>
-          <Grid item md={6} xs={12} alignItems="center">
+          <StyledInfoGrid item md={6} xs={12} alignItems="center">
             <H1 mb="1rem">{name}</H1>
             <Paragraph mb="2rem">{description}</Paragraph>
             {productsSizes.length > 0 && withTintometric ? (
               <Grid container justifyContent="center" spacing={10}>
                 <Grid item md={6} xs={12} alignItems="center" justifyContent="center">
-                  <Box mb="20px">
+                  <StyledBox>
                     <Typography fontSize="0.875rem" fontWeight={600} mb="6px">
                       Tamaños
                     </Typography>
@@ -245,14 +291,12 @@ const ProductIntro: FC<ProductIntroProps> = ({ product, tintometricSystem }) => 
                         }
                       })}
                     />
-                  </Box>
+                  </StyledBox>
                 </Grid>
                 <Grid item md={6} xs={12} alignItems="center" justifyContent="center">
-                  <Box mb="20px">
+                  <StyledBox>
                     <Typography fontSize="0.875rem" fontWeight={600} mb="6px">
-                      {selectedColor !== null
-                        ? `${selectedColor.name} - ${selectedColor.code}`
-                        : 'Colores'}
+                      {selectedColor !== null ? `${selectedColor.name}` : 'Colores'}
                     </Typography>
                     {selectedColor !== null ? (
                       <Button
@@ -273,14 +317,14 @@ const ProductIntro: FC<ProductIntroProps> = ({ product, tintometricSystem }) => 
                         Seleccionar color
                       </Button>
                     )}
-                  </Box>
+                  </StyledBox>
                 </Grid>
               </Grid>
             ) : null}
             {productsSizes.length > 0 && !withTintometric ? (
               <Grid container justifyContent="center" spacing={10}>
                 <Grid item xs={12} alignItems="center" justifyContent="center">
-                  <Box mb="20px">
+                  <StyledBox>
                     <Typography fontSize="0.875rem" fontWeight={600} mb="6px">
                       Tamaños
                     </Typography>
@@ -306,14 +350,14 @@ const ProductIntro: FC<ProductIntroProps> = ({ product, tintometricSystem }) => 
                         }
                       })}
                     />
-                  </Box>
+                  </StyledBox>
                 </Grid>
               </Grid>
             ) : null}
             {productsSizes.length === 0 && withTintometric ? (
               <Grid container justifyContent="center" spacing={10}>
                 <Grid item xs={12} alignItems="center" justifyContent="center">
-                  <Box mb="20px">
+                  <StyledBox>
                     <Typography fontSize="0.875rem" fontWeight={600} mb="6px">
                       {selectedColor !== null
                         ? `${selectedColor.name} - ${selectedColor.code}`
@@ -338,58 +382,60 @@ const ProductIntro: FC<ProductIntroProps> = ({ product, tintometricSystem }) => 
                         Seleccionar color
                       </Button>
                     )}
-                  </Box>
+                  </StyledBox>
                 </Grid>
               </Grid>
             ) : null}
             {product?.price || selectedSize ? (
-              <Grid container justifyContent="center" spacing={10}>
-                <Grid item xs={6} alignItems="center" justifyContent="center">
-                  {!withTintometric || (withTintometric && selectedColor) ? (
-                    <Box mb="24px">
-                      <H2 color="primary.main" mb="4px" lineHeight="1">
-                        {currency(totalPrice)}
-                      </H2>
-                      <Small fontWeight={700} color="text.primary">
-                        {currency(totalPrice)} x {selectedQty}
-                      </Small>
-                    </Box>
-                  ) : null}
-                </Grid>
-                <Grid item xs={6} alignItems="center" justifyContent="center">
-                  {!withTintometric || (withTintometric && selectedColor) ? (
-                    <FlexBox alignItems="center">
-                      <Button
-                        disabled={selectedQty === 1}
-                        p="9px"
-                        size="small"
-                        color="primary"
-                        variant="outlined"
-                        onClick={handleCartAmountChangeDown}
-                      >
-                        <Icon variant="small">minus</Icon>
-                      </Button>
+              <Box my={3}>
+                <Grid container justifyContent="center" spacing={10}>
+                  <Grid item xs={6} alignItems="center" justifyContent="center">
+                    {!withTintometric || (withTintometric && selectedColor) ? (
+                      <StyledBox>
+                        <H2 color="primary.main" mb="4px" lineHeight="1">
+                          {currency(totalPrice)}
+                        </H2>
+                        <Small fontWeight={700} color="text.primary">
+                          {currency(totalPrice)} x {selectedQty}
+                        </Small>
+                      </StyledBox>
+                    ) : null}
+                  </Grid>
+                  <Grid item xs={6} alignItems="center" justifyContent="center">
+                    {!withTintometric || (withTintometric && selectedColor) ? (
+                      <StyledQtyBox alignItems="center">
+                        <Button
+                          disabled={selectedQty === 1}
+                          p="9px"
+                          size="small"
+                          color="primary"
+                          variant="outlined"
+                          onClick={handleCartAmountChangeDown}
+                        >
+                          <Icon variant="small">minus</Icon>
+                        </Button>
 
-                      <H3 fontWeight="600" mx="20px">
-                        {selectedQty.toString().padStart(2, '0')}
-                      </H3>
+                        <H3 fontWeight="600" mx="20px">
+                          {selectedQty.toString().padStart(2, '0')}
+                        </H3>
 
-                      <Button
-                        p="9px"
-                        size="small"
-                        color="primary"
-                        variant="outlined"
-                        onClick={handleCartAmountChangeUp}
-                      >
-                        <Icon variant="small">plus</Icon>
-                      </Button>
-                    </FlexBox>
-                  ) : null}
+                        <Button
+                          p="9px"
+                          size="small"
+                          color="primary"
+                          variant="outlined"
+                          onClick={handleCartAmountChangeUp}
+                        >
+                          <Icon variant="small">plus</Icon>
+                        </Button>
+                      </StyledQtyBox>
+                    ) : null}
+                  </Grid>
                 </Grid>
-              </Grid>
+              </Box>
             ) : null}
             <Grid container justifyContent="space-between" spacing={16}>
-              <Grid item md={6} xs={12} alignItems="center" justifyContent="center">
+              <Grid item lg={6} md={12} sm={12} xs={12} alignItems="center" justifyContent="center">
                 <Button
                   fullwidth
                   disabled={handleDisabledCartBtn}
@@ -403,7 +449,7 @@ const ProductIntro: FC<ProductIntroProps> = ({ product, tintometricSystem }) => 
                 </Button>
               </Grid>
             </Grid>
-          </Grid>
+          </StyledInfoGrid>
         </Grid>
       </Box>
     </>

@@ -44,9 +44,8 @@ const Wrapper = styled.div`
 `;
 const list = [
   { title: 'Home', icon: 'home', href: '/' },
-  { title: 'Category', icon: 'category', href: '/mobile-category-nav' },
-  { title: 'Cart', icon: 'bag', href: '/cart' },
-  { title: 'Account', icon: 'user-2', href: '/profile' }
+  { title: 'Categorías', icon: 'category', href: '/mobile-category-nav' },
+  { title: 'Carrito', icon: 'shopping-cart', href: '/cart' }
 ];
 
 const MobileNavigationBar: FC = () => {
@@ -64,10 +63,10 @@ const MobileNavigationBar: FC = () => {
 
             {item.title}
 
-            {item.title === 'Cart' && !!state.cart.length && (
+            {item.title === 'Carrito' && !!state.cart.length && (
               <Chip
                 top="4px"
-                px="0.25rem"
+                px="0.35rem"
                 fontWeight="600"
                 bg="primary.main"
                 position="absolute"

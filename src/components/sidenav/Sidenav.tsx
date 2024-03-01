@@ -1,10 +1,11 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { cloneElement, FC, ReactElement, ReactNode, useEffect, useState } from 'react';
+import { cloneElement, FC, ReactElement, ReactNode, useEffect, useState, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import StyledSidenav from './SidenavStyle';
 
 export interface SidenavProps {
+  subcategory?: string;
   open?: boolean;
   width?: number;
   scroll?: boolean;
@@ -21,8 +22,10 @@ const Sidenav: FC<SidenavProps> = ({
   handle,
   children,
   position,
+  subcategory,
   toggleSidenav
 }) => {
+  const currSubcategory = useRef(subcategory);
   const [sidenavOpen, setSidenavOpen] = useState(open);
 
   const handleModalContentClick = (e) => {
@@ -31,7 +34,12 @@ const Sidenav: FC<SidenavProps> = ({
 
   const handleToggleSidenav = () => setSidenavOpen(!sidenavOpen);
 
-  useEffect(() => setSidenavOpen(open), [open]);
+  useEffect(() => {
+    if (subcategory !== currSubcategory.current) {
+      currSubcategory.current = subcategory;
+      setSidenavOpen(false);
+    }
+  }, [subcategory]);
 
   if (globalThis.document && sidenavOpen) {
     let sidenav = document.querySelector('#sidenav-root');
@@ -77,6 +85,7 @@ const Sidenav: FC<SidenavProps> = ({
 };
 
 Sidenav.defaultProps = {
+  subcategory: '',
   width: 280,
   position: 'right',
   open: false,

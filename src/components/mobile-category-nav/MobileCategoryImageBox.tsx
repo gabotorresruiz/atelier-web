@@ -1,32 +1,34 @@
 import { FC } from 'react';
-import NextImage from 'next/image';
 import styled from 'styled-components';
-import Icon from '../icon/Icon';
+import { colors } from 'theme/colors';
 import FlexBox from '../FlexBox';
-import Typography from '../Typography';
+import { Paragraph } from '../Typography';
 
-const StyledImage = styled(NextImage)`
+const StyledFlexBox = styled(FlexBox)`
+  background-color: ${colors.primary.main};
   border-radius: 5px;
+  color: ${colors.gray.white};
+  padding: 8px 0;
+`;
+
+const StyledParagraph = styled(Paragraph)`
+  max-width: 90px;
+
+  @media screen and (min-width: 1200px) {
+    max-width: 100%;
+  }
 `;
 
 type MobileCategoryImageBoxProps = {
-  icon?: string;
   title: string;
-  imgUrl?: string;
 };
 
-const MobileCategoryImageBox: FC<MobileCategoryImageBoxProps> = ({ title, imgUrl, icon }) => (
-  <FlexBox flexDirection="column" alignItems="center" justifyContent="center">
-    {imgUrl ? (
-      <StyledImage src={imgUrl} width={100} height={100} objectFit="cover" />
-    ) : (
-      icon && <Icon size="48px">{icon}</Icon>
-    )}
-
-    <Typography className="ellipsis" textAlign="center" fontSize="11px" lineHeight="1" mt="0.5rem">
+const MobileCategoryImageBox: FC<MobileCategoryImageBoxProps> = ({ title }) => (
+  <StyledFlexBox flexDirection="column" alignItems="center" justifyContent="center">
+    <StyledParagraph ellipsis textAlign="center" fontSize="14px" fontWeight={700}>
       {title}
-    </Typography>
-  </FlexBox>
+    </StyledParagraph>
+  </StyledFlexBox>
 );
 
 export default MobileCategoryImageBox;

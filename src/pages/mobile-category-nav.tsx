@@ -1,137 +1,98 @@
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useState } from 'react';
 import Link from 'next/link';
 import Box from '@component/Box';
 import Grid from '@component/grid/Grid';
-import Icon from '@component/icon/Icon';
 import Divider from '@component/Divider';
-// import { Header } from '@component/header';
+import Icon from '@component/icon/Icon';
 import Typography from '@component/Typography';
 import MobileNavigationBar from '@component/mobile-navigation';
 import { Accordion, AccordionHeader } from '@component/accordion';
 import { MobileCategoryImageBox, MobileCategoryNavStyle } from '@component/mobile-category-nav';
-import navigations from '@data/navigations';
+import { branding, categories, macrocategories } from '@utils/page_resources/mobile-category';
+import { GetStaticProps } from 'next';
+import { Header } from '@component/header';
+import Category from '@models/category.model';
+import Macrocategory from '@models/macrocategory.model';
+import Branding from '@models/branding.model';
+import { getSlug } from '@utils/utils';
+import { colors } from '@utils/themeColors';
 
-const suggestion = [
-  {
-    title: 'Belt',
-    href: '/belt',
-    imgUrl: '/assets/images/products/categories/belt.png'
-  },
-  {
-    title: 'Hat',
-    href: '/Hat',
-    imgUrl: '/assets/images/products/categories/hat.png'
-  },
-  {
-    title: 'Watches',
-    href: '/Watches',
-    imgUrl: '/assets/images/products/categories/watch.png'
-  },
-  {
-    title: 'Sunglasses',
-    href: '/Sunglasses',
-    imgUrl: '/assets/images/products/categories/sunglass.png'
-  },
-  {
-    title: 'Sneakers',
-    href: '/Sneakers',
-    imgUrl: '/assets/images/products/categories/sneaker.png'
-  },
-  {
-    title: 'Sandals',
-    href: '/Sandals',
-    imgUrl: '/assets/images/products/categories/sandal.png'
-  },
-  {
-    title: 'Formal',
-    href: '/Formal',
-    imgUrl: '/assets/images/products/categories/shirt.png'
-  },
-  {
-    title: 'Casual',
-    href: '/Casual',
-    imgUrl: '/assets/images/products/categories/t-shirt.png'
-  }
-];
+// ====================================================================
+type MobileCategoryNavProps = {
+  brandingResource: Branding;
+  categoryList: Category[];
+  macrocategoryList: Macrocategory[];
+};
+// =====================================================================
 
-const MobileCategoryNav = () => {
-  const [category, setCategory] = useState(null);
-  const [suggestedList, setSuggestedList] = useState([]);
-  const [subCategoryList, setSubCategoryList] = useState([]);
+const MobileCategoryNav = ({
+  brandingResource,
+  categoryList,
+  macrocategoryList
+}: MobileCategoryNavProps) => {
+  const [macrocategory, setMacrocategory] = useState(macrocategoryList[0]);
+  const [internalCategories, setInternalCategories] = useState(
+    macrocategoryList[0].categories || []
+  );
 
-  const handleCategoryClick = (cat) => () => {
-    let { menuData } = cat;
-    if (menuData) setSubCategoryList(menuData.categories || menuData);
-    else setSubCategoryList([]);
-    setCategory(cat);
+  const handleCategoryClick = (itemSelected) => () => {
+    setInternalCategories(itemSelected.categories || []);
+    setMacrocategory(itemSelected);
   };
-
-  useEffect(() => setSuggestedList(suggestion), []);
 
   return (
     <MobileCategoryNavStyle>
-      {/* <Header
+      <Header
         brandingResource={brandingResource}
         dataList={macrocategoryList.length ? macrocategoryList : categoryList}
         className="header"
-      /> */}
+      />
 
       <Box className="main-category-holder">
-        {navigations.map((item) => (
+        {macrocategoryList.map((item, idx) => (
           <Box
-            key={item.title}
+            key={item.id}
             className="main-category-box"
             onClick={handleCategoryClick(item)}
-            borderLeft={`${category?.href === item.href ? '3' : '0'}px solid`}
+            borderBottom={`${
+              macrocategory?.name === item.name
+                ? `3px solid ${colors.primary.main}`
+                : `3px solid ${colors.text.disabled}`
+            }`}
           >
             <Icon size="28px" mb="0.5rem">
-              {item.icon}
+              {idx % 2 === 0 ? 'categories' : 'category'}
             </Icon>
-
             <Typography className="ellipsis" textAlign="center" fontSize="11px" lineHeight="1">
-              {item.title}
+              {item.name}
             </Typography>
           </Box>
         ))}
       </Box>
 
       <Box className="container">
-        <Typography fontWeight="600" fontSize="15px" mb="1rem">
-          Recommended Categories
-        </Typography>
-
-        <Box mb="2rem">
-          <Grid container spacing={3}>
-            {suggestedList.map((item) => (
-              <Grid item lg={1} md={2} sm={3} xs={4} key={item.title}>
-                <Link href="/product/search/423423">
-                  <a>
-                    <MobileCategoryImageBox {...item} />
-                  </a>
-                </Link>
-              </Grid>
-            ))}
-          </Grid>
-        </Box>
-
-        {category?.menuComponent === 'MegaMenu1' ? (
-          subCategoryList.map((item) => (
-            <Fragment key={item.title}>
+        {macrocategory?.categories.length > 0 ? (
+          internalCategories.map((item) => (
+            <Fragment key={item.id}>
               <Divider />
               <Accordion>
                 <AccordionHeader px="0px" py="10px">
                   <Typography fontWeight="600" fontSize="15px">
-                    {item.title}
+                    {item.name}
                   </Typography>
                 </AccordionHeader>
 
                 <Box mb="2rem" mt="0.5rem">
-                  <Grid container spacing={3}>
-                    {item.subCategories?.map((subItem) => (
-                      <Grid item lg={1} md={2} sm={3} xs={4} key={subItem.title}>
-                        <Link href="/product/search/423423">
+                  <Grid container spacing={2}>
+                    {item.categories_subcategories?.map((subItem) => (
+                      <Grid item lg={1} md={2} sm={3} xs={4} key={subItem.subcategoryId}>
+                        <Link
+                          href={`/subcategory/${subItem.subcategory.id}-${getSlug(
+                            subItem.subcategory.name
+                          )}`}
+                        >
                           <a>
-                            <MobileCategoryImageBox {...subItem} />
+                            <MobileCategoryImageBox title={subItem.subcategory.name} />
                           </a>
                         </Link>
                       </Grid>
@@ -144,11 +105,11 @@ const MobileCategoryNav = () => {
         ) : (
           <Box mb="2rem">
             <Grid container spacing={3}>
-              {subCategoryList.map((item) => (
-                <Grid item lg={1} md={2} sm={3} xs={4} key={item.title}>
+              {internalCategories.map((item) => (
+                <Grid item lg={1} md={2} sm={3} xs={4} key={item.id}>
                   <Link href="/product/search/423423">
                     <a>
-                      <MobileCategoryImageBox {...item} />
+                      <MobileCategoryImageBox title={item.name} />
                     </a>
                   </Link>
                 </Grid>
@@ -161,6 +122,20 @@ const MobileCategoryNav = () => {
       <MobileNavigationBar />
     </MobileCategoryNavStyle>
   );
+};
+
+export const getStaticProps: GetStaticProps = async () => {
+  const brandingResource = await branding.getBranding();
+  const macrocategoryList = await macrocategories.getMacrocategories();
+  const categoryList = await categories.getCategories();
+
+  return {
+    props: {
+      brandingResource,
+      categoryList,
+      macrocategoryList
+    }
+  };
 };
 
 export default MobileCategoryNav;

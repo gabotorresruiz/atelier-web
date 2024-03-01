@@ -1,8 +1,25 @@
 import { FC, Fragment, useEffect, useState } from 'react';
+import styled from 'styled-components';
 import { useAppContext } from '@context/AppContext';
 import Box from './Box';
 import Chip from './Chip';
 import FlexBox from './FlexBox';
+
+const StyledChip = styled(Chip)`
+  padding: 0.4rem 0.8rem;
+
+  @media screen and (min-width: 768px) {
+    padding: 0.5rem 1.5rem;
+  }
+`;
+
+const StyledLineSeparator = styled(Box)`
+  width: 15px;
+
+  @media screen and (min-width: 768px) {
+    width: 50px;
+  }
+`;
 
 type Step = { title: string; disabled: boolean };
 
@@ -40,11 +57,10 @@ const Stepper: FC<StepperProps> = ({ selectedStep, stepperList, onChange }) => {
     <FlexBox alignItems="center" flexWrap="wrap" justifyContent="center" my="-4px">
       {stepperList.map((step, ind) => (
         <Fragment key={step.title}>
-          <Chip
+          <StyledChip
             my="4px"
             fontSize="14px"
             fontWeight="600"
-            p="0.5rem 1.5rem"
             color={ind <= selected ? 'white' : 'primary.main'}
             cursor={
               step.disabled || getTotalPrice() === 0 || !getBuyerUser() ? 'not-allowed' : 'pointer'
@@ -53,10 +69,13 @@ const Stepper: FC<StepperProps> = ({ selectedStep, stepperList, onChange }) => {
             onClick={handleStepClick(step, ind)}
           >
             {ind + 1}. {step.title}
-          </Chip>
+          </StyledChip>
 
           {ind < stepperList.length - 1 && (
-            <Box width="50px" height="4px" bg={ind < selected ? 'primary.main' : 'primary.light'} />
+            <StyledLineSeparator
+              height="4px"
+              bg={ind < selected ? 'primary.main' : 'primary.light'}
+            />
           )}
         </Fragment>
       ))}

@@ -8,17 +8,22 @@ import { deviceSize } from '@utils/constants';
 import Branding from '@models/branding.model';
 
 // styled components
-const StyledBox = styled(Box)({
-  marginBottom: 60,
-  overflow: 'hidden',
-  '& .carousel-dot': {
-    left: 0,
-    right: 0,
-    bottom: '30px',
-    margin: 'auto',
-    position: 'absolute'
+const StyledBox = styled(Box)`
+  margin-bottom: 0;
+  overflow: hidden;
+
+  @media screen and (min-width: 1024px) {
+    margin-bottom: 60px;
   }
-});
+
+  & .carousel-dot {
+    left: 0;
+    right: 0;
+    bottom: 30px;
+    margin: auto;
+    position: absolute;
+  }
+`;
 
 const Container = styled(Box)({
   minHeight: 650,
@@ -32,20 +37,33 @@ const Container = styled(Box)({
   [`@media(max-width:${deviceSize.sm}px)`]: { height: '50vh' }
 });
 
-const StyledGrid = styled(Grid)({
-  maxWidth: 1280,
-  margin: '0 8rem',
-  position: 'relative',
-  alignItems: 'center',
-  padding: '2rem 0px 5rem 0px'
-});
+const StyledGrid = styled(Grid)`
+  min-width: 70vw;
+  max-width: 1280px;
+  margin: 0 auto;
+  position: relative;
+  align-items: center;
+  padding: 2rem 0px 5rem 0px;
 
-const GridItemOne = styled(Grid)({
-  backdropFilter: 'blur(50px)',
-  borderRadius: '10px',
-  padding: '30px 40px',
-  width: '100%'
-});
+  @media screen and (min-width: 1025px) {
+    margin: 0 8rem;
+    min-width: auto;
+    padding: 2rem 0px 5rem 0px;
+  }
+`;
+
+const GridItemOne = styled(Grid)`
+  backdrop-filter: blur(50px);
+  border-radius: 10px;
+  padding: 30px 40px;
+  text-align: center;
+  width: 100%;
+
+  @media screen and (min-width: 1025px) {
+    text-align: left;
+    padding: 35px 220px 35px 40px;
+  }
+`;
 
 // ===============================================================
 type Props = { mainCarouselData: Branding };

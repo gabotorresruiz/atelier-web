@@ -18,8 +18,12 @@ export const StyledCarousel = styled(
   ({ ...props }: CarouselProviderProps & StyledCarouselProps) => <CarouselProvider {...props} />
 )`
   position: relative;
-  margin-bottom: 64px;
+  margin-bottom: 35px;
   min-width: 0px;
+
+  @media screen and (min-width: 768px) {
+    margin-bottom: 64px;
+  }
 
   .custom-slider {
     margin-left: calc(-1 * ${({ spacing }) => spacing || '0px'} / 2);

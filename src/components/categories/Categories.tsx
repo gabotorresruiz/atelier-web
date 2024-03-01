@@ -1,4 +1,4 @@
-import { cloneElement, FC, ReactElement, useCallback, useEffect, useRef, useState } from 'react';
+import { cloneElement, FC, ReactElement, useState } from 'react';
 import Category from '@models/category.model';
 import Macrocategory from '@models/macrocategory.model';
 import CategoryDropdown from './CategoryDropdown';
@@ -14,22 +14,11 @@ type CategoriesProps = {
 
 const Categories: FC<CategoriesProps> = ({ open: isOpen, dataList, children }) => {
   const [open, setOpen] = useState(isOpen);
-  const popoverRef = useRef(open);
-  popoverRef.current = open;
 
   const toggleMenu = (e) => {
     e.stopPropagation();
     if (!isOpen) setOpen(!open);
   };
-
-  const handleDocumentClick = useCallback(() => {
-    if (popoverRef.current && !isOpen) setOpen(false);
-  }, [isOpen]);
-
-  useEffect(() => {
-    window.addEventListener('click', handleDocumentClick);
-    return () => window.removeEventListener('click', handleDocumentClick);
-  }, [handleDocumentClick]);
 
   return (
     <StyledCategory open={open}>
@@ -38,7 +27,7 @@ const Categories: FC<CategoriesProps> = ({ open: isOpen, dataList, children }) =
         onClick: toggleMenu,
         className: `${children.props.className} cursor-pointer`
       })}
-      <CategoryDropdown open={open} dataList={dataList} />
+      <CategoryDropdown open={open} dataList={dataList} setOpen={setOpen} />
     </StyledCategory>
   );
 };

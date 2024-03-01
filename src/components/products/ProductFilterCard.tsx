@@ -111,8 +111,8 @@ const ProductFilterCard: FC<ProductFilterCardProps> = ({
     ));
 
   return (
-    <Card p="18px 27px" elevation={5}>
-      <Scrollbar autoHide={false} sx={{ maxHeight: '85vh' }}>
+    <Card style={{ height: '100%' }} p="10px" elevation={5}>
+      <Scrollbar autoHide={false} sx={{ maxHeight: '96vh' }}>
         <NavbarRoot isfixed sidebarstyle="style1">
           {navList.map((item: any, i: number) => (
             <Box key={i}>

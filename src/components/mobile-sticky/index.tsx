@@ -10,7 +10,7 @@ export interface StickyProps {
   notifyOnScroll?: (hasReachedPosition: boolean) => void;
 }
 
-const Sticky: FC<StickyProps> = (props) => {
+const MobileSticky: FC<StickyProps> = (props) => {
   const { fixedOn, containerRef, children, notifyPosition, notifyOnScroll, onSticky } = props;
 
   const elementRef = useRef(null);
@@ -21,7 +21,7 @@ const Sticky: FC<StickyProps> = (props) => {
   const scrollListener = useCallback(() => {
     if (!window) return;
 
-    let distance = window.scrollY - 100 - positionRef.current;
+    let distance = window.scrollY - positionRef.current;
 
     if (containerRef?.current && containerRef.current?.offsetHeight) {
       let containerDistance =
@@ -80,4 +80,4 @@ const Sticky: FC<StickyProps> = (props) => {
   );
 };
 
-export default Sticky;
+export default MobileSticky;

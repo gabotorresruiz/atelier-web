@@ -36,6 +36,14 @@ const StyledTitleBox = styled(Box)`
   padding: 15px;
 `;
 
+const StyledSectionTitle = styled(Box)`
+  text-align: center;
+
+  @media screen and (min-width: 768px) {
+    text-align: left;
+  }
+`;
+
 type Section2Props = {
   dataList: Trend[];
   title: string;
@@ -43,9 +51,9 @@ type Section2Props = {
 
 const Section2: FC<Section2Props> = ({ dataList, title }) => (
   <>
-    <Box mb={4}>
+    <StyledSectionTitle mb={4}>
       <H1 mb="4px">{title}</H1>
-    </Box>
+    </StyledSectionTitle>
     <Grid container spacing={6}>
       {dataList.map((item) => (
         <Grid key={item.id} item xs={12} md={6}>

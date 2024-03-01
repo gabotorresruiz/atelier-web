@@ -50,7 +50,7 @@ const ProductSearchResult = ({
     <Box pt="20px">
       <FlexBox
         as={Card}
-        mb="55px"
+        mb="40px"
         p="1.25rem"
         elevation={5}
         flexWrap="wrap"

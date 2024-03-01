@@ -12,7 +12,14 @@ import AppLayout from './AppLayout';
 import Navbar from '../navbar/Navbar';
 
 const StyledContainer = styled(Container)`
-  min-height: calc(100vh - 404px);
+  margin: 9.5rem 0 2rem;
+  max-width: 100%;
+  min-height: calc(100vh - 496px);
+
+  @media screen and (min-width: 768px) {
+    margin: 2rem 0;
+    min-height: calc(100vh - 404px);
+  }
 `;
 
 // ======================================================
@@ -79,10 +86,10 @@ const CheckoutNavLayout: FC<Props> = ({
       macrocategoryList={macrocategoryList}
       navbar={<Navbar dataList={macrocategoryList.length ? macrocategoryList : categoryList} />}
     >
-      <StyledContainer my="2rem">
+      <StyledContainer>
         <Box mb="14px">
-          <Grid container spacing={6}>
-            <Grid item lg={8} md={8} xs={12}>
+          <Grid style={{ margin: 0 }} container spacing={6}>
+            <Grid item xs={12}>
               <Stepper
                 stepperList={stepperList}
                 selectedStep={selectedStep}

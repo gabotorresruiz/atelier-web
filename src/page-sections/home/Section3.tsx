@@ -1,10 +1,19 @@
 import { FC, useEffect, useState } from 'react';
+import styled from 'styled-components';
 import Box from '@component/Box';
 import { Carousel } from '@component/carousel';
 import { H1 } from '@component/Typography';
 import { ProductCard13 } from '@component/product-cards';
 import useWindowSize from '@hook/useWindowSize';
 import Product from '@models/product.model';
+
+const StyledSectionTitle = styled(Box)`
+  text-align: center;
+
+  @media screen and (min-width: 768px) {
+    text-align: left;
+  }
+`;
 
 // =====================================================
 type Props = { products: Product[]; title: string };
@@ -22,9 +31,9 @@ const Section3: FC<Props> = ({ products, title }) => {
 
   return (
     <Box mt={5}>
-      <Box mb={4}>
+      <StyledSectionTitle mb={4}>
         <H1 mb="4px">{title}</H1>
-      </Box>
+      </StyledSectionTitle>
 
       <Box my="-0.25rem">
         <Carousel

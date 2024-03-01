@@ -6,7 +6,7 @@ import CheckoutNavLayout from '@component/layout/CheckoutNavLayout';
 import { branding, categories, macrocategories } from '@utils/page_resources/checkout';
 
 const Checkout = () => (
-  <Grid container flexWrap="wrap-reverse" spacing={6}>
+  <Grid style={{ margin: 0 }} container flexWrap="wrap-reverse" spacing={6}>
     <Grid item lg={8} md={8} xs={12}>
       <CheckoutForm />
     </Grid>

@@ -20,6 +20,11 @@ const StyledAlert = styled(FlexBox)`
   flex-direction: column;
   height: 142px;
   padding: 15px;
+  text-align: center;
+
+  @media screen and (min-width: 768px) {
+    text-align: left;
+  }
 `;
 
 const Cart = () => {
@@ -29,7 +34,7 @@ const Cart = () => {
     state.cart.reduce((accumulator, item) => accumulator + item.price * item.qty, 0) || 0;
 
   return (
-    <Grid container spacing={6}>
+    <Grid style={{ margin: 0 }} container spacing={6}>
       <Grid item lg={8} md={8} xs={12}>
         {state.cart.length > 0 ? (
           state.cart.map((item, idx) => (

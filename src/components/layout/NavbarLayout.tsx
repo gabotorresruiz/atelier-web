@@ -1,4 +1,5 @@
 import { FC, ReactNode, useEffect } from 'react';
+import styled from 'styled-components';
 import NProgress from 'nprogress';
 import Container from '@component/Container';
 import Navbar from '@component/navbar/Navbar';
@@ -6,6 +7,14 @@ import Branding from '@models/branding.model';
 import Category from '@models/category.model';
 import Macrocategory from '@models/macrocategory.model';
 import AppLayout from './AppLayout';
+
+const StyledWrapperSection = styled(Container)`
+  margin-top: 130px;
+
+  @media screen and (min-width: 768px) {
+    margin-top: 0;
+  }
+`;
 
 // ======================================================
 type Props = {
@@ -37,9 +46,9 @@ const NavbarLayout: FC<Props> = ({
       macrocategoryList={macrocategoryList}
       navbar={<Navbar dataList={macrocategoryList.length ? macrocategoryList : categoryList} />}
     >
-      <Container style={{ minHeight: '65vh' }} my="2rem">
+      <StyledWrapperSection style={{ minHeight: 'calc(100vh - 389px)' }} mb="2rem">
         {children}
-      </Container>
+      </StyledWrapperSection>
     </AppLayout>
   ) : null;
 };
