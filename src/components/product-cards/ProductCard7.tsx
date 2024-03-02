@@ -17,11 +17,17 @@ import Color from '@models/color.model';
 const Wrapper = styled.div`
   display: flex;
   overflow: hidden;
-  padding: 5px 10px;
+  flex-direction: column;
+  padding: 5px 15px;
   position: relative;
   border-radius: 10px;
   box-shadow: ${getTheme('shadows.4')};
   background-color: ${getTheme('colors.body.paper')};
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    padding: 5px 10px;
+  }
 
   .product-details {
     gap: 20px;

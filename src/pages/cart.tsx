@@ -34,7 +34,7 @@ const Cart = () => {
     state.cart.reduce((accumulator, item) => accumulator + item.price * item.qty, 0) || 0;
 
   return (
-    <Grid style={{ margin: 0 }} container spacing={6}>
+    <Grid style={{ maxWidth: '1200px', margin: '0 auto' }} container spacing={6}>
       <Grid item lg={8} md={8} xs={12}>
         {state.cart.length > 0 ? (
           state.cart.map((item, idx) => (

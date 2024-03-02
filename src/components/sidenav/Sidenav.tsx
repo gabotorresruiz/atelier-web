@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-import { cloneElement, FC, ReactElement, ReactNode, useEffect, useState, useRef } from 'react';
+import { cloneElement, FC, ReactElement, ReactNode, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import StyledSidenav from './SidenavStyle';
 
@@ -13,10 +12,12 @@ export interface SidenavProps {
   handle: ReactElement;
   position?: 'left' | 'right';
   toggleSidenav?: () => void;
+  setOpen?: any;
 }
 
 const Sidenav: FC<SidenavProps> = ({
   open,
+  setOpen,
   width,
   scroll,
   handle,
@@ -26,22 +27,19 @@ const Sidenav: FC<SidenavProps> = ({
   toggleSidenav
 }) => {
   const currSubcategory = useRef(subcategory);
-  const [sidenavOpen, setSidenavOpen] = useState(open);
 
   const handleModalContentClick = (e) => {
     e.stopPropagation();
   };
 
-  const handleToggleSidenav = () => setSidenavOpen(!sidenavOpen);
-
   useEffect(() => {
     if (subcategory !== currSubcategory.current) {
       currSubcategory.current = subcategory;
-      setSidenavOpen(false);
+      setOpen(false);
     }
-  }, [subcategory]);
+  }, [setOpen, subcategory]);
 
-  if (globalThis.document && sidenavOpen) {
+  if (globalThis.document && open) {
     let sidenav = document.querySelector('#sidenav-root');
 
     if (!sidenav) {
@@ -56,9 +54,9 @@ const Sidenav: FC<SidenavProps> = ({
           <StyledSidenav
             width={width}
             scroll={scroll}
-            open={sidenavOpen}
+            open={open}
             position={position}
-            onClick={toggleSidenav || handleToggleSidenav}
+            onClick={toggleSidenav}
           >
             <div className="sidenav-content" onClick={handleModalContentClick}>
               {children}
@@ -70,7 +68,7 @@ const Sidenav: FC<SidenavProps> = ({
         {handle &&
           cloneElement(handle, {
             className: `${handle.props?.className} cursor-pointer`,
-            onClick: toggleSidenav || handleToggleSidenav
+            onClick: toggleSidenav
           })}
       </>
     );
@@ -79,7 +77,7 @@ const Sidenav: FC<SidenavProps> = ({
     handle &&
     cloneElement(handle, {
       className: `${handle.props?.className} cursor-pointer`,
-      onClick: toggleSidenav || handleToggleSidenav
+      onClick: toggleSidenav
     })
   );
 };

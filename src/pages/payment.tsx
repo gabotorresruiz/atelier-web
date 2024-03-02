@@ -34,7 +34,12 @@ const Checkout = () => {
   const [paymentSuccess, setPaymentSuccess] = useState(false);
 
   return !paymentSuccess ? (
-    <Grid style={{ margin: 0 }} container flexWrap="wrap-reverse" spacing={6}>
+    <Grid
+      style={{ maxWidth: '1200px', margin: '0 auto' }}
+      container
+      flexWrap="wrap-reverse"
+      spacing={6}
+    >
       <Grid item lg={8} md={8} xs={12}>
         <PaymentForm setPaymentSuccess={setPaymentSuccess} />
       </Grid>

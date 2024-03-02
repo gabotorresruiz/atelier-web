@@ -17,7 +17,8 @@ const StyledContainer = styled(Container)`
   min-height: calc(100vh - 496px);
 
   @media screen and (min-width: 768px) {
-    margin: 2rem 0;
+    margin: 2rem auto;
+    max-width: 1200px;
     min-height: calc(100vh - 404px);
   }
 `;
@@ -88,7 +89,7 @@ const CheckoutNavLayout: FC<Props> = ({
     >
       <StyledContainer>
         <Box mb="14px">
-          <Grid style={{ margin: 0 }} container spacing={6}>
+          <Grid style={{ maxWidth: '1200px', margin: '0 auto' }} container spacing={6}>
             <Grid item xs={12}>
               <Stepper
                 stepperList={stepperList}

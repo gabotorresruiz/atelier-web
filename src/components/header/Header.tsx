@@ -54,7 +54,10 @@ type HeaderProps = {
 const Header: FC<HeaderProps> = ({ isFixed, className, brandingResource, dataList }) => {
   const { state } = useAppContext();
   const [open, setOpen] = useState(false);
-  const toggleSidenav = () => setOpen(!open);
+
+  const toggleSidenav = () => {
+    setOpen((prevState) => !prevState);
+  };
 
   const CART_HANDLE = (
     <Box ml="20px" position="relative">
@@ -115,6 +118,7 @@ const Header: FC<HeaderProps> = ({ isFixed, className, brandingResource, dataLis
         <FlexBox className="header-right" alignItems="center">
           <Sidenav
             open={open}
+            setOpen={setOpen}
             width={380}
             position="right"
             handle={CART_HANDLE}
