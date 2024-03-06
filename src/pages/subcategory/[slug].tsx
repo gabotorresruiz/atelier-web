@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import Box from '@component/Box';
@@ -44,6 +45,12 @@ const SubcategoryResult = ({
   const router = useRouter();
   const width = useWindowSize();
 
+  const [open, setOpen] = useState(false);
+
+  const toggleSidenav = () => {
+    setOpen((prevState) => !prevState);
+  };
+
   const isTablet = width < 1025;
 
   // Show a loading state when the fallback is rendered
@@ -74,9 +81,12 @@ const SubcategoryResult = ({
             <FlexBox alignItems="center" flexWrap="wrap">
               {isTablet && (
                 <Sidenav
+                  open={open}
+                  setOpen={setOpen}
                   subcategory={subcategory.name}
                   position="left"
                   scroll
+                  toggleSidenav={toggleSidenav}
                   handle={
                     <IconButton size="small">
                       <Icon>options</Icon>
