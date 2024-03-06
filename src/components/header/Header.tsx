@@ -27,7 +27,7 @@ const StyledLogoImage = styled.img`
   object-fit: scale-down;
 `;
 
-const StyledContainer = styled(Container)`
+const StyledContainerHeader = styled(Container)`
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -87,7 +87,7 @@ const Header: FC<HeaderProps> = ({ isFixed, className, brandingResource, dataLis
 
   return (
     <StyledHeader className={className}>
-      <StyledContainer
+      <StyledContainerHeader
         display="flex"
         alignItems="center"
         justifyContent="space-between"
@@ -127,7 +127,7 @@ const Header: FC<HeaderProps> = ({ isFixed, className, brandingResource, dataLis
             <MiniCart toggleSidenav={toggleSidenav} />
           </Sidenav>
         </FlexBox>
-      </StyledContainer>
+      </StyledContainerHeader>
     </StyledHeader>
   );
 };

@@ -31,7 +31,7 @@ const Section3: FC<Props> = ({ products, title }) => {
 
   return (
     <Box mt={5}>
-      <StyledSectionTitle mb={4}>
+      <StyledSectionTitle id="section-3-title" mb={4}>
         <H1 mb="4px">{title}</H1>
       </StyledSectionTitle>
 

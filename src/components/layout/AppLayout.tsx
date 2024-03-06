@@ -39,7 +39,7 @@ const AppLayout: FC<Props> = ({
   brandingResource,
   categoryList = [],
   macrocategoryList = [],
-  navbar,
+  navbar = null,
   children,
   title = 'Creative ColorLabs - Atelier'
 }) => (
@@ -65,13 +65,13 @@ const AppLayout: FC<Props> = ({
         />
       </MobileSticky>
     </Hidden>
-    {navbar && (
-      <StyledWrapperSection className="section-after-sticky">{navbar}</StyledWrapperSection>
-    )}
-    {!navbar ? (
-      <StyledWrapperSection className="section-after-sticky">{children}</StyledWrapperSection>
+    {navbar ? (
+      <StyledWrapperSection className="section-after-sticky">
+        {navbar}
+        {children}
+      </StyledWrapperSection>
     ) : (
-      <StyledWrapperSection>{children}</StyledWrapperSection>
+      <StyledWrapperSection className="section-after-sticky">{children}</StyledWrapperSection>
     )}
     <MobileNavigationBar />
     <Footer1 brandingResource={brandingResource} />

@@ -99,6 +99,29 @@ const GlobalStyles = createGlobalStyle`
   position: absolute;
 }
 
+#home-container {
+  gap: 1.75rem;
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+
+.trends-card-title {
+  background-color: white;
+  border-radius: 5px;
+  padding: 15px;
+}
+
+#section-3-title {
+  height: auto;
+  margin-bottom: 32px;
+  text-align: center;
+
+  @media screen and (min-width: 768px) {
+    text-align: left;
+  }
+}
+
 @-webkit-keyframes nprogress-spinner {
   0%   { -webkit-transform: rotate(0deg); }
   100% { -webkit-transform: rotate(360deg); }

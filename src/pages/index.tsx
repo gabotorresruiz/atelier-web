@@ -9,7 +9,7 @@ import SideNavbar from '@component/sidenav/SideNavbar';
 import Section1 from '@sections/home/Section1';
 import Section2 from '@sections/home/Section2';
 import Section3 from '@sections/home/Section3';
-import { deviceSize, layoutConstant } from '@utils/constants';
+import { deviceSize } from '@utils/constants';
 import {
   branding,
   categories,
@@ -25,28 +25,28 @@ import Category from '@models/category.model';
 import Trend from '@models/trend.model';
 
 // styled component
-const StyledContainer = styled(Container)({
-  gap: '1.75rem',
-  display: 'flex',
-  padding: '0 !important',
-  margin: '0',
+const StyledContainerHome = styled(Box)`
+  gap: 1.75rem;
+  display: flex;
+  padding: 0;
+  margin: 0;
+`;
 
-  '.sidenav': {
-    top: 0,
-    bottom: 0,
-    position: 'relative',
-    transition: 'all 350ms ease-in-out',
-    width: layoutConstant.grocerySidenavWidth,
-    minWidth: layoutConstant.grocerySidenavWidth,
-    [`@media (max-width:${deviceSize.md}px)`]: { display: 'none' }
-  },
+const StyledSidenavBox = styled(Box)({
+  top: 0,
+  bottom: 0,
+  position: 'relative',
+  transition: 'all 350ms ease-in-out',
+  width: '280px',
+  minWidth: '280px',
+  [`@media (max-width:${deviceSize.md}px)`]: { display: 'none' }
+});
 
-  '& .pageContent': {
-    left: 'unset',
-    position: 'relative',
-    width: `calc(100% - ${layoutConstant.grocerySidenavWidth})`,
-    [`@media (max-width:${deviceSize.md}px)`]: { width: '100%', marginLeft: 0 }
-  }
+const StyledPageContent = styled('div')({
+  left: 'unset',
+  position: 'relative',
+  width: 'calc(100% - 280px})',
+  [`@media (max-width:${deviceSize.md}px)`]: { width: '100%', marginLeft: 0 }
 });
 
 // ======================================================================
@@ -90,20 +90,20 @@ const Home = ({
       <Section1 mainCarouselData={brandingResource} />
 
       <Container style={{ minHeight: '90vh' }}>
-        <StyledContainer>
+        <StyledContainerHome id="home-container">
           {/* SIDBAR NAVIGATION AREA */}
-          <Box className="sidenav">
+          <StyledSidenavBox>
             <SideNavbar
               lineStyle="dash"
               sidebarStyle="style2"
               navList={macrocategoryList.length ? macrocategoryList : categoryList}
               sidebarHeight={sidebarHeight || '85vh'}
             />
-          </Box>
-          <div className="pageContent" ref={pageContentRef}>
+          </StyledSidenavBox>
+          <StyledPageContent ref={pageContentRef}>
             <Section2 dataList={trendList} title="Tendencias" />
-          </div>
-        </StyledContainer>
+          </StyledPageContent>
+        </StyledContainerHome>
         {productList.length ? (
           <Section3 products={productList} title="Agregados recientemente" />
         ) : null}
@@ -127,7 +127,8 @@ export const getServerSideProps: GetServerSideProps = async () => {
       categoryList,
       macrocategoryList,
       productList,
-      trendList
+      trendList,
+      navbar: null
     }
   };
 };

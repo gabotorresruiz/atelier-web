@@ -11,7 +11,7 @@ type Props = { products: Product[] };
 const ProductCard1List: FC<Props> = ({ products }) => (
   <Grid container spacing={6}>
     {products.map((item) => (
-      <Grid item lg={4} sm={6} xs={12} key={item.id}>
+      <Grid item lg={4} sm={12} xs={12} key={item.id}>
         <ProductCard1
           id={item.id}
           slug={getSlug(item.name)}
