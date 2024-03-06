@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  atelier-web:
+    build:
+      context: ./
+      target: runner
+    env_file:
+      - ./.env
+    volumes:
+      - .:/app
+    command: npm run dev
+    ports:
+      - '3001:3001'
+    environment:
+      NODE_ENV: production
