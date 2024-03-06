@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import { GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import { IconButton } from '@component/buttons';
 import Card from '@component/Card';
 import Grid from '@component/grid/Grid';
@@ -72,7 +72,7 @@ const Checkout = () => {
 
 Checkout.layout = CheckoutNavLayout;
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const brandingResource = await branding.getBranding();
   const macrocategoryList = await macrocategories.getMacrocategories();
   const categoryList = await categories.getCategories();

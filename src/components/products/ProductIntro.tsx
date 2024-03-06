@@ -117,6 +117,11 @@ const ProductIntro: FC<ProductIntroProps> = ({ product, tintometricSystem }) => 
       ? product.products_sizes[0].basePrice
       : product?.price || 0) * selectedQty
   );
+  const [unitPrice, setUnitPrice] = useState(
+    productsSizes && productsSizes.length > 0
+      ? product.products_sizes[0].basePrice
+      : product?.price || 0
+  );
 
   const handleCartAmountChangeDown = () => {
     if (selectedQty === 1) setSelectedQty(1);
@@ -166,6 +171,7 @@ const ProductIntro: FC<ProductIntroProps> = ({ product, tintometricSystem }) => 
 
   const handleSelectedColor = (color: Color) => {
     setSelectedColor(color);
+    setUnitPrice(selectedSize.value.basePrice + color.price * selectedSize.value.size.quantity);
     setTotalPrice(
       (selectedSize.value.basePrice + color.price * selectedSize.value.size.quantity) * selectedQty
     );
@@ -175,12 +181,16 @@ const ProductIntro: FC<ProductIntroProps> = ({ product, tintometricSystem }) => 
   const handleSelectedSize = (size) => {
     setSelectedSize(size);
 
+    let newUnitPrice = size.value.basePrice;
     let newTotalPrice = size.value.basePrice * selectedQty;
 
-    if (withTintometric && selectedColor !== null)
+    if (withTintometric && selectedColor !== null) {
+      newUnitPrice = size.value.basePrice + selectedColor.price * size.value.size.quantity;
       newTotalPrice =
         (size.value.basePrice + selectedColor.price * size.value.size.quantity) * selectedQty;
+    }
 
+    setUnitPrice(newUnitPrice);
     setTotalPrice(newTotalPrice);
   };
 
@@ -396,7 +406,7 @@ const ProductIntro: FC<ProductIntroProps> = ({ product, tintometricSystem }) => 
                           {currency(totalPrice)}
                         </H2>
                         <Small fontWeight={700} color="text.primary">
-                          {currency(totalPrice)} x {selectedQty}
+                          {currency(unitPrice)} x {selectedQty}
                         </Small>
                       </StyledBox>
                     ) : null}

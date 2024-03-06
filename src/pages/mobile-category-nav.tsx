@@ -1,4 +1,5 @@
 import { Fragment, useState } from 'react';
+import { GetServerSideProps } from 'next';
 import Link from 'next/link';
 import Box from '@component/Box';
 import Grid from '@component/grid/Grid';
@@ -9,7 +10,6 @@ import MobileNavigationBar from '@component/mobile-navigation';
 import { Accordion, AccordionHeader } from '@component/accordion';
 import { MobileCategoryImageBox, MobileCategoryNavStyle } from '@component/mobile-category-nav';
 import { branding, categories, macrocategories } from '@utils/page_resources/mobile-category';
-import { GetStaticProps } from 'next';
 import { Header } from '@component/header';
 import Category from '@models/category.model';
 import Macrocategory from '@models/macrocategory.model';
@@ -124,7 +124,7 @@ const MobileCategoryNav = ({
   );
 };
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const brandingResource = await branding.getBranding();
   const macrocategoryList = await macrocategories.getMacrocategories();
   const categoryList = await categories.getCategories();

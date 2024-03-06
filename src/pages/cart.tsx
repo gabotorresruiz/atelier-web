@@ -1,4 +1,4 @@
-import { GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import styled from 'styled-components';
 import Link from 'next/link';
 import Grid from '@component/grid/Grid';
@@ -85,7 +85,7 @@ const Cart = () => {
 
 Cart.layout = CheckoutNavLayout;
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const brandingResource = await branding.getBranding();
   const macrocategoryList = await macrocategories.getMacrocategories();
   const categoryList = await categories.getCategories();

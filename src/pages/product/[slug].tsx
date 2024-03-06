@@ -1,4 +1,4 @@
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { filter, sample } from 'lodash';
 import NavbarLayout from '@component/layout/NavbarLayout';
@@ -47,12 +47,7 @@ const ProductDetails = ({ product, relatedProducts, tintometricSystem }: Props) 
 
 ProductDetails.layout = NavbarLayout;
 
-export const getStaticPaths: GetStaticPaths = async () => ({
-  paths: [],
-  fallback: 'blocking'
-});
-
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const productId = (params.slug as string).split('-')[0];
 
   let tintometricSystem = [];

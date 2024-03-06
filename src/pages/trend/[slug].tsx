@@ -1,4 +1,4 @@
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import NavbarLayout from '@component/layout/NavbarLayout';
 import TrendIntro from '@component/trends/TrendIntro';
@@ -21,25 +21,20 @@ const ProductDetails = ({ trend, relatedProducts }: Props) => {
   if (router.isFallback) return <h1>Loading...</h1>;
 
   return (
-    <>
+    <div>
       <TrendIntro trend={trend} />
 
       {/* RELATED PRODUCTS */}
       {relatedProducts.length ? (
         <RelatedProducts title="Productos en la Tendencia" products={relatedProducts} />
       ) : null}
-    </>
+    </div>
   );
 };
 
 ProductDetails.layout = NavbarLayout;
 
-export const getStaticPaths: GetStaticPaths = async () => ({
-  paths: [],
-  fallback: 'blocking'
-});
-
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const trendId = (params.slug as string).split('-')[0];
 
   const brandingResource = await branding.getBranding();

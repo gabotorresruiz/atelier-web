@@ -46,9 +46,11 @@ const StyledGrid = styled(Grid)`
   padding: 2rem 0px 5rem 0px;
 
   @media screen and (min-width: 1025px) {
-    margin: 0 8rem;
-    min-width: auto;
+    margin: 0 8rem !important;
+    min-width: 40%;
+    max-width: 40%;
     padding: 2rem 0px 5rem 0px;
+    width: 40%;
   }
 `;
 
@@ -61,7 +63,7 @@ const GridItemOne = styled(Grid)`
 
   @media screen and (min-width: 1025px) {
     text-align: left;
-    padding: 35px 220px 35px 40px;
+    padding: 35px;
   }
 `;
 

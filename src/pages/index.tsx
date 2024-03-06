@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import styled from 'styled-components';
 import Box from '@component/Box';
 import Container from '@component/Container';
@@ -114,7 +114,7 @@ const Home = ({
 
 Home.layout = AppLayout;
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const brandingResource = await branding.getBranding();
   const macrocategoryList = await macrocategories.getMacrocategories();
   const categoryList = await categories.getCategories();

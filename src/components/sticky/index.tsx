@@ -21,7 +21,7 @@ const Sticky: FC<StickyProps> = (props) => {
   const scrollListener = useCallback(() => {
     if (!window) return;
 
-    let distance = window.scrollY - 100 - positionRef.current;
+    let distance = window.scrollY - 200 - positionRef.current;
 
     if (containerRef?.current && containerRef.current?.offsetHeight) {
       let containerDistance =
