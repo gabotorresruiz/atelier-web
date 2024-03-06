@@ -11,7 +11,7 @@ import Stepper from '../Stepper';
 import AppLayout from './AppLayout';
 import Navbar from '../navbar/Navbar';
 
-const StyledContainer = styled(Container)`
+const StyledContainerAppLayout = styled(Container)`
   margin: 9.5rem 0 2rem;
   max-width: 100%;
   min-height: calc(100vh - 496px);
@@ -87,7 +87,7 @@ const CheckoutNavLayout: FC<Props> = ({
       macrocategoryList={macrocategoryList}
       navbar={<Navbar dataList={macrocategoryList.length ? macrocategoryList : categoryList} />}
     >
-      <StyledContainer>
+      <StyledContainerAppLayout>
         <Box mb="14px">
           <Grid style={{ maxWidth: '1200px', margin: '0 auto' }} container spacing={6}>
             <Grid item xs={12}>
@@ -100,7 +100,7 @@ const CheckoutNavLayout: FC<Props> = ({
           </Grid>
         </Box>
         {children}
-      </StyledContainer>
+      </StyledContainerAppLayout>
     </AppLayout>
   );
 };

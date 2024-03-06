@@ -60,7 +60,7 @@ const Section2: FC<Section2Props> = ({ dataList, title }) => (
           <Link href={`/trend/${item.id}-${getSlug(item.name)}`}>
             <a>
               <RightContentBox imgUrl={item.imageUrl} mb={2}>
-                <StyledTitleBox textAlign="center" pt={3}>
+                <StyledTitleBox className="trends-card-title" textAlign="center" pt={3}>
                   <H3 fontSize={23} color="primary.main">
                     {item.name}
                   </H3>

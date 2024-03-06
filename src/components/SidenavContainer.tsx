@@ -6,7 +6,7 @@ import Container from '@component/Container';
 import { deviceSize, layoutConstant } from 'utils/constants';
 
 // styled component
-const StyledContainer = styled(Container)`
+const StyledSidenavContainer = styled(Container)`
   display: flex;
   padding-top: 24px;
   position: relative;
@@ -83,7 +83,7 @@ const SidenavContainer: FC<SidenavContainerProps> = (props) => {
   }, [scrollListener]);
 
   return (
-    <StyledContainer>
+    <StyledSidenavContainer>
       <Box className={clsx({ sidenav: true, fixed: isSidenavFixed })}>
         <SideNav />
       </Box>
@@ -96,7 +96,7 @@ const SidenavContainer: FC<SidenavContainerProps> = (props) => {
       >
         {children}
       </Box>
-    </StyledContainer>
+    </StyledSidenavContainer>
   );
 };
 
