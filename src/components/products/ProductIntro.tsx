@@ -1,4 +1,4 @@
-import { FC, Fragment, useMemo, useState } from 'react';
+import { FC, Fragment, useEffect, useMemo, useRef, useState } from 'react';
 import styled from 'styled-components';
 import ReactSelect from 'react-select';
 import { capitalize, groupBy } from 'lodash';
@@ -95,12 +95,23 @@ type ProductIntroProps = {
 
 const ProductIntro: FC<ProductIntroProps> = ({ product, tintometricSystem }) => {
   const { dispatch } = useAppContext();
-  const { description, imageUrl, name, withTintometric, products_sizes: productsSizes } = product;
+  const {
+    id,
+    description,
+    imageUrl,
+    name,
+    withTintometric,
+    products_sizes: productsSizes
+  } = product;
+
+  const idRef = useRef(id);
 
   const tintometricSystemGrouped =
     tintometricSystem.length > 0
       ? groupBy(tintometricSystem, ({ familyColor }) => familyColor)
       : null;
+
+  const [isProductAdded, setIsProductAdded] = useState(false);
   const [open, setOpen] = useState(false);
   const [selectedQty, setSelectedQty] = useState(1);
   const [selectedColor, setSelectedColor] = useState(null);
@@ -212,7 +223,34 @@ const ProductIntro: FC<ProductIntroProps> = ({ product, tintometricSystem }) => 
         size: selectedSize?.value ?? null
       }
     });
+    setIsProductAdded(true);
   };
+
+  useEffect(() => {
+    if (idRef.current !== id) {
+      setIsProductAdded(false);
+      setSelectedQty(1);
+      setSelectedColor(null);
+      setSelectedSize(
+        productsSizes && productsSizes.length > 0
+          ? {
+              label: `${productsSizes[0].size.quantity} L`,
+              value: productsSizes[0]
+            }
+          : null
+      );
+      setTotalPrice(
+        (productsSizes && productsSizes.length > 0
+          ? product.products_sizes[0].basePrice
+          : product?.price || 0) * selectedQty
+      );
+      setUnitPrice(
+        productsSizes && productsSizes.length > 0
+          ? product.products_sizes[0].basePrice
+          : product?.price || 0
+      );
+    }
+  }, [id, product?.price, product?.products_sizes, productsSizes, selectedQty]);
 
   return (
     <>
@@ -455,7 +493,13 @@ const ProductIntro: FC<ProductIntroProps> = ({ product, tintometricSystem }) => 
                   variant="contained"
                   onClick={handleAddToCart}
                 >
-                  Añadir al Carrito
+                  {isProductAdded ? (
+                    <Icon color="primary" variant="medium">
+                      check
+                    </Icon>
+                  ) : (
+                    'Añadir al Carrito'
+                  )}
                 </Button>
               </Grid>
             </Grid>

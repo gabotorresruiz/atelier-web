@@ -27,8 +27,7 @@ const ImgBox = styled(Box)(({ theme }) => ({
   alignItems: 'center',
   background: theme.colors.primary[50],
   display: 'flex',
-  height: '100%',
-  minHeight: '384px'
+  height: '384px'
 }));
 
 const ContentWrapper = styled(Box)({
@@ -61,7 +60,7 @@ const ProductCard13: FC<Props> = ({ id, title, imgUrl }) => {
               height="100%"
               src={imgUrl}
               id="productImg"
-              style={{ objectFit: 'contain' }}
+              style={{ objectFit: 'cover' }}
             />
           </ImgBox>
         </a>
