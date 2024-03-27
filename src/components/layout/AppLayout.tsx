@@ -48,6 +48,10 @@ const AppLayout: FC<Props> = ({
       <title>{title}</title>
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      <meta
+        name="description"
+        content="Somos tu Laboratorio de Color. Somos integradores de Sistemas Tintométricos. Desarrollamos todos las herramientas de color para tintometria."
+      />
     </Head>
     <Hidden down={1023}>
       <Sticky fixedOn={0}>

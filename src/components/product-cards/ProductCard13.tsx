@@ -56,6 +56,7 @@ const ProductCard13: FC<Props> = ({ id, title, imgUrl }) => {
         <a>
           <ImgBox id="imgBox">
             <Image
+              alt={title}
               width="100%"
               height="100%"
               src={imgUrl}
