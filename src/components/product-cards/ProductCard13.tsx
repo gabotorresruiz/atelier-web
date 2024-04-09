@@ -23,9 +23,9 @@ const StyledCard = styled(Box)(({ theme }) => ({
   }
 }));
 
-const ImgBox = styled(Box)(({ theme }) => ({
+const ImgBox = styled(Box)(() => ({
   alignItems: 'center',
-  background: theme.colors.primary[50],
+  background: 'white',
   display: 'flex',
   height: '384px'
 }));
@@ -61,7 +61,7 @@ const ProductCard13: FC<Props> = ({ id, title, imgUrl }) => {
               height="100%"
               src={imgUrl}
               id="productImg"
-              style={{ objectFit: 'cover' }}
+              style={{ objectFit: 'contain', padding: '0 25px' }}
             />
           </ImgBox>
         </a>
