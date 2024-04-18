@@ -1,33 +1,49 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import Box from '@component/Box';
-import Grid from '@component/grid/Grid';
 import { H3 } from '@component/Typography';
-import { ProductCard1 } from '@component/product-cards';
 import Product from '@models/product.model';
-import { getSlug } from '@utils/utils';
+import { ProductCard13 } from '@component/product-cards';
+import useWindowSize from '@hook/useWindowSize';
+import { Carousel } from '@component/carousel';
 
 // ============================================================
 type Props = { products: Product[]; title?: string };
 // ============================================================
 
-const RelatedProducts: FC<Props> = ({ products, title = 'Productos Relacionados' }) => (
-  <Box mt="1rem" mb="3.75rem">
-    <H3 mb="1.5rem">{title}</H3>
+const RelatedProducts: FC<Props> = ({ products, title = 'Productos Relacionados' }) => {
+  const width = useWindowSize();
+  const [visibleSlides, setVisibleSlides] = useState(4);
 
-    <Grid container spacing={8}>
-      {products.map((item) => (
-        <Grid item lg={3} md={4} sm={6} xs={12} key={item.id}>
-          <ProductCard1
-            hoverEffect
-            id={item.id}
-            slug={getSlug(item.name)}
-            title={item.name}
-            imgUrl={item.imageUrl}
-          />
-        </Grid>
-      ))}
-    </Grid>
-  </Box>
-);
+  useEffect(() => {
+    if (width <= 600) setVisibleSlides(1);
+    else if (width < 950) setVisibleSlides(2);
+    else setVisibleSlides(4);
+  }, [width]);
+
+  return (
+    <Box mt="1rem" mb="3.75rem">
+      <H3 mb="1.5rem">{title}</H3>
+      <Box my="-0.25rem">
+        <Carousel
+          showArrowOnHover
+          arrowButtonColor="inherit"
+          totalSlides={products.length}
+          visibleSlides={visibleSlides}
+        >
+          {products.map((item, ind) => (
+            <Box py="0.25rem" key={ind}>
+              <ProductCard13
+                id={item.id}
+                title={item.name}
+                titleSize="18px"
+                imgUrl={item.imageUrl}
+              />
+            </Box>
+          ))}
+        </Carousel>
+      </Box>
+    </Box>
+  );
+};
 
 export default RelatedProducts;

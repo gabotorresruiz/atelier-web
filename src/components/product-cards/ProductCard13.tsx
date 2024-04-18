@@ -32,22 +32,23 @@ const ImgBox = styled(Box)(() => ({
 
 const ContentWrapper = styled(Box)({
   padding: '1rem',
-  '& .title, & .categories': {
-    overflow: 'hidden',
-    whiteSpace: 'nowrap',
-    textOverflow: 'ellipsis'
-  }
+  minHeight: '96px',
+  maxHeight: '96px',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center'
 });
 
 // =====================================================================
 interface Props {
   title: string;
+  titleSize?: string;
   imgUrl: string;
   id: string | number;
 }
 // =====================================================================
 
-const ProductCard13: FC<Props> = ({ id, title, imgUrl }) => {
+const ProductCard13: FC<Props> = ({ id, title, imgUrl, titleSize = '20px' }) => {
   const slugTitle = getSlug(title);
 
   return (
@@ -74,7 +75,7 @@ const ProductCard13: FC<Props> = ({ id, title, imgUrl }) => {
                 <H3
                   mb={1}
                   title={title}
-                  fontSize="24px"
+                  fontSize={titleSize}
                   fontWeight="700"
                   className="title"
                   color="text.primary"

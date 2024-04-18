@@ -53,14 +53,19 @@ const Wrapper = styled(Card)`
   }
 
   .details {
+    align-items: center;
+    display: flex;
     padding: 1rem;
+    justify-content: center;
+    min-height: 80px;
+    max-height: 80px;
 
-    .title,
+    /* .title,
     .categories {
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
-    }
+    } */
 
     .icon-holder {
       display: flex;

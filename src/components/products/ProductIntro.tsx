@@ -165,6 +165,7 @@ const ProductIntro: FC<ProductIntroProps> = ({ product, tintometricSystem }) => 
           newQty;
 
       setTotalPrice(newTotalPrice);
+      setIsProductAdded(false);
 
       return newQty;
     });
@@ -186,6 +187,7 @@ const ProductIntro: FC<ProductIntroProps> = ({ product, tintometricSystem }) => 
     setTotalPrice(
       (selectedSize.value.basePrice + color.price * selectedSize.value.size.quantity) * selectedQty
     );
+    setIsProductAdded(false);
     onClose();
   };
 
@@ -203,6 +205,7 @@ const ProductIntro: FC<ProductIntroProps> = ({ product, tintometricSystem }) => 
 
     setUnitPrice(newUnitPrice);
     setTotalPrice(newTotalPrice);
+    setIsProductAdded(false);
   };
 
   const handleDisabledCartBtn = useMemo(() => {
