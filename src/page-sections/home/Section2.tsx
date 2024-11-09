@@ -3,10 +3,10 @@ import { FC } from 'react';
 import styled from 'styled-components';
 import Box from '@component/Box';
 import Grid from '@component/grid/Grid';
-import { H1, H3 } from 'components/Typography';
 import { theme } from '@utils/theme';
 import Trend from '@models/trend.model';
 import { getSlug } from '@utils/utils';
+import { H1, H3 } from '@component/Typography';
 
 // styled components
 const ContentBox = styled(Box)<{ imgUrl: string }>(({ imgUrl }) => ({
@@ -58,15 +58,13 @@ const Section2: FC<Section2Props> = ({ dataList, title }) => (
       {dataList.map((item) => (
         <Grid key={item.id} item xs={12} md={6}>
           <Link href={`/trend/${item.id}-${getSlug(item.name)}`}>
-            <a>
-              <RightContentBox imgUrl={item.imageUrl} mb={2}>
-                <StyledTitleBox className="trends-card-title" textAlign="center" pt={3}>
-                  <H3 fontSize={23} color="primary.main">
-                    {item.name}
-                  </H3>
-                </StyledTitleBox>
-              </RightContentBox>
-            </a>
+            <RightContentBox imgUrl={item.imageUrl} mb={2}>
+              <StyledTitleBox className="trends-card-title" textAlign="center" pt={3}>
+                <H3 fontSize={23} color="primary.main">
+                  {item.name}
+                </H3>
+              </StyledTitleBox>
+            </RightContentBox>
           </Link>
         </Grid>
       ))}

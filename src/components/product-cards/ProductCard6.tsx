@@ -43,7 +43,7 @@ const ProductCard6: FC<ProductCard6Props> = ({ title, subtitle, imgUrl }) => (
     </Chip>
 
     <HoverBox position="relative" height="120px" borderRadius={8}>
-      <NextImage src={imgUrl} layout="fill" objectFit="cover" />
+      <NextImage src={imgUrl} layout="fill" objectFit="cover" alt="Descripción de la imagen" />
     </HoverBox>
   </Card>
 );

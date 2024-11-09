@@ -64,11 +64,9 @@ const ShopCard1: FC<ShopCard1Props> = ({
     <FlexBox pl="30px" pr="18px" justifyContent="space-between">
       <Avatar src={imgUrl} size={64} mt="-32px" border="4px solid" borderColor="gray.100" />
       <Link href={shopUrl}>
-        <a>
-          <IconButton size="small" my="0.25rem">
-            <Icon defaultcolor="auto">arrow-long-right</Icon>
-          </IconButton>
-        </a>
+        <IconButton size="small" my="0.25rem">
+          <Icon defaultcolor="auto">arrow-long-right</Icon>
+        </IconButton>
       </Link>
     </FlexBox>
   </ShopCard1Wrapper>

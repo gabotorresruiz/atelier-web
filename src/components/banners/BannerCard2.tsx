@@ -53,11 +53,9 @@ const BannerCard2: FC<BannerCard2Props> = ({ img, url, text1, text2, text3 }) =>
       </Box>
 
       <Link href={url}>
-        <a>
-          <Button variant="outlined" color="primary">
-            Shop Now
-          </Button>
-        </a>
+        <Button variant="outlined" color="primary">
+          Shop Now
+        </Button>
       </Link>
     </CardContent>
   </CardWrapper>

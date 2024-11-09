@@ -22,32 +22,31 @@ type ProductCard8Props = {
 const ProductCard8: FC<ProductCard8Props> = ({ price, title, off, slug, imgUrl, ...props }) => (
   <Card p="1rem" {...props}>
     <Link href={`/product/${slug}`}>
-      <a>
-        <HoverBox mb="0.75rem" borderRadius={8} overflow="hidden">
-          <NextImage
-            src={imgUrl || '/assets/images/products/Rectangle 116.png'}
-            width={500}
-            height={500}
-            layout="responsive"
-            objectFit="contain"
-            objectPosition="center"
-          />
-        </HoverBox>
+      <HoverBox mb="0.75rem" borderRadius={8} overflow="hidden">
+        <NextImage
+          src={imgUrl || '/assets/images/products/Rectangle 116.png'}
+          width={500}
+          height={500}
+          layout="responsive"
+          objectFit="contain"
+          objectPosition="center"
+          alt="Descripción de la imagen"
+        />
+      </HoverBox>
 
-        <SemiSpan title={title} mb="0.25rem" color="inherit" ellipsis display="block">
-          {title}
+      <SemiSpan title={title} mb="0.25rem" color="inherit" ellipsis display="block">
+        {title}
+      </SemiSpan>
+
+      <FlexBox alignItems="center">
+        <H6 color="primary.main" mr="0.25rem">
+          {calculateDiscount(price, off)}
+        </H6>
+
+        <SemiSpan>
+          <del>{currency(price)}</del>
         </SemiSpan>
-
-        <FlexBox alignItems="center">
-          <H6 color="primary.main" mr="0.25rem">
-            {calculateDiscount(price, off)}
-          </H6>
-
-          <SemiSpan>
-            <del>{currency(price)}</del>
-          </SemiSpan>
-        </FlexBox>
-      </a>
+      </FlexBox>
     </Link>
   </Card>
 );

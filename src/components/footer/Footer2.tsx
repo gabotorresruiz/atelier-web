@@ -60,9 +60,7 @@ const Footer2: FC = () => (
   <footer>
     <Wrapper>
       <Link href="/">
-        <a>
-          <Image mb="1.5rem" src="/assets/images/logo.svg" alt="logo" />
-        </a>
+        <Image mb="1.5rem" src="/assets/images/logo.svg" alt="logo" />
       </Link>
 
       <Grid container spacing={6}>

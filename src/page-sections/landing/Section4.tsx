@@ -102,6 +102,7 @@ const Section4: FC = () => (
                   src={item.imgUrl}
                   objectFit="contain"
                   objectPosition="center"
+                  alt="Descripción de la imagen"
                 />
               </Box>
 

@@ -28,6 +28,7 @@ const Section1: FC = () => (
             height={73}
             layout="responsive"
             src="/assets/images/landing/this-bonik.svg"
+            alt="Descripción de la imagen"
           />
         </Box>
 
@@ -71,6 +72,7 @@ const Section1: FC = () => (
         height={318}
         layout="responsive"
         src="/assets/images/landing/page-group.png"
+        alt="Descripción de la imagen"
       />
 
       <Card

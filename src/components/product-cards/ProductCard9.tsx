@@ -120,11 +120,9 @@ const ProductCard9: FC<ProductCard9Props> = ({ id, title, imgUrl, ...props }) =>
         <Grid item md={8} sm={8} xs={12}>
           <FlexBox flexDirection="column" justifyContent="center" height="100%" p="1rem">
             {/* <Link href={`/product/${slug}`}>
-              <a>
                 <H5 fontWeight="600" my="0.5rem">
                   {title}
                 </H5>
-              </a>
             </Link> */}
 
             {/* <FlexBox mt="0.5rem" mb="1rem" alignItems="center">

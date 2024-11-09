@@ -108,9 +108,7 @@ const MobileCategoryNav = ({
               {internalCategories.map((item) => (
                 <Grid item lg={1} md={2} sm={3} xs={4} key={item.id}>
                   <Link href="/product/search/423423">
-                    <a>
-                      <MobileCategoryImageBox title={item.name} />
-                    </a>
+                    <MobileCategoryImageBox title={item.name} />
                   </Link>
                 </Grid>
               ))}

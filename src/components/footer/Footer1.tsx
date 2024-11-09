@@ -72,11 +72,9 @@ const Footer1: FC<Footer1Props> = ({ brandingResource }) => (
           <StyledGrid container spacing={6}>
             <StyledLeftGrid item lg={4} md={6} sm={12} xs={12}>
               <Link href="/">
-                <a>
-                  <StyledLogoWrapper>
-                    <StyledLogoImage src={brandingResource.logoImageUrl} alt="logo" />
-                  </StyledLogoWrapper>
-                </a>
+                <StyledLogoWrapper>
+                  <StyledLogoImage src={brandingResource.logoImageUrl} alt="logo" />
+                </StyledLogoWrapper>
               </Link>
             </StyledLeftGrid>
             <StyledContactGrid item lg={3} md={6} sm={12} xs={12}>

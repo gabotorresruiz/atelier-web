@@ -67,31 +67,32 @@ const PageCard: FC<PageCardProps> = ({ imgUrl, previewUrl, title, badge }) => (
           objectFit="cover"
           layout="responsive"
           objectPosition="top center"
+          alt="Descripción de la imagen"
         />
       </Card>
 
       {badge && <StatusChip>New</StatusChip>}
 
       <Link href={previewUrl}>
-        <a target="_blank">
-          <FlexBox
-            top="0"
-            right="0"
-            left="0"
-            bottom="0"
-            opacity="0"
-            borderRadius={8}
-            className="overlay"
-            position="absolute"
-            alignItems="center"
-            bg="rgba(0,0,0, 0.54)"
-            justifyContent="center"
-          >
-            <IconButton>
-              <Icon>eye</Icon>
-            </IconButton>
-          </FlexBox>
-        </a>
+        {/* <a target="_blank"> */}
+        <FlexBox
+          top="0"
+          right="0"
+          left="0"
+          bottom="0"
+          opacity="0"
+          borderRadius={8}
+          className="overlay"
+          position="absolute"
+          alignItems="center"
+          bg="rgba(0,0,0, 0.54)"
+          justifyContent="center"
+        >
+          <IconButton>
+            <Icon>eye</Icon>
+          </IconButton>
+        </FlexBox>
+        {/* </a> */}
       </Link>
     </Wrapper>
 

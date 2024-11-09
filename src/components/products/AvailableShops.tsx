@@ -20,21 +20,19 @@ const AvailableShops: FC<Props> = ({ shops }) => (
       {shops.map((item) => (
         <Grid item lg={2} md={4} sm={6} xs={12} key={item.name}>
           <Link href={`/shops/${item.slug}`}>
-            <a>
-              <FlexBox
-                as={Card}
-                p="1.5rem"
-                width="100%"
-                alignItems="center"
-                flexDirection="column"
-                justifyContent="center"
-              >
-                <Avatar src={item.profilePicture} />
-                <H4 textAlign="center" width="inherit" mt="0.75rem" color="gray.800" ellipsis>
-                  {item.name}
-                </H4>
-              </FlexBox>
-            </a>
+            <FlexBox
+              as={Card}
+              p="1.5rem"
+              width="100%"
+              alignItems="center"
+              flexDirection="column"
+              justifyContent="center"
+            >
+              <Avatar src={item.profilePicture} />
+              <H4 textAlign="center" width="inherit" mt="0.75rem" color="gray.800" ellipsis>
+                {item.name}
+              </H4>
+            </FlexBox>
           </Link>
         </Grid>
       ))}

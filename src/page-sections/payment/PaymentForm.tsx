@@ -1,6 +1,5 @@
 import { useRef, useState } from 'react';
 import { useAppContext } from '@context/AppContext';
-import axiosClientInterceptorInstance from 'config/axiosClientInterceptorInstance';
 import Link from 'next/link';
 import { Formik } from 'formik';
 import * as yup from 'yup';
@@ -13,6 +12,7 @@ import { Button } from '@component/buttons';
 import TextField from '@component/text-field';
 import Typography from '@component/Typography';
 import Spinner from '@component/Spinner';
+import axiosClientInterceptorInstance from '../../config/axiosClientInterceptorInstance';
 
 const initialValues = {
   card_no: '',
@@ -147,11 +147,9 @@ const PaymentForm = ({ setPaymentSuccess }: PaymentFormProps) => {
               <Grid container spacing={7}>
                 <Grid item sm={6} xs={12}>
                   <Link href={!state.cart.length ? '/cart' : '/checkout'}>
-                    <a>
-                      <Button variant="outlined" color="primary" type="button" fullwidth>
-                        {!state.cart.length ? 'Volver al carrito' : 'Volver a los Detalles'}
-                      </Button>
-                    </a>
+                    <Button variant="outlined" color="primary" type="button" fullwidth>
+                      {!state.cart.length ? 'Volver al carrito' : 'Volver a los Detalles'}
+                    </Button>
                   </Link>
                 </Grid>
                 <Grid item sm={6} xs={12}>
@@ -187,11 +185,9 @@ const PaymentForm = ({ setPaymentSuccess }: PaymentFormProps) => {
           <Grid container spacing={7}>
             <Grid item sm={6} xs={12}>
               <Link href={!state.cart.length ? '/cart' : '/checkout'}>
-                <a>
-                  <Button variant="outlined" color="primary" type="button" fullwidth>
-                    {!state.cart.length ? 'Volver al carrito' : 'Volver a los Detalles'}
-                  </Button>
-                </a>
+                <Button variant="outlined" color="primary" type="button" fullwidth>
+                  {!state.cart.length ? 'Volver al carrito' : 'Volver a los Detalles'}
+                </Button>
               </Link>
             </Grid>
             <Grid item sm={6} xs={12}>

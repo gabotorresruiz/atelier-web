@@ -36,3 +36,5 @@ yarn-error.log*
 
 # zip
 *.zip
+.env.development
+.env
