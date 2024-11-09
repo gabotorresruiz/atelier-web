@@ -1,5 +1,5 @@
 import Macrocategory from '@models/macrocategory.model';
-import axiosInterceptorInstance from 'config/axiosInterceptorInstance';
+import axiosInterceptorInstance from '../../config/axiosInterceptorInstance';
 
 const getMacrocategories = async (): Promise<Macrocategory[]> => {
   const response = await axiosInterceptorInstance.get('api/macro-categories');

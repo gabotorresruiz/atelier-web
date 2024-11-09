@@ -1,5 +1,5 @@
 import Trend from '@models/trend.model';
-import axiosInterceptorInstance from 'config/axiosInterceptorInstance';
+import axiosInterceptorInstance from '../../config/axiosInterceptorInstance';
 
 const getTrends = async (): Promise<Trend[]> => {
   const response = await axiosInterceptorInstance.get('api/trends');

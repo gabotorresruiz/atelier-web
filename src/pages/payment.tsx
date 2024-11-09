@@ -53,16 +53,14 @@ const Checkout = () => {
         <FlexBox flexDirection="column" alignItems="center" justifyContent="center">
           <StyledTitle mb="2rem">¡Su compra ha sido realizada exitosamente!</StyledTitle>
           <Link href="/">
-            <a>
-              <IconButton variant="contained" color="primary" px="1rem">
-                <FlexBox alignItems="center" flexDirection="row">
-                  <Icon size="20px" mr=".5rem">
-                    home
-                  </Icon>{' '}
-                  Seguir comprando
-                </FlexBox>
-              </IconButton>
-            </a>
+            <IconButton variant="contained" color="primary" px="1rem">
+              <FlexBox alignItems="center" flexDirection="row">
+                <Icon size="20px" mr=".5rem">
+                  home
+                </Icon>{' '}
+                Seguir comprando
+              </FlexBox>
+            </IconButton>
           </Link>
         </FlexBox>
       </Card>

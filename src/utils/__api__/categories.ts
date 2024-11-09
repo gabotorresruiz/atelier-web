@@ -1,5 +1,5 @@
 import Category from '@models/category.model';
-import axiosInterceptorInstance from 'config/axiosInterceptorInstance';
+import axiosInterceptorInstance from '../../config/axiosInterceptorInstance';
 
 const getCategories = async (): Promise<Category[]> => {
   const response = await axiosInterceptorInstance.get('api/categories');

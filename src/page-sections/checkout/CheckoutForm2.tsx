@@ -208,6 +208,7 @@ const CheckoutForm2: FC = () => {
                         src={`/assets/images/payment-methods/${item.cardType}.svg`}
                         layout="fill"
                         objectFit="contain"
+                        alt="Descripción de la imagen"
                       />
                     </Box>
 

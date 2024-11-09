@@ -54,35 +54,31 @@ const ProductCard13: FC<Props> = ({ id, title, imgUrl }) => {
   return (
     <StyledCard>
       <Link href={`/product/${id}-${slugTitle}`}>
-        <a>
-          <ImgBox id="imgBox">
-            <Image
-              width="100%"
-              height="100%"
-              src={imgUrl}
-              id="productImg"
-              style={{ objectFit: 'contain' }}
-            />
-          </ImgBox>
-        </a>
+        <ImgBox id="imgBox">
+          <Image
+            width="100%"
+            height="100%"
+            src={imgUrl}
+            id="productImg"
+            style={{ objectFit: 'contain' }}
+          />
+        </ImgBox>
       </Link>
       <ContentWrapper>
         <FlexBox>
           <Box flex="1 1 0" minWidth="0px" mr={1}>
             <Link href={`/product/${id}-${slugTitle}`}>
-              <a>
-                <H3
-                  mb={1}
-                  title={title}
-                  fontSize="24px"
-                  fontWeight="700"
-                  className="title"
-                  color="text.primary"
-                  textAlign="center"
-                >
-                  {title}
-                </H3>
-              </a>
+              <H3
+                mb={1}
+                title={title}
+                fontSize="24px"
+                fontWeight="700"
+                className="title"
+                color="text.primary"
+                textAlign="center"
+              >
+                {title}
+              </H3>
             </Link>
           </Box>
         </FlexBox>

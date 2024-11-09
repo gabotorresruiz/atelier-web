@@ -95,11 +95,9 @@ const Header: FC<HeaderProps> = ({ isFixed, className, brandingResource, dataLis
       >
         <FlexBox className="logo" alignItems="center" mr="1rem">
           <Link href="/">
-            <a>
-              <StyledLogoWrapper>
-                <StyledLogoImage src={brandingResource.logoImageUrl} alt="logo" />
-              </StyledLogoWrapper>
-            </a>
+            <StyledLogoWrapper>
+              <StyledLogoImage src={brandingResource.logoImageUrl} alt="logo" />
+            </StyledLogoWrapper>
           </Link>
           {isFixed && (
             <div className="category-holder">

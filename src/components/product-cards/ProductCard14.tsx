@@ -2,8 +2,8 @@ import { FC } from 'react';
 import styled from 'styled-components';
 import Box from '@component/Box';
 import { theme } from '@utils/theme';
-import LazyImage from 'components/LazyImage';
-import { H6, Paragraph } from 'components/Typography';
+import LazyImage from '@component/LazyImage';
+import { H6, Paragraph } from '@component/Typography';
 
 // styled components
 const StyledCard = styled(Box)({
@@ -31,7 +31,14 @@ const ProductCard14: FC<Props> = (props) => {
   return (
     <StyledCard>
       <ImgBox>
-        <LazyImage src={imgUrl} width={100} height={100} layout="responsive" objectFit="contain" />
+        <LazyImage
+          src={imgUrl}
+          width={100}
+          height={100}
+          layout="responsive"
+          objectFit="contain"
+          alt="Descripción de la imagen"
+        />
       </ImgBox>
 
       <H6 fontSize={15} mt="8px" mb="2px">

@@ -22,14 +22,12 @@ const CategoryMenuItem: FC<CategoryMenuItemProps> = ({
 }) => (
   <StyledCategoryMenuItem>
     {href ? (
-      <Link href={href}>
-        <a className="category-dropdown-link">
-          <div>
-            {icon && <Icon variant="small">{icon}</Icon>}
-            <span className="title">{title}</span>
-            {caret && <Icon variant="small">chevron-right</Icon>}
-          </div>
-        </a>
+      <Link href={href} className="category-dropdown-link">
+        <div>
+          {icon && <Icon variant="small">{icon}</Icon>}
+          <span className="title">{title}</span>
+          {caret && <Icon variant="small">chevron-right</Icon>}
+        </div>
       </Link>
     ) : (
       <div className="category-dropdown">

@@ -123,15 +123,13 @@ const ProductCard7: FC<ProductCard7Props> = ({
     <Wrapper {...others}>
       <StyledImageWrapper>
         <Link href={`/product/${product.id}-${slug}`}>
-          <a>
-            <Image
-              style={{ objectFit: 'contain', height: '100%' }}
-              size="100%"
-              alt={product.name}
-              display="block"
-              src={product.imageUrl}
-            />
-          </a>
+          <Image
+            style={{ objectFit: 'contain', height: '100%' }}
+            size="100%"
+            alt={product.name}
+            display="block"
+            src={product.imageUrl}
+          />
         </Link>
       </StyledImageWrapper>
       <FlexBox
@@ -142,11 +140,9 @@ const ProductCard7: FC<ProductCard7Props> = ({
         justifyContent="space-evenly"
       >
         <Link href={`/product/${product.id}-${slug}`}>
-          <a>
-            <StyledProductTitle className="title" fontWeight="600" fontSize="18px">
-              {product.name}
-            </StyledProductTitle>
-          </a>
+          <StyledProductTitle className="title" fontWeight="600" fontSize="18px">
+            {product.name}
+          </StyledProductTitle>
         </Link>
         <Box position="absolute" right="1rem" top="1rem">
           <IconButton padding="4px" ml="12px" size="small" onClick={handleCartAmountChange(0)}>

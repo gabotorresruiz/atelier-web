@@ -41,22 +41,28 @@ const MegaMenu1: FC<MegaMenu1Props> = ({
 
           {rightImage && (
             <Link href={rightImage.href}>
-              <a>
-                <Box position="relative" width="153px" height="100%">
-                  <NextImage src={rightImage.imgUrl} layout="fill" objectFit="contain" />
-                </Box>
-              </a>
+              <Box position="relative" width="153px" height="100%">
+                <NextImage
+                  src={rightImage.imgUrl}
+                  layout="fill"
+                  objectFit="contain"
+                  alt="Descripción de la imagen"
+                />
+              </Box>
             </Link>
           )}
         </FlexBox>
 
         {bottomImage && (
           <Link href={bottomImage.href}>
-            <a>
-              <Box position="relative" height="170px">
-                <NextImage src={bottomImage.imgUrl} layout="fill" objectFit="cover" />
-              </Box>
-            </a>
+            <Box position="relative" height="170px">
+              <NextImage
+                src={bottomImage.imgUrl}
+                layout="fill"
+                objectFit="cover"
+                alt="Descripción de la imagen"
+              />
+            </Box>
           </Link>
         )}
       </Card>

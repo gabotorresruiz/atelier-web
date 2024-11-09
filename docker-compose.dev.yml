@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   atelier-e-commerce:
     container_name: e-commerce-service
@@ -11,8 +9,6 @@ services:
     volumes:
       - .:/app
     command: npm run dev
-    env_file:
-      - ./.env.development.local
     ports:
       - '3001:3001'
     environment:

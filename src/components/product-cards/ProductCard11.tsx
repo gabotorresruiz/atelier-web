@@ -50,39 +50,38 @@ const ProductCard11: FC<ProductCard11Props> = (props) => {
 
   return (
     <Link href={`/product/${slug}`}>
-      <a>
-        <StyledProductCard>
-          <Box mb="1rem" className="image-holder">
-            <NextImage
-              src={imgUrl}
-              width={100}
-              height={100}
-              objectFit="cover"
-              layout="responsive"
-            />
-          </Box>
+      <StyledProductCard>
+        <Box mb="1rem" className="image-holder">
+          <NextImage
+            src={imgUrl}
+            width={100}
+            height={100}
+            objectFit="cover"
+            layout="responsive"
+            alt="Descripción de la imagen"
+          />
+        </Box>
 
-          <Box mb="0.5rem">
-            <Rating value={rating} outof={5} color="warn" readonly />
-          </Box>
+        <Box mb="0.5rem">
+          <Rating value={rating} outof={5} color="warn" readonly />
+        </Box>
 
-          <H6 className="ellipsis" mb="6px" title={title}>
-            {title}
-          </H6>
+        <H6 className="ellipsis" mb="6px" title={title}>
+          {title}
+        </H6>
 
-          <FlexBox alignItems="center">
-            <SemiSpan pr="0.3rem" fontWeight="600" color="primary.main" lineHeight="1">
-              {calculateDiscount(price, off)}
-            </SemiSpan>
+        <FlexBox alignItems="center">
+          <SemiSpan pr="0.3rem" fontWeight="600" color="primary.main" lineHeight="1">
+            {calculateDiscount(price, off)}
+          </SemiSpan>
 
-            {!!off && (
-              <Small color="text.muted" lineHeight="1">
-                <del>{currency(price, 0)}</del>
-              </Small>
-            )}
-          </FlexBox>
-        </StyledProductCard>
-      </a>
+          {!!off && (
+            <Small color="text.muted" lineHeight="1">
+              <del>{currency(price, 0)}</del>
+            </Small>
+          )}
+        </FlexBox>
+      </StyledProductCard>
     </Link>
   );
 };

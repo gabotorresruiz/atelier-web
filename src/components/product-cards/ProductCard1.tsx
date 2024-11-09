@@ -111,34 +111,30 @@ const ProductCard1: FC<ProductCard1Props> = ({ id, slug, title, imgUrl, ...props
   <Wrapper {...props}>
     <StyledImageWrapper className="image-holder">
       <Link href={`/product/${id}-${slug}`}>
-        <a>
-          <Image
-            alt={title}
-            width="100%"
-            src={imgUrl}
-            height="100%"
-            style={{ objectFit: 'scale-down', padding: '20px' }}
-          />
-        </a>
+        <Image
+          alt={title}
+          width="100%"
+          src={imgUrl}
+          height="100%"
+          style={{ objectFit: 'scale-down', padding: '20px' }}
+        />
       </Link>
     </StyledImageWrapper>
     <div className="details">
       <FlexBox>
         <Box flex="1 1 0" minWidth="0px" mr="0.5rem">
           <Link href={`/product/${id}-${slug}`}>
-            <a>
-              <H3
-                mb="0"
-                title={title}
-                fontSize="16px"
-                textAlign="center"
-                fontWeight="600"
-                className="title"
-                color="text.secondary"
-              >
-                {title}
-              </H3>
-            </a>
+            <H3
+              mb="0"
+              title={title}
+              fontSize="16px"
+              textAlign="center"
+              fontWeight="600"
+              className="title"
+              color="text.secondary"
+            >
+              {title}
+            </H3>
           </Link>
         </Box>
       </FlexBox>

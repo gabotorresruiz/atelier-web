@@ -56,7 +56,12 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav }) => {
             justifyContent="center"
             height="calc(100% - 80px)"
           >
-            <NextImage src="/assets/images/logos/shopping-cart.svg" width="100%" height="100%" />
+            <NextImage
+              src="/assets/images/logos/shopping-cart.svg"
+              width={100}
+              height={100}
+              alt="Descripción de la imagen"
+            />
             <Paragraph mt="1rem" color="text.muted" textAlign="center" maxWidth="200px">
               Tu carrito de compras está vacío
             </Paragraph>
@@ -98,18 +103,14 @@ const MiniCart: FC<MiniCartProps> = ({ toggleSidenav }) => {
               </FlexBox>
 
               <Link href={`/product/${item.product.id}-${getSlug(item.product.name)}`}>
-                <a>
-                  <Avatar size={76} mx="1rem" alt={item.product.name} src={item.product.imageUrl} />
-                </a>
+                <Avatar size={76} mx="1rem" alt={item.product.name} src={item.product.imageUrl} />
               </Link>
 
               <div className="product-details">
                 <Link href={`/product/${item.product.id}-${getSlug(item.product.name)}`}>
-                  <a>
-                    <H5 className="title" fontSize="14px">
-                      {item.product.name}
-                    </H5>
-                  </a>
+                  <H5 className="title" fontSize="14px">
+                    {item.product.name}
+                  </H5>
                 </Link>
 
                 <Tiny color="text.muted">

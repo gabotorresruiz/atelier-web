@@ -75,9 +75,7 @@ const BannerCard1: FC<BannerCard1Props> = ({
       <Divider height={2} my="1rem" width={50} />
 
       <Link href={url}>
-        <a>
-          <CardLink>Shop Now</CardLink>
-        </a>
+        <CardLink>Shop Now</CardLink>
       </Link>
     </CardContent>
   </CardWrapper>
